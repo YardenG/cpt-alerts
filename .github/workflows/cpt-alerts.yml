@@ -1,0 +1,38 @@
+name: CPT JohnG entry alerts
+
+on:
+  schedule:
+    - cron: '*/15 13-21 * * 1-5'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cpt-alerts
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scan for JohnG entries and alert
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python cpt_telegram_alerts.py
+      - name: Persist fire-once state (only if it changed)
+        run: |
+          if [ -n "$(git status --porcelain .telegram_alert_state.json)" ]; then
+            git config user.name "cpt-alert-bot"
+            git config user.email "cpt-alert-bot@users.noreply.github.com"
+            git add .telegram_alert_state.json
+            git commit -m "update alert state [skip ci]"
+            git push
+          else
+            echo "no state change"
+          fi
