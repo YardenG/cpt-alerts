@@ -115,7 +115,9 @@ def main():
         where = "in his PRIME cluster" if a["strong"] else "at/around the EMA mid"
         msg = (f"{emoji} <b>JohnG {tag}</b> - {a['t']} @ {a['price']:.2f}\n"
                f"pos {a['pos']:.0f}% of the Keltner range | RSI {a['rsi']:.0f}\n"
-               f"Below the top, {where}, not overbought = John's entry setup.")
+               f"Below the top, {where}, not overbought = John's entry setup.\n"
+               f"<b>Exact legs</b> (at your desk, Gateway up): "
+               f"<code>python3 cpt_legs.py {a['t']}</code>")
         send(token, chat, msg)
     print(f"scan {dt.datetime.now():%H:%M}: {len(fresh)} fresh alert(s) sent.")
 
