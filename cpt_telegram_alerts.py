@@ -22,14 +22,22 @@ ONE-TIME SETUP (2 minutes):
      find  "chat":{"id":<NUMBER> ...}  - that <NUMBER> is your chat_id.
   4. Copy telegram_config.example.json -> telegram_config.json and paste in your token + chat id.
 
+Each alert now carries: the entry read, the SUGGESTED structure (CSP / 99-delta ITM CCW /
+long-dated CSP - John's up/down-day + structure rules), a chart image (price + Keltner bands,
+rendered via a chart-image URL so the cloud run stays pure-stdlib), a TradingView link, and the
+exact-legs command for the desk.
+
 RUN:
-  python3 cpt_telegram_alerts.py --test     # send a test message and exit (prove the pipe)
-  python3 cpt_telegram_alerts.py            # one live scan; alert fresh entries (market hours)
-  python3 cpt_telegram_alerts.py --force    # scan even when the US market is closed (testing)
+  python3 cpt_telegram_alerts.py --test          # send a plain test message (prove the pipe)
+  python3 cpt_telegram_alerts.py --preview TQQQ   # send ONE full enriched alert for TQQQ to your
+                                                  #   phone NOW (chart+strategy+links), bypassing
+                                                  #   the fire-once gate - see it before deploying
+  python3 cpt_telegram_alerts.py                  # one live scan; alert fresh entries (mkt hours)
+  python3 cpt_telegram_alerts.py --force          # scan even when the US market is closed (testing)
 Then schedule it (next step) - e.g. cron every 15-20 min during market hours.
 """
 import json, os, sys, urllib.request, urllib.parse, datetime as dt
-from cpt_data_spike import analyze, UNIVERSE
+from cpt_data_spike import analyze, strategy_pick, series, UNIVERSE
 
 HERE   = os.path.dirname(os.path.abspath(__file__))
 CONFIG = os.path.join(HERE, "telegram_config.json")
@@ -60,6 +68,76 @@ def send(token, chat_id, text):
     except Exception as e:
         print("telegram send failed:", str(e)[:120]); return False
 
+def chart_config(sym, s, subtitle):
+    """Chart.js config: daily CANDLESTICKS + the three Keltner bands overlaid, last ~40 bars."""
+    def line(label, data, color, dash=None):
+        d = {"type": "line", "label": label, "data": data, "borderColor": color,
+             "backgroundColor": "rgba(0,0,0,0)", "pointRadius": 0, "borderWidth": 1, "fill": False}
+        if dash:
+            d["borderDash"] = dash
+        return d
+    return {"type": "candlestick",
+            "data": {"datasets": [
+                {"label": sym, "data": s["candles"]},
+                line("KC upper", s["upper"], "rgb(192,57,43)", [5, 4]),
+                line("KC mid", s["mid"], "rgb(41,128,185)"),
+                line("KC lower", s["lower"], "rgb(39,174,96)", [5, 4])]},
+            # Chart.js v3/v4 syntax (title/legend under plugins; x/y scales). QuickChart's default
+            # v2 does NOT render candlesticks (returns a 400 error-image), so chart_url pins v4.
+            "options": {"plugins": {"title": {"display": True,
+                                              "text": [f"{sym}  Keltner(10,5,ema)", subtitle]},
+                                    "legend": {"display": True, "position": "bottom"}},
+                        "scales": {"x": {"type": "time", "time": {"unit": "day"}}, "y": {}}}}
+
+def chart_url(sym, s, subtitle):
+    """Render via quickchart.io's POST endpoint -> a SHORT hosted image URL Telegram fetches (no
+    local plotting dep, and no query-string length limit from the bulkier candlestick payload).
+    version=4 is REQUIRED: candlesticks are unsupported on QuickChart's default Chart.js v2."""
+    body = json.dumps({"chart": chart_config(sym, s, subtitle),
+                       "width": 640, "height": 400, "backgroundColor": "white",
+                       "version": "4"}).encode()
+    req = urllib.request.Request("https://quickchart.io/chart/create", data=body,
+                                 headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        return json.load(r)["url"]
+
+def send_photo(token, chat_id, photo_url, caption):
+    url = f"https://api.telegram.org/bot{token}/sendPhoto"
+    data = urllib.parse.urlencode({"chat_id": chat_id, "photo": photo_url,
+                                   "caption": caption, "parse_mode": "HTML"}).encode()
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, data=data), timeout=25) as r:
+            return json.load(r).get("ok", False)
+    except Exception as e:
+        print("telegram sendPhoto failed:", str(e)[:160]); return False
+
+def build_caption(a):
+    """The enriched alert text: entry read + day + SUGGESTED structure + why + legs cmd + TV link."""
+    tag = "ENTRY *" if a["strong"] else "ENTRY"
+    emoji = "\U0001F7E2" if a["strong"] else "\U0001F535"          # green / blue
+    where = "in his PRIME cluster" if a["strong"] else "at/around the EMA mid"
+    daytxt = f" ({a['day']} day {a['chg']:+.2f})" if a.get("day") else ""
+    rec_label, rec_why = strategy_pick(a)
+    tv = f"https://www.tradingview.com/chart/?symbol={a['t']}"
+    return (f"{emoji} <b>JohnG {tag}</b> - {a['t']} @ {a['price']:.2f}{daytxt}\n"
+            f"pos {a['pos']:.0f}% of the Keltner range | RSI {a['rsi']:.0f}\n"
+            f"Below the top, {where}, not overbought = John's entry setup.\n"
+            f"<b>Suggested:</b> {rec_label}\n{rec_why}\n"
+            f"<b>Exact legs</b> (desk, Gateway up): <code>python3 cpt_legs.py {a['t']}</code>\n"
+            f"<b>Live chart:</b> {tv}")
+
+def send_alert(token, chat, a):
+    """Send the full enriched alert: chart image + caption; fall back to text if the chart fails."""
+    caption = build_caption(a)
+    try:
+        s = series(a["t"])
+        url = chart_url(a["t"], s, f"pos {a['pos']:.0f}% | RSI {a['rsi']:.0f} | {a['verdict']}")
+        if send_photo(token, chat, url, caption):
+            return True
+    except Exception as e:
+        print("chart build failed, sending text:", str(e)[:120])
+    return send(token, chat, caption)
+
 def load_state():
     if os.path.exists(STATE):
         with open(STATE) as f:
@@ -86,6 +164,12 @@ def main():
         ok = send(token, chat, "✅ <b>CPT alert bot connected.</b> You'll get JohnG entry alerts here.")
         print("test message sent:", ok); return
 
+    if "--preview" in sys.argv:
+        args = [x for x in sys.argv[1:] if not x.startswith("-")]
+        tk = (args[0] if args else "TQQQ").upper()
+        ok = send_alert(token, chat, analyze(tk))
+        print(f"preview enriched alert for {tk} sent:", ok); return
+
     if not market_open_now() and "--force" not in sys.argv:
         print(f"{dt.datetime.now():%H:%M} US market closed - no scan (use --force to override).")
         return
@@ -110,15 +194,7 @@ def main():
         return
 
     for a in sorted(fresh, key=lambda x: (not x["strong"], x["t"])):
-        tag   = "ENTRY *" if a["strong"] else "ENTRY"
-        emoji = "\U0001F7E2" if a["strong"] else "\U0001F535"   # green / blue
-        where = "in his PRIME cluster" if a["strong"] else "at/around the EMA mid"
-        msg = (f"{emoji} <b>JohnG {tag}</b> - {a['t']} @ {a['price']:.2f}\n"
-               f"pos {a['pos']:.0f}% of the Keltner range | RSI {a['rsi']:.0f}\n"
-               f"Below the top, {where}, not overbought = John's entry setup.\n"
-               f"<b>Exact legs</b> (at your desk, Gateway up): "
-               f"<code>python3 cpt_legs.py {a['t']}</code>")
-        send(token, chat, msg)
+        send_alert(token, chat, a)
     print(f"scan {dt.datetime.now():%H:%M}: {len(fresh)} fresh alert(s) sent.")
 
 if __name__ == "__main__":

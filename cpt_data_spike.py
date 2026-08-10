@@ -31,11 +31,14 @@ def fetch(ticker, rng="3mo", interval="1d"):
         d = json.load(r)
     res = d["chart"]["result"][0]
     q = res["indicators"]["quote"][0]
-    rows = [(o, h, l, c) for o, h, l, c in
-            zip(q["open"], q["high"], q["low"], q["close"])
-            if None not in (o, h, l, c)]
-    price = res["meta"].get("regularMarketPrice") or rows[-1][3]
-    return rows, price
+    ts = res.get("timestamp", [])
+    packed = [(t, o, h, l, c) for t, o, h, l, c in
+              zip(ts, q["open"], q["high"], q["low"], q["close"])
+              if None not in (o, h, l, c)]
+    rows = [(o, h, l, c) for (t, o, h, l, c) in packed]
+    times = [t for (t, o, h, l, c) in packed]
+    price = res["meta"].get("regularMarketPrice") or (rows[-1][3] if rows else None)
+    return rows, price, times
 
 def ema(vals, n):
     k = 2 / (n + 1)
@@ -74,7 +77,7 @@ def wilder_rsi(closes, n=14):
     return rsi
 
 def analyze(ticker):
-    rows, price = fetch(ticker)
+    rows, price, _ = fetch(ticker)
     closes = [r[3] for r in rows]
     mid = ema(closes, KC_LEN)[-1]
     atr = wilder_atr(rows, ATR_LEN)[-1]
@@ -91,8 +94,67 @@ def analyze(ticker):
                "ENTRY" if valid else
                "watch" if pos <= 68 and rsi < 70 else
                "TOO HIGH")
+    # day direction (for the strategy pick): current price vs the previous daily close.
+    prev_close = closes[-2] if len(closes) >= 2 else closes[-1]
+    chg = price - prev_close
+    day = "green" if chg >= 0 else "red"
     return dict(t=ticker, price=price, mid=mid, up=upper, lo=lower, atr=atr,
-                pos=pos, rsi=rsi, strong=strong, valid=valid, verdict=verdict)
+                pos=pos, rsi=rsi, strong=strong, valid=valid, verdict=verdict,
+                prev_close=prev_close, chg=chg, day=day)
+
+
+def strategy_pick(a):
+    """Which structure fits THIS entry, per John's doctrine (cpt-doctrine.md sec.4 + 6B/6C).
+    `a` is an analyze() dict. Returns (label, why). SUGGESTION only: account type can override
+    (sec.6C - he does the ITM CC in IRA / unsettled-cash situations; a CSP needs settled cash).
+
+    Confirmed rules used:
+      - "Buy on down days for CSPs" (put premium fattens on red days; enter with downside cushion).
+      - "Sell covered calls on green/up days" (call premium fattens); the 99-delta ITM CCW is his
+        capital-efficient core and most-common structure.
+      - Long-dated ATM CSP = down-market "parking money" (300-361d, ~26-30%) on a beaten-down ETF.
+    """
+    pos, day, verdict = a["pos"], a.get("day"), a.get("verdict")
+    if verdict == "BELOW CH" or pos < 15:
+        return ("Long-dated ATM CSP (LEAPS-like)",
+                "deep in the range / below the channel = John's down-market 'parking money' play "
+                "(300-361d ATM CSP, ~26-30%). A near-term CSP works too if you want the shares.")
+    if day == "red":
+        return ("CSP (cash-secured put)",
+                "down day: put premium is fatter and you enter with downside protection "
+                "(John: 'buy on down days for CSPs').")
+    if day == "green":
+        return ("99-delta ITM CCW",
+                "up day: call premium is fatter (John: 'sell covered calls on green days'); "
+                "the 99-delta ITM covered call is his capital-efficient core.")
+    return ("99-delta ITM CCW",
+            "his primary/most-common structure. Prefer a CSP on a down day or if you want the "
+            "shares; account type can override (ITM CC for IRA / unsettled cash).")
+
+def series(ticker, n=40):
+    """Last `n` daily CANDLES (o/h/l/c + date) + the Keltner band series, for charting (pure stdlib,
+    same math as analyze / the TradingView indicator). Bands are {x:date, y:value} point-lists so
+    they overlay the candlesticks on a time axis."""
+    rows, price, times = fetch(ticker)
+    closes = [r[3] for r in rows]
+    mids = ema(closes, KC_LEN)
+    atrs = wilder_atr(rows, ATR_LEN)
+    pts = []
+    for i in range(len(rows)):
+        if mids[i] is None or atrs[i] is None:
+            continue
+        o, h, l, c = rows[i]
+        x = times[i] * 1000   # epoch-ms: Chart.js v4's time axis needs a NUMERIC x, not a date string
+        pts.append(dict(x=x, o=round(o, 2), h=round(h, 2), l=round(l, 2), c=round(c, 2),
+                        up=round(mids[i] + KC_MULT * atrs[i], 2), mid=round(mids[i], 2),
+                        lo=round(mids[i] - KC_MULT * atrs[i], 2)))
+    tail = pts[-n:]
+    return dict(
+        candles=[{"x": p["x"], "o": p["o"], "h": p["h"], "l": p["l"], "c": p["c"]} for p in tail],
+        upper=[{"x": p["x"], "y": p["up"]} for p in tail],
+        mid=[{"x": p["x"], "y": p["mid"]} for p in tail],
+        lower=[{"x": p["x"], "y": p["lo"]} for p in tail])
+
 
 def main():
     tickers = sys.argv[1:] or ["DPST", "TQQQ", "TNA"]
