@@ -38,6 +38,10 @@ Then schedule it (next step) - e.g. cron every 15-20 min during market hours.
 """
 import json, os, sys, urllib.request, urllib.parse, datetime as dt
 from cpt_data_spike import analyze, strategy_pick, series, UNIVERSE
+try:
+    import cpt_legs_web                    # cloud exact-legs from free options data (best-effort)
+except Exception:
+    cpt_legs_web = None
 
 HERE   = os.path.dirname(os.path.abspath(__file__))
 CONFIG = os.path.join(HERE, "telegram_config.json")
@@ -112,19 +116,36 @@ def send_photo(token, chat_id, photo_url, caption):
         print("telegram sendPhoto failed:", str(e)[:160]); return False
 
 def build_caption(a):
-    """The enriched alert text: entry read + day + SUGGESTED structure + why + legs cmd + TV link."""
+    """The enriched alert text: entry read + day + SUGGESTED structure + why + EXACT LEGS (from
+    free options data so they reach the phone on the go) + TV link. Legs are best-effort: if the
+    cloud can't fetch options, fall back to the desk command so the alert still fires complete."""
     tag = "ENTRY *" if a["strong"] else "ENTRY"
     emoji = "\U0001F7E2" if a["strong"] else "\U0001F535"          # green / blue
     where = "in his PRIME cluster" if a["strong"] else "at/around the EMA mid"
     daytxt = f" ({a['day']} day {a['chg']:+.2f})" if a.get("day") else ""
     rec_label, rec_why = strategy_pick(a)
     tv = f"https://www.tradingview.com/chart/?symbol={a['t']}"
-    return (f"{emoji} <b>JohnG {tag}</b> - {a['t']} @ {a['price']:.2f}{daytxt}\n"
-            f"pos {a['pos']:.0f}% of the Keltner range | RSI {a['rsi']:.0f}\n"
-            f"Below the top, {where}, not overbought = John's entry setup.\n"
-            f"<b>Suggested:</b> {rec_label}\n{rec_why}\n"
-            f"<b>Exact legs</b> (desk, Gateway up): <code>python3 cpt_legs.py {a['t']}</code>\n"
-            f"<b>Live chart:</b> {tv}")
+
+    # Sections separated by a blank line (join with \n\n); emojis flag each section for scanning.
+    parts = [f"{emoji} <b>JohnG {tag}</b> - {a['t']} @ {a['price']:.2f}{daytxt}\n"
+             f"pos {a['pos']:.0f}% of the Keltner range | RSI {a['rsi']:.0f}",
+             f"\U0001F9E0 Below the top, {where}, not overbought = John's entry setup.",
+             f"\U0001F4A1 <b>Suggested:</b> {rec_label}\n{rec_why}"]
+
+    legs_txt = None
+    if cpt_legs_web is not None:
+        try:
+            legs_txt = cpt_legs_web.format_legs(a["t"], cpt_legs_web.legs(a["t"]))
+        except Exception as e:
+            print("cloud legs failed (sending desk pointer):", str(e)[:120])
+    if legs_txt:
+        parts.append(legs_txt.strip())
+        parts.append(f"Exact live at desk: <code>python3 cpt_legs.py {a['t']}</code>")
+    else:
+        parts.append(f"\U0001F4CA <b>Exact legs</b> (desk, Gateway up): "
+                     f"<code>python3 cpt_legs.py {a['t']}</code>")
+    parts.append(f"\U0001F4CA <b>Live chart:</b> {tv}")
+    return "\n\n".join(parts)
 
 def send_alert(token, chat, a):
     """Send the full enriched alert: chart image + caption; fall back to text if the chart fails."""
