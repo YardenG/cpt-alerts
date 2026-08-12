@@ -79,8 +79,13 @@ def legs(ticker, csp_dte=CSP_DTE, lc_dte=LC_DTE):
     cdte = _dte(csp_exp, today)
     atm_call = min(calls, key=lambda c: abs(c["strike"] - px))           # ATM ~ CC-at-assignment proxy
     atm_iv = atm_call.get("impliedVolatility")
-    em = px * atm_iv * math.sqrt(cdte / 365) if atm_iv else None
-    csp = min(puts, key=lambda p: abs(p["strike"] - (px - em))) if em else None
+    # Off-hours / thin data: Yahoo returns 0.0 bids and a missing/~0 IV, which would collapse the CSP
+    # to the ATM strike and the 99-delta to a nonsense deep strike. Bail out with a clean marker so
+    # the alert says "market closed" instead of printing garbage legs. (Real alerts fire in-hours.)
+    if not atm_iv or atm_iv < 0.05:
+        return dict(stale=True, px=px)
+    em = px * atm_iv * math.sqrt(cdte / 365)
+    csp = min(puts, key=lambda p: abs(p["strike"] - (px - em)))
 
     # --- 99-delta ITM long call (~35 DTE), delta via Black-Scholes on each strike's IV ---
     lc_exp = min(future, key=lambda e: abs(_dte(e, today) - lc_dte))
@@ -110,6 +115,9 @@ def format_legs(ticker, L):
     header / T1 CSP / (T2 CC + 99d call together). Everything labeled a delayed estimate."""
     if not L:
         return None
+    if L.get("stale"):
+        return ("\U0001F4CA <b>Exact legs</b>: market closed / data thin - legs populate live "
+                "during US market hours.")
     blocks = ["\U0001F4CA <b>Exact legs</b> (Yahoo ~15m delayed - confirm live in IBKR):"]
     t2 = None
     csp = L.get("csp")
@@ -139,5 +147,10 @@ if __name__ == "__main__":
     import sys
     tk = (sys.argv[1] if len(sys.argv) > 1 else "TQQQ").upper()
     L = legs(tk)
-    print(f"px={L['px']}  ATM IV={L['atm_iv']:.1%}  expected move=+/-{L['em']:.2f}" if L else "no data")
+    if not L:
+        print("no data")
+    elif L.get("stale"):
+        print(f"px={L['px']}  (market closed / thin data - no live legs)")
+    else:
+        print(f"px={L['px']}  ATM IV={L['atm_iv']:.1%}  expected move=+/-{L['em']:.2f}")
     print(format_legs(tk, L))
