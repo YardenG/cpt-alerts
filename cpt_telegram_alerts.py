@@ -24,8 +24,9 @@ ONE-TIME SETUP (2 minutes):
 
 Each alert now carries: the entry read, the SUGGESTED structure (CSP / 99-delta ITM CCW /
 long-dated CSP - John's up/down-day + structure rules), a chart image (price + Keltner bands,
-rendered via a chart-image URL so the cloud run stays pure-stdlib), a TradingView link, and the
-exact-legs command for the desk.
+rendered via a chart-image URL so the cloud run stays pure-stdlib), a TradingView link, the
+exact-legs command for the desk, and a SITUATIONAL AWARENESS line (market regime + fragility +
+sector trend + earnings proximity, from cpt_context) - advise-only, computed once per scan.
 
 RUN:
   python3 cpt_telegram_alerts.py --test          # send a plain test message (prove the pipe)
@@ -42,6 +43,10 @@ try:
     import cpt_legs_web                    # cloud exact-legs from free options data (best-effort)
 except Exception:
     cpt_legs_web = None
+try:
+    import cpt_context                     # SITUATIONAL AWARENESS layer (regime/sector/earnings; best-effort)
+except Exception:
+    cpt_context = None
 
 HERE   = os.path.dirname(os.path.abspath(__file__))
 CONFIG = os.path.join(HERE, "telegram_config.json")
@@ -147,17 +152,49 @@ def build_caption(a):
     parts.append(f"\U0001F4CA <b>Live chart:</b> {tv}")
     return "\n\n".join(parts)
 
-def send_alert(token, chat, a):
-    """Send the full enriched alert: chart image + caption; fall back to text if the chart fails."""
+def shared_regime():
+    """Compute the market regime ONCE (SPY/QQQ/VIX) to share across every alert in a scan. Best-effort."""
+    if cpt_context is None:
+        return None
+    try:
+        return cpt_context.regime()
+    except Exception as e:
+        print("regime failed:", str(e)[:120])
+        return None
+
+def situational_line(a, reg):
+    """Compact one-line situational-awareness read for the caption (tape/fragility/sector/earnings),
+    computed from a SHARED regime so a scan pays for SPY/QQQ/VIX once. Best-effort -> None on failure."""
+    if cpt_context is None:
+        return None
+    try:
+        c = cpt_context.context(a["t"], reg=reg, a=a)
+        return f"\U0001F30D <b>Context:</b> {cpt_context.read_line(c)}"
+    except Exception as e:
+        print("situational read failed:", str(e)[:120])
+        return None
+
+def send_alert(token, chat, a, reg=None):
+    """Send the full enriched alert: chart image + caption (with the situational line inlined when it
+    fits Telegram's 1024-char caption cap; otherwise as a short follow-up). Falls back to text if the
+    chart fails."""
     caption = build_caption(a)
+    ctx = situational_line(a, reg)
+    full = caption + (f"\n\n{ctx}" if ctx else "")
+    inline = bool(ctx) and len(full) <= 1000
+    to_send = full if inline else caption
+    sent = False
     try:
         s = series(a["t"])
         url = chart_url(a["t"], s, f"pos {a['pos']:.0f}% | RSI {a['rsi']:.0f} | {a['verdict']}")
-        if send_photo(token, chat, url, caption):
-            return True
+        sent = send_photo(token, chat, url, to_send)
     except Exception as e:
         print("chart build failed, sending text:", str(e)[:120])
-    return send(token, chat, caption)
+    if not sent:
+        return send(token, chat, full if ctx else caption)
+    if ctx and not inline:
+        send(token, chat, ctx)          # caption was full; send context as its own short message
+    return True
 
 def load_state():
     if os.path.exists(STATE):
@@ -188,7 +225,7 @@ def main():
     if "--preview" in sys.argv:
         args = [x for x in sys.argv[1:] if not x.startswith("-")]
         tk = (args[0] if args else "TQQQ").upper()
-        ok = send_alert(token, chat, analyze(tk))
+        ok = send_alert(token, chat, analyze(tk), reg=shared_regime())
         print(f"preview enriched alert for {tk} sent:", ok); return
 
     if not market_open_now() and "--force" not in sys.argv:
@@ -214,8 +251,9 @@ def main():
         print(f"Baseline set for {len(state)} names. Fresh entries will be alerted from the next scan.")
         return
 
+    reg = shared_regime() if fresh else None      # compute the regime ONCE, only if we have alerts to send
     for a in sorted(fresh, key=lambda x: (not x["strong"], x["t"])):
-        send_alert(token, chat, a)
+        send_alert(token, chat, a, reg=reg)
     print(f"scan {dt.datetime.now():%H:%M}: {len(fresh)} fresh alert(s) sent.")
 
 if __name__ == "__main__":
