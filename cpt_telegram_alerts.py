@@ -149,7 +149,7 @@ def build_caption(a):
     legs_txt = None
     if cpt_legs_web is not None:
         try:
-            legs_txt = cpt_legs_web.format_legs(a["t"], cpt_legs_web.legs(a["t"]))
+            legs_txt = cpt_legs_web.format_legs(a["t"], cpt_legs_web.legs(a["t"]), structure=rec_label)
         except Exception as e:
             print("cloud legs failed (sending desk pointer):", str(e)[:120])
     if legs_txt:

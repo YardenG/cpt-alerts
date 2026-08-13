@@ -86,6 +86,11 @@ def legs(ticker, csp_dte=CSP_DTE, lc_dte=LC_DTE):
         return dict(stale=True, px=px)
     em = px * atm_iv * math.sqrt(cdte / 365)
     csp = min(puts, key=lambda p: abs(p["strike"] - (px - em)))
+    # Near-term OTM call to WRITE against the 99-delta long = the CCW's income leg (doctrine sec.6B:
+    # "immediately write the near-term covered call"). Nearest strike above spot = highest-premium OTM,
+    # John's "sell covered calls on green days, a little upside + premium." Same weekly expiry as the CSP.
+    otm = [c for c in calls if c["strike"] > px and c.get("bid")]
+    ccw_cc = min(otm, key=lambda c: c["strike"]) if otm else None
 
     # --- 99-delta ITM long call (~35 DTE), delta via Black-Scholes on each strike's IV ---
     lc_exp = min(future, key=lambda e: abs(_dte(e, today) - lc_dte))
@@ -102,6 +107,7 @@ def legs(ticker, csp_dte=CSP_DTE, lc_dte=LC_DTE):
     return dict(px=px, atm_iv=atm_iv, em=em,
                 csp=csp, csp_exp=csp_exp, cdte=cdte,
                 cc_bid=atm_call.get("bid"),        # ATM call bid = pre-dialed CC premium proxy
+                ccw_cc=ccw_cc,                     # near-term OTM call = the CCW income leg
                 lc=lc[0] if lc else None, lc_delta=lc[1] if lc else None,
                 lc_exp=lc_exp, lddte=lddte)
 
@@ -110,37 +116,65 @@ def coc(prem, strike):
     return prem / strike * 100 if (prem and strike) else None
 
 
-def format_legs(ticker, L):
-    """Phone-ready legs block for the Telegram alert (HTML). Blocks joined by blank lines:
-    header / T1 CSP / (T2 CC + 99d call together). Everything labeled a delayed estimate."""
+def format_legs(ticker, L, structure=None):
+    """Phone-ready legs block for the Telegram alert (HTML), laid out to MATCH the suggested structure
+    (`structure` = strategy_pick's label). When the 99-delta ITM CCW is suggested, lead with ITS two
+    legs - buy the 99-delta long + write a near-term OTM CC against it - and demote the CSP to a
+    one-line alternative. Otherwise keep the CSP Two-Trade lead. Everything labeled a delayed estimate."""
     if not L:
         return None
     if L.get("stale"):
         return ("\U0001F4CA <b>Exact legs</b>: market closed / data thin - legs populate live "
                 "during US market hours.")
-    blocks = ["\U0001F4CA <b>Exact legs</b> (Yahoo ~15m delayed - confirm live in IBKR):"]
-    t2 = None
+
+    # --- build each leg's core string once (whichever data is present) ---
     csp = L.get("csp")
+    csp_core = costcc_core = None
     if csp and L.get("em") is not None:
-        c = coc(csp.get("bid"), csp["strike"])
-        cctxt = f" ~{c:.1f}% CoC" if c else ""
-        blocks.append(f"T1 CSP: sell <b>{csp['strike']:g}P</b> {_fmt_date(L['csp_exp'])} "
-                      f"({L['cdte']}d)  bid ~{csp.get('bid')}{cctxt}")
-        cc2 = coc(L.get("cc_bid"), csp["strike"])
-        cc2txt = f" ~{cc2:.1f}% CoC" if cc2 else ""
-        t2 = (f"T2 CC if assigned: sell <b>{csp['strike']:g}C</b> at cost basis  "
-              f"~{L.get('cc_bid')}{cc2txt}")
-    lc_line = None
-    lc = L.get("lc")
+        c = coc(csp.get("bid"), csp["strike"]); cctxt = f" ~{c:.1f}% CoC" if c else ""
+        csp_core = (f"sell <b>{csp['strike']:g}P</b> {_fmt_date(L['csp_exp'])} "
+                    f"({L['cdte']}d)  bid ~{csp.get('bid')}{cctxt}")
+        cc2 = coc(L.get("cc_bid"), csp["strike"]); cc2txt = f" ~{cc2:.1f}% CoC" if cc2 else ""
+        costcc_core = f"sell <b>{csp['strike']:g}C</b> at cost basis  ~{L.get('cc_bid')}{cc2txt}"
+    lc = L.get("lc"); lc_core = None
     if lc:
-        d = L.get("lc_delta")
-        dtxt = f" ~{d:.2f}d" if d is not None else ""
-        lc_line = (f"99d call: buy <b>{lc['strike']:g}C</b> {_fmt_date(L['lc_exp'])} "
+        d = L.get("lc_delta"); dtxt = f" ~{d:.2f}d" if d is not None else ""
+        lc_core = (f"buy <b>{lc['strike']:g}C</b> {_fmt_date(L['lc_exp'])} "
                    f"({L['lddte']}d){dtxt}  ask ~{lc.get('ask')}")
-    tail = "\n".join(x for x in (t2, lc_line) if x)   # T2 + 99d in one block, no blank between
-    if tail:
-        blocks.append(tail)
-    return "\n\n".join(blocks)                          # blank line between header / T1 / (T2+99d)
+    ccw_cc = L.get("ccw_cc"); ccwcc_core = None
+    if ccw_cc:
+        cc = coc(ccw_cc.get("bid"), ccw_cc["strike"]); cctxt = f" ~{cc:.1f}% CoC" if cc else ""
+        ccwcc_core = (f"sell <b>{ccw_cc['strike']:g}C</b> {_fmt_date(L['csp_exp'])} "
+                      f"({L['cdte']}d)  bid ~{ccw_cc.get('bid')}{cctxt}")
+
+    hdr = "\U0001F4CA <b>Exact legs</b> (Yahoo ~15m delayed - confirm live in IBKR):"
+    blocks = [hdr]
+    is_ccw = bool(structure) and "CCW" in structure
+
+    if is_ccw and lc_core:
+        # Lead with the CCW's TWO legs: buy the deep-ITM long, write the near-term OTM CC against it.
+        ccw = ["⭐ <b>99-delta ITM CCW</b> (suggested - green day):",
+               f"1) buy the ~99d long: {lc_core}"]
+        ccw.append(f"2) write the CC against it: {ccwcc_core}" if ccwcc_core
+                   else "2) write a near-term OTM covered call against it (no OTM strike quoting now)")
+        blocks.append("\n".join(ccw))
+        if csp_core:                                   # CSP demoted to a one-line alternative
+            alt = f"Alt - CSP path: {csp_core}"
+            if costcc_core:
+                alt += f"\nif assigned, {costcc_core}"
+            blocks.append(alt)
+    else:
+        # CSP-led (red day / long-dated / default): T1 CSP, then T2 cost-basis CC + the 99d long.
+        if csp_core:
+            blocks.append(f"T1 CSP: {csp_core}")
+        tail = []
+        if costcc_core:
+            tail.append(f"T2 CC if assigned: {costcc_core}")
+        if lc_core:
+            tail.append(f"99d call: {lc_core}")
+        if tail:
+            blocks.append("\n".join(tail))
+    return "\n\n".join(blocks)
 
 
 if __name__ == "__main__":
