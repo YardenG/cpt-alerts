@@ -124,9 +124,18 @@ def build_caption(a):
     """The enriched alert text: entry read + day + SUGGESTED structure + why + EXACT LEGS (from
     free options data so they reach the phone on the go) + TV link. Legs are best-effort: if the
     cloud can't fetch options, fall back to the desk command so the alert still fires complete."""
-    tag = "ENTRY *" if a["strong"] else "ENTRY"
-    emoji = "\U0001F7E2" if a["strong"] else "\U0001F535"          # green / blue
-    where = "in his PRIME cluster" if a["strong"] else "at/around the EMA mid"
+    # Header/brain reflect the TRUE verdict. A live scan only ever alerts in-gate names, but
+    # --preview can send an out-of-gate name to eyeball - so don't mislabel it "ENTRY".
+    if a["strong"]:
+        tag, emoji = "ENTRY *", "\U0001F7E2"                       # green
+        brain = "\U0001F9E0 Below the top, in his PRIME cluster, not overbought = John's entry setup."
+    elif a["valid"]:
+        tag, emoji = "ENTRY", "\U0001F535"                         # blue
+        brain = "\U0001F9E0 Below the top, at/around the EMA mid, not overbought = John's entry setup."
+    else:
+        tag, emoji = f"{a['verdict'].upper()} (not in gate)", "⚪"   # preview-only path
+        brain = (f"\U0001F9E0 pos {a['pos']:.0f}% / RSI {a['rsi']:.0f} is OUTSIDE John's gate "
+                 f"(pos<=60 & RSI<70) - preview only, not a live entry signal.")
     daytxt = f" ({a['day']} day {a['chg']:+.2f})" if a.get("day") else ""
     rec_label, rec_why = strategy_pick(a)
     tv = f"https://www.tradingview.com/chart/?symbol={a['t']}"
@@ -134,7 +143,7 @@ def build_caption(a):
     # Sections separated by a blank line (join with \n\n); emojis flag each section for scanning.
     parts = [f"{emoji} <b>JohnG {tag}</b> - {a['t']} @ {a['price']:.2f}{daytxt}\n"
              f"pos {a['pos']:.0f}% of the Keltner range | RSI {a['rsi']:.0f}",
-             f"\U0001F9E0 Below the top, {where}, not overbought = John's entry setup.",
+             brain,
              f"\U0001F4A1 <b>Suggested:</b> {rec_label}\n{rec_why}"]
 
     legs_txt = None
