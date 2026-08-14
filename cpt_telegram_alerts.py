@@ -47,6 +47,10 @@ try:
     import cpt_context                     # SITUATIONAL AWARENESS layer (regime/sector/earnings; best-effort)
 except Exception:
     cpt_context = None
+try:
+    import cpt_paper                       # PAPER-TRADE LEDGER: auto-capture + daily mark + weekly digest (best-effort)
+except Exception:
+    cpt_paper = None
 
 HERE   = os.path.dirname(os.path.abspath(__file__))
 CONFIG = os.path.join(HERE, "telegram_config.json")
@@ -263,7 +267,43 @@ def main():
     reg = shared_regime() if fresh else None      # compute the regime ONCE, only if we have alerts to send
     for a in sorted(fresh, key=lambda x: (not x["strong"], x["t"])):
         send_alert(token, chat, a, reg=reg)
+        if cpt_paper is not None:             # auto-capture the fired alert into the paper ledger (best-effort)
+            try:
+                cpt_paper.auto_open(a, reg=reg)
+            except Exception as e:
+                print("paper auto-open skipped:", str(e)[:120])
     print(f"scan {dt.datetime.now():%H:%M}: {len(fresh)} fresh alert(s) sent.")
+
+    paper_maintenance(token, chat)            # once/day mark + Friday digest (self-gated, best-effort)
+
+
+def paper_maintenance(token, chat):
+    """Run the paper ledger's daily upkeep from inside the live scan (no extra cron needed):
+      - MARK every open position ONCE per day, near the close (19:45-20:00 UTC, in-session so the
+        option quotes are live), guarded by `last_marked` in the ledger meta.
+      - Send the WEEKLY scorecard digest to Telegram on Friday near close, guarded by `last_digest_week`.
+    All best-effort: any failure here must never touch the proven-live alert path."""
+    if cpt_paper is None:
+        return
+    now = dt.datetime.utcnow()
+    mins = now.hour * 60 + now.minute
+    if not (market_open_now() and mins >= 19 * 60 + 45):   # only near the close, still in-session
+        return
+    today = dt.date.today().isoformat()
+    try:
+        if cpt_paper.meta_get("last_marked") != today:
+            cpt_paper.mark()
+            cpt_paper.meta_set("last_marked", today)
+    except Exception as e:
+        print("paper daily mark skipped:", str(e)[:120])
+    try:
+        if now.weekday() == 4:                              # Friday
+            wk = now.strftime("%G-W%V")
+            if cpt_paper.meta_get("last_digest_week") != wk:
+                if send(token, chat, cpt_paper.digest_text()):
+                    cpt_paper.meta_set("last_digest_week", wk)
+    except Exception as e:
+        print("paper weekly digest skipped:", str(e)[:120])
 
 if __name__ == "__main__":
     main()
