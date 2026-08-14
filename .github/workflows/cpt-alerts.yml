@@ -41,13 +41,13 @@ jobs:
           else
             python cpt_telegram_alerts.py
           fi
-      - name: Persist fire-once state (only if it changed)
+      - name: Persist state + paper ledger (only if changed)
         run: |
-          if [ -n "$(git status --porcelain .telegram_alert_state.json)" ]; then
+          if [ -n "$(git status --porcelain .telegram_alert_state.json paper-ledger.json)" ]; then
             git config user.name "cpt-alert-bot"
             git config user.email "cpt-alert-bot@users.noreply.github.com"
-            git add .telegram_alert_state.json
-            git commit -m "update alert state [skip ci]"
+            git add .telegram_alert_state.json paper-ledger.json
+            git commit -m "update alert state + paper ledger [skip ci]"
             git push
           else
             echo "no state change"
