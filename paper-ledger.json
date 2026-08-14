@@ -32,6 +32,39 @@
       "premium_banked": 0.0,
       "events": [],
       "closed": null
+    },
+    {
+      "id": "NVDL-20260814",
+      "ticker": "NVDL",
+      "opened": "2026-08-14",
+      "status": "OPEN",
+      "kind": "CSP",
+      "entry_price": 36.68,
+      "pos_pct": 59.4,
+      "rsi": 61.3,
+      "verdict": "ENTRY",
+      "day": "red",
+      "structure": "CSP (cash-secured put)",
+      "structure_why": "down day: put premium is fatter and you enter with downside protection (John: 'buy on down days for CSPs').",
+      "structure_bucket": "csp",
+      "regime": "RISK-ON",
+      "context": "NVDA reports in 12d (2026-08-26) - lands inside a ~30d CC; OK for a weekly, but keep your expiry BEFORE the print or accept the event risk",
+      "contracts": 10,
+      "long_call": null,
+      "income": {
+        "right": "P",
+        "strike": 33.67,
+        "exp": "Aug-21",
+        "exp_ts": 1787270400,
+        "sold": 0.18,
+        "cycle_opened": "2026-08-14",
+        "cost_cc_bid": 1.13
+      },
+      "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
+      "weeklies": [],
+      "premium_banked": 0.0,
+      "events": [],
+      "closed": null
     }
   ]
 }
