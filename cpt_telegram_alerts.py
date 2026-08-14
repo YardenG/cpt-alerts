@@ -238,8 +238,17 @@ def main():
     if "--preview" in sys.argv:
         args = [x for x in sys.argv[1:] if not x.startswith("-")]
         tk = (args[0] if args else "TQQQ").upper()
-        ok = send_alert(token, chat, analyze(tk), reg=shared_regime())
-        print(f"preview enriched alert for {tk} sent:", ok); return
+        a = analyze(tk)
+        reg = shared_regime()
+        ok = send_alert(token, chat, a, reg=reg)
+        print(f"preview enriched alert for {tk} sent:", ok)
+        if cpt_paper is not None:            # also paper-capture: cloud self-test for the ledger (best-effort)
+            try:
+                if not cpt_paper.auto_open(a, reg=reg):
+                    print(f"[paper] {tk} not captured (already open, or not a live ENTRY gate).")
+            except Exception as e:
+                print("paper preview-capture skipped:", str(e)[:120])
+        return
 
     if not market_open_now() and "--force" not in sys.argv:
         print(f"{dt.datetime.now():%H:%M} US market closed - no scan (use --force to override).")
