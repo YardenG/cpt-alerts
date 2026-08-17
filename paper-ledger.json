@@ -90,6 +90,44 @@
       "premium_banked": 0.0,
       "events": [],
       "closed": null
+    },
+    {
+      "id": "IREN-20260817",
+      "ticker": "IREN",
+      "opened": "2026-08-17",
+      "status": "OPEN",
+      "kind": "CCW",
+      "entry_price": 45.59,
+      "pos_pct": 59.2,
+      "rsi": 57.3,
+      "verdict": "ENTRY",
+      "day": "green",
+      "structure": "99-delta ITM CCW",
+      "structure_why": "up day: call premium is fatter (John: 'sell covered calls on green days'); the 99-delta ITM covered call is his capital-efficient core.",
+      "structure_bucket": "itm_ccw",
+      "regime": "RISK-ON",
+      "context": "RISK-ON tape, IBIT mixed - neutral backdrop",
+      "contracts": 10,
+      "long_call": {
+        "strike": 20.0,
+        "exp": "Sep-18",
+        "exp_ts": 1789689600,
+        "ask_paid": 26.7,
+        "delta": 0.9874587329291116
+      },
+      "income": {
+        "right": "C",
+        "strike": 46.0,
+        "exp": "Aug-21",
+        "exp_ts": 1787270400,
+        "sold": 1.88,
+        "cycle_opened": "2026-08-17"
+      },
+      "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
+      "weeklies": [],
+      "premium_banked": 0.0,
+      "events": [],
+      "closed": null
     }
   ]
 }
