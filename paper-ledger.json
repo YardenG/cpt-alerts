@@ -65,6 +65,31 @@
       "premium_banked": 0.0,
       "events": [],
       "closed": null
+    },
+    {
+      "id": "TNA-20260817",
+      "ticker": "TNA",
+      "opened": "2026-08-17",
+      "status": "OPEN",
+      "kind": "CSP",
+      "entry_price": 76.09,
+      "pos_pct": 56.5,
+      "rsi": 59.6,
+      "verdict": "ENTRY",
+      "day": "red",
+      "structure": "CSP (cash-secured put)",
+      "structure_why": "down day: put premium is fatter and you enter with downside protection (John: 'buy on down days for CSPs').",
+      "structure_bucket": "csp",
+      "regime": "RISK-ON",
+      "context": "RISK-ON tape + IWM uptrend = supportive backdrop",
+      "contracts": 10,
+      "long_call": null,
+      "income": null,
+      "legs_note": "market closed / thin data - legs populate live during US market hours",
+      "weeklies": [],
+      "premium_banked": 0.0,
+      "events": [],
+      "closed": null
     }
   ]
 }
