@@ -26,11 +26,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 41.0,
-        "exp": "Aug-21",
-        "exp_ts": 1787270400,
-        "sold": 0.7,
-        "cycle_opened": "2026-08-17"
+        "strike": 39.5,
+        "exp": "Aug-28",
+        "exp_ts": 1787875200,
+        "sold": 1.55,
+        "cycle_opened": "2026-08-18"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -44,9 +44,20 @@
           "coc": 3.17,
           "days": 4,
           "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-08-18",
+          "strike": 41.0,
+          "sold": 0.7,
+          "buyback": 0.62,
+          "income_ps": 0.07,
+          "income_usd": 75.0,
+          "coc": 0.3,
+          "days": 1,
+          "reason": "expired OTM"
         }
       ],
-      "premium_banked": 800.0,
+      "premium_banked": 875.0,
       "events": [],
       "closed": null
     },
@@ -79,8 +90,8 @@
         "strike": 102.0,
         "exp": "Aug-21",
         "exp_ts": 1787270400,
-        "sold": 1.9,
-        "cycle_opened": "2026-08-17"
+        "sold": 1.7,
+        "cycle_opened": "2026-08-18"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -93,6 +104,17 @@
           "income_usd": 700.0,
           "coc": 1.43,
           "days": 4,
+          "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-08-18",
+          "strike": 102.0,
+          "sold": 1.9,
+          "buyback": 2.1,
+          "income_ps": 0.0,
+          "income_usd": 0.0,
+          "coc": 0.0,
+          "days": 1,
           "reason": "expired OTM"
         }
       ],
@@ -126,11 +148,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 153.0,
-        "exp": "Aug-21",
-        "exp_ts": 1787270400,
-        "sold": 2.1,
-        "cycle_opened": "2026-08-17"
+        "strike": 150.0,
+        "exp": "Aug-28",
+        "exp_ts": 1787875200,
+        "sold": 4.5,
+        "cycle_opened": "2026-08-18"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -144,9 +166,20 @@
           "coc": 1.67,
           "days": 4,
           "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-08-18",
+          "strike": 153.0,
+          "sold": 2.1,
+          "buyback": 1.75,
+          "income_ps": 0.35,
+          "income_usd": 350.0,
+          "coc": 0.34,
+          "days": 1,
+          "reason": "expired OTM"
         }
       ],
-      "premium_banked": 1700.0,
+      "premium_banked": 2050.0,
       "events": [],
       "closed": null
     },
@@ -180,7 +213,12 @@
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [],
       "premium_banked": 0.0,
-      "events": [],
+      "events": [
+        {
+          "date": "2026-08-18",
+          "detail": "CSP ITM near expiry (3d): assigned at 73 = cost basis; now write the CC."
+        }
+      ],
       "closed": null
     },
     {
@@ -220,7 +258,7 @@
       "id": "IREN-20260817",
       "ticker": "IREN",
       "opened": "2026-08-17",
-      "status": "OPEN",
+      "status": "ROLLED",
       "kind": "CCW",
       "entry_price": 44.9,
       "pos_pct": 57.7,
@@ -242,15 +280,27 @@
       },
       "income": {
         "right": "C",
-        "strike": 45.0,
-        "exp": "Aug-21",
-        "exp_ts": 1787270400,
-        "sold": 1.74,
-        "cycle_opened": "2026-08-17"
+        "strike": 42.5,
+        "exp": "Aug-28",
+        "exp_ts": 1787875200,
+        "sold": 2.8,
+        "cycle_opened": "2026-08-18"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
-      "weeklies": [],
-      "premium_banked": 0.0,
+      "weeklies": [
+        {
+          "closed": "2026-08-18",
+          "strike": 45.0,
+          "sold": 1.74,
+          "buyback": 0.42,
+          "income_ps": 1.31,
+          "income_usd": 1315.0,
+          "coc": 4.53,
+          "days": 1,
+          "reason": "expired OTM"
+        }
+      ],
+      "premium_banked": 1315.0,
       "events": [],
       "closed": null
     },
@@ -320,5 +370,8 @@
       "events": [],
       "closed": null
     }
-  ]
+  ],
+  "meta": {
+    "last_marked": "2026-08-18"
+  }
 }
