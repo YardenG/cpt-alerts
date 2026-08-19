@@ -65,7 +65,7 @@
       "id": "GGLL-20260813",
       "ticker": "GGLL",
       "opened": "2026-08-13",
-      "status": "ROLLED",
+      "status": "CLOSED",
       "kind": "CCW",
       "entry_price": 102.97,
       "pos_pct": 45.2,
@@ -120,7 +120,14 @@
       ],
       "premium_banked": 700.0,
       "events": [],
-      "closed": null
+      "closed": {
+        "date": "2026-08-19",
+        "cohort": "campaign",
+        "realized": -1525.0,
+        "coc": -3.11,
+        "days": 6,
+        "detail": "CASE B: GGLL 102.17 above 102C at 2d - closed both legs."
+      }
     },
     {
       "id": "DPST-20260813",
@@ -148,11 +155,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 150.0,
+        "strike": 139.0,
         "exp": "Aug-28",
         "exp_ts": 1787875200,
-        "sold": 4.5,
-        "cycle_opened": "2026-08-18"
+        "sold": 4.6,
+        "cycle_opened": "2026-08-19"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -177,9 +184,20 @@
           "coc": 0.34,
           "days": 1,
           "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-08-19",
+          "strike": 150.0,
+          "sold": 4.5,
+          "buyback": 1.85,
+          "income_ps": 2.65,
+          "income_usd": 2650.0,
+          "coc": 2.6,
+          "days": 1,
+          "reason": "-50% rule"
         }
       ],
-      "premium_banked": 2050.0,
+      "premium_banked": 4700.0,
       "events": [],
       "closed": null
     },
@@ -217,6 +235,10 @@
         {
           "date": "2026-08-18",
           "detail": "CSP ITM near expiry (3d): assigned at 73 = cost basis; now write the CC."
+        },
+        {
+          "date": "2026-08-19",
+          "detail": "CSP ITM near expiry (2d): assigned at 73 = cost basis; now write the CC."
         }
       ],
       "closed": null
@@ -251,7 +273,12 @@
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [],
       "premium_banked": 0.0,
-      "events": [],
+      "events": [
+        {
+          "date": "2026-08-19",
+          "detail": "CSP ITM near expiry (2d): assigned at 34.33 = cost basis; now write the CC."
+        }
+      ],
       "closed": null
     },
     {
@@ -372,6 +399,6 @@
     }
   ],
   "meta": {
-    "last_marked": "2026-08-18"
+    "last_marked": "2026-08-19"
   }
 }
