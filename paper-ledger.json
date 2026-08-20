@@ -239,6 +239,10 @@
         {
           "date": "2026-08-19",
           "detail": "CSP ITM near expiry (2d): assigned at 73 = cost basis; now write the CC."
+        },
+        {
+          "date": "2026-08-20",
+          "detail": "CSP ITM near expiry (1d): assigned at 73 = cost basis; now write the CC."
         }
       ],
       "closed": null
@@ -277,6 +281,10 @@
         {
           "date": "2026-08-19",
           "detail": "CSP ITM near expiry (2d): assigned at 34.33 = cost basis; now write the CC."
+        },
+        {
+          "date": "2026-08-20",
+          "detail": "CSP ITM near expiry (1d): assigned at 34.33 = cost basis; now write the CC."
         }
       ],
       "closed": null
@@ -361,7 +369,12 @@
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [],
       "premium_banked": 0.0,
-      "events": [],
+      "events": [
+        {
+          "date": "2026-08-20",
+          "detail": "CSP ITM near expiry (1d): assigned at 73.5 = cost basis; now write the CC."
+        }
+      ],
       "closed": null
     },
     {
@@ -432,6 +445,6 @@
     }
   ],
   "meta": {
-    "last_marked": "2026-08-19"
+    "last_marked": "2026-08-20"
   }
 }
