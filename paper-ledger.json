@@ -396,6 +396,39 @@
       "premium_banked": 0.0,
       "events": [],
       "closed": null
+    },
+    {
+      "id": "LABU-20260820",
+      "ticker": "LABU",
+      "opened": "2026-08-20",
+      "status": "OPEN",
+      "kind": "CSP",
+      "entry_price": 307.14,
+      "pos_pct": 56.9,
+      "rsi": 59.8,
+      "verdict": "ENTRY",
+      "day": "red",
+      "structure": "CSP (cash-secured put)",
+      "structure_why": "down day: put premium is fatter and you enter with downside protection (John: 'buy on down days for CSPs').",
+      "structure_bucket": "csp",
+      "regime": "RISK-ON",
+      "context": "RISK-ON tape + XBI uptrend = supportive backdrop",
+      "contracts": 10,
+      "long_call": null,
+      "income": {
+        "right": "P",
+        "strike": 250.0,
+        "exp": "Aug-28",
+        "exp_ts": 1787875200,
+        "sold": 1.0,
+        "cycle_opened": "2026-08-20",
+        "cost_cc_bid": 22.1
+      },
+      "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
+      "weeklies": [],
+      "premium_banked": 0.0,
+      "events": [],
+      "closed": null
     }
   ],
   "meta": {
