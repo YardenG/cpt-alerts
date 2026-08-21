@@ -243,6 +243,10 @@
         {
           "date": "2026-08-20",
           "detail": "CSP ITM near expiry (1d): assigned at 73 = cost basis; now write the CC."
+        },
+        {
+          "date": "2026-08-21",
+          "detail": "CSP ITM near expiry (0d): assigned at 73 = cost basis; now write the CC."
         }
       ],
       "closed": null
@@ -285,6 +289,10 @@
         {
           "date": "2026-08-20",
           "detail": "CSP ITM near expiry (1d): assigned at 34.33 = cost basis; now write the CC."
+        },
+        {
+          "date": "2026-08-21",
+          "detail": "CSP ITM near expiry (0d): assigned at 34.33 = cost basis; now write the CC."
         }
       ],
       "closed": null
@@ -373,6 +381,10 @@
         {
           "date": "2026-08-20",
           "detail": "CSP ITM near expiry (1d): assigned at 73.5 = cost basis; now write the CC."
+        },
+        {
+          "date": "2026-08-21",
+          "detail": "CSP ITM near expiry (0d): assigned at 73.5 = cost basis; now write the CC."
         }
       ],
       "closed": null
@@ -381,7 +393,7 @@
       "id": "AMZU-20260817",
       "ticker": "AMZU",
       "opened": "2026-08-17",
-      "status": "OPEN",
+      "status": "ROLLED",
       "kind": "CSP",
       "entry_price": 38.35,
       "pos_pct": 44.0,
@@ -405,8 +417,20 @@
         "cost_cc_bid": 1.0
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
-      "weeklies": [],
-      "premium_banked": 0.0,
+      "weeklies": [
+        {
+          "closed": "2026-08-21",
+          "strike": 36.0,
+          "sold": 0.1,
+          "buyback": 0,
+          "income_ps": 0.1,
+          "income_usd": 100.0,
+          "coc": 0.28,
+          "days": 4,
+          "reason": "CSP expired OTM"
+        }
+      ],
+      "premium_banked": 100.0,
       "events": [],
       "closed": null
     },
@@ -445,6 +469,7 @@
     }
   ],
   "meta": {
-    "last_marked": "2026-08-20"
+    "last_marked": "2026-08-21",
+    "last_digest_week": "2026-W34"
   }
 }
