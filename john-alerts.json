@@ -1,0 +1,195 @@
+{
+  "_note": "John's REAL entry alerts, parsed from the CPT Dashboard Gmail label (sender john@*cptdashboard/corepositiontrading). 'NEW OPEN CCW Campaign' + PMCC opens only (skips closes/rolls/notes). Seeded 2026-08-14 from newer_than:30d. Append new opens as they arrive.",
+  "entries": [
+    {
+      "date": "2026-08-26",
+      "ticker": "DPST",
+      "structure": "OPEN CCW",
+      "csp_prem": 2.53
+    },
+    {
+      "date": "2026-08-25",
+      "ticker": "TQQQ",
+      "structure": "OPEN CCW"
+    },
+    {
+      "date": "2026-08-25",
+      "ticker": "TNA",
+      "structure": "OPEN CCW",
+      "csp_prem": 1.23
+    },
+    {
+      "date": "2026-08-25",
+      "ticker": "AAPU",
+      "structure": "OPEN PMCC"
+    },
+    {
+      "date": "2026-08-24",
+      "ticker": "TQQQ",
+      "structure": "OPEN CCW",
+      "csp_prem": 1.79
+    },
+    {
+      "date": "2026-08-24",
+      "ticker": "NVDL",
+      "structure": "OPEN CCW",
+      "csp_prem": 0.7
+    },
+    {
+      "date": "2026-08-24",
+      "ticker": "LABU",
+      "structure": "OPEN CCW",
+      "csp_prem": 5.1
+    },
+    {
+      "date": "2026-08-24",
+      "ticker": "GGLL",
+      "structure": "OPEN CCW",
+      "csp_prem": 4.02
+    },
+    {
+      "date": "2026-08-21",
+      "ticker": "NAIL",
+      "structure": "OPEN CCW"
+    },
+    {
+      "date": "2026-08-21",
+      "ticker": "AAPU",
+      "structure": "OPEN PMCC"
+    },
+    {
+      "date": "2026-08-20",
+      "ticker": "TNA",
+      "structure": "OPEN CCW",
+      "csp_prem": 1.01
+    },
+    {
+      "date": "2026-08-20",
+      "ticker": "SOXL",
+      "structure": "OPEN CCW"
+    },
+    {
+      "date": "2026-08-20",
+      "ticker": "NAIL",
+      "structure": "OPEN CCW",
+      "csp_prem": 0.87
+    },
+    {
+      "date": "2026-08-20",
+      "ticker": "DPST",
+      "structure": "OPEN CCW",
+      "csp_prem": 1.59
+    },
+    {
+      "date": "2026-08-18",
+      "ticker": "TNA",
+      "structure": "OPEN CCW",
+      "csp_prem": 1.2
+    },
+    {
+      "date": "2026-08-18",
+      "ticker": "DPST",
+      "structure": "OPEN CCW",
+      "csp_prem": 2.68
+    },
+    {
+      "date": "2026-08-17",
+      "ticker": "TQQQ",
+      "structure": "OPEN CCW",
+      "csp_prem": 0.7
+    },
+    {
+      "date": "2026-08-17",
+      "ticker": "AMZU",
+      "structure": "OPEN PMCC"
+    },
+    {
+      "date": "2026-08-14",
+      "ticker": "NAIL",
+      "structure": "OPEN CCW",
+      "csp_prem": 0.56
+    },
+    {
+      "date": "2026-08-14",
+      "ticker": "DPST",
+      "structure": "OPEN CCW",
+      "csp_prem": 2.88
+    },
+    {
+      "date": "2026-08-13",
+      "ticker": "TQQQ",
+      "structure": "OPEN CCW",
+      "csp_prem": 1.0
+    },
+    {
+      "date": "2026-08-13",
+      "ticker": "SOXL",
+      "structure": "OPEN CCW",
+      "csp_prem": 2.25
+    },
+    {
+      "date": "2026-08-13",
+      "ticker": "LABU",
+      "structure": "OPEN CCW",
+      "csp_prem": 3.65
+    },
+    {
+      "date": "2026-08-12",
+      "ticker": "TNA",
+      "structure": "OPEN CCW",
+      "csp_prem": 0.93
+    },
+    {
+      "date": "2026-08-12",
+      "ticker": "NAIL",
+      "structure": "OPEN CCW",
+      "csp_prem": 1.4
+    },
+    {
+      "date": "2026-08-11",
+      "ticker": "TNA",
+      "structure": "OPEN CCW",
+      "csp_prem": 1.1
+    },
+    {
+      "date": "2026-08-11",
+      "ticker": "GGLL",
+      "structure": "OPEN CCW",
+      "csp_prem": 1.49
+    },
+    {
+      "date": "2026-08-11",
+      "ticker": "DPST",
+      "structure": "OPEN CCW",
+      "csp_prem": 3.13
+    },
+    {
+      "date": "2026-08-07",
+      "ticker": "TQQQ",
+      "structure": "OPEN CCW"
+    },
+    {
+      "date": "2026-08-06",
+      "ticker": "TNA",
+      "structure": "OPEN CCW",
+      "csp_prem": 0.71
+    },
+    {
+      "date": "2026-08-06",
+      "ticker": "DPST",
+      "structure": "OPEN CCW",
+      "csp_prem": 3.55
+    },
+    {
+      "date": "2026-08-05",
+      "ticker": "GGLL",
+      "structure": "OPEN CCW",
+      "csp_prem": 1.9
+    },
+    {
+      "date": "2026-08-05",
+      "ticker": "AAPU",
+      "structure": "OPEN PMCC"
+    }
+  ]
+}
