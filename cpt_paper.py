@@ -347,7 +347,10 @@ def _mark_one(pos, op, crumb, log):
     sold, strike = inc["sold"], inc["strike"]
     itm = inc["right"] == "C" and spot is not None and spot > strike
 
-    # ---- CASE B: short CC ITM near expiry -> campaign closeout (don't roll an ITM CC) ----
+    # ---- CASE B: short CC ITM near expiry ----
+    # John's rule: NEVER close red - roll up-and-out. Close BOTH legs here ONLY if that locks a WIN;
+    # if closing now would realize a LOSS, buy back the ITM CC and re-write a fresh OTM CC further out,
+    # keeping the (winning, deep-ITM) long call + the campaign alive so the loss is deferred, not booked.
     if pos["kind"] == "CCW" and itm and dte is not None and dte <= NEAR_EXPIRY:
         lc = pos.get("long_call") or {}
         lc_mark = None
@@ -360,11 +363,29 @@ def _mark_one(pos, op, crumb, log):
                 pass
         lc_mark = lc_mark if lc_mark is not None else max(0.0, (spot or 0) - lc.get("strike", 0))
         buyback = cur if cur is not None else max(0.0, (spot or 0) - strike)
-        _close_campaign(pos, lc_mark, buyback,
-                        f"CASE B: {ticker} {spot:.2f} above {strike:g}C at {dte}d - closed both legs.")
-        c = pos["closed"]
-        log.append(f"  {pos['id']} {ticker}: CASE B CAMPAIGN CLOSEOUT  {c['realized']:+,.0f}  "
-                   f"({c['coc']:.1f}% on the long-call capital, {c['days']}d).")
+        # Would closing BOTH legs now realize a win? (banked weeklies + long-call P&L + short-leg P&L)
+        paid = lc.get("ask_paid") or 0
+        long_pl  = ((lc_mark or 0) - paid) * MULT * pos["contracts"]
+        short_pl = ((sold or 0) - (buyback or 0)) * MULT * pos["contracts"]
+        would_realize = pos["premium_banked"] + long_pl + short_pl
+        if would_realize >= 0:
+            _close_campaign(pos, lc_mark, buyback,
+                            f"CASE B WIN: {ticker} {spot:.2f} above {strike:g}C at {dte}d - closed both legs green.")
+            c = pos["closed"]
+            log.append(f"  {pos['id']} {ticker}: CASE B CAMPAIGN CLOSEOUT (win)  {c['realized']:+,.0f}  "
+                       f"({c['coc']:.1f}% on the long-call capital, {c['days']}d).")
+            return
+        # Closing now would be RED -> roll it (John never books the loss): realize this CC cycle, re-write up-and-out.
+        rec = _realize_weekly(pos, sold, buyback, "CASE B roll (avoid closing red)")
+        new_cc = _next_weekly(op, crumb, ticker, spot) if spot else None
+        if new_cc:
+            _roll_to(pos, new_cc)
+            log.append(f"  {pos['id']} {ticker}: CASE B ROLL up-and-out (closing now = {would_realize:+,.0f} red) "
+                       f"-> bought back {strike:g}C, wrote {new_cc['strike']:g}C @ {new_cc['sold']}; campaign stays alive.")
+        else:
+            pos["status"] = "ROLLED"
+            log.append(f"  {pos['id']} {ticker}: CASE B ROLL (closing now = {would_realize:+,.0f} red) - "
+                       f"bought back {strike:g}C, no fresh OTM strike to re-write right now.")
         return
 
     # ---- OTM management on the weekly CC: expire / -50% / cheap -> realize + roll ----

@@ -296,7 +296,7 @@ def paper_maintenance(token, chat):
         return
     now = dt.datetime.utcnow()
     mins = now.hour * 60 + now.minute
-    if not (market_open_now() and mins >= 19 * 60 + 45):   # only near the close, still in-session
+    if not (market_open_now() and mins >= 18 * 60):   # last ~2h in-session (18:00-20:00 UTC): live quotes, robust to cron jitter dropping the exact close slot; last_marked keeps it once/day
         return
     today = dt.date.today().isoformat()
     try:
