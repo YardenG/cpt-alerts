@@ -1,0 +1,44 @@
+name: CPT John weekly review
+
+# Headless weekly self-critique - runs in GitHub's cloud, no laptop, no MCP connector.
+# Replaces the local scheduled task that silently stalled. Fridays 20:00 UTC (23:00 Israel).
+# Reads John's Gmail via IMAP (App Password), updates john-alerts.json, runs the self-critique,
+# posts a Telegram digest, and commits the refreshed data back to the repo.
+on:
+  schedule:
+    - cron: '0 20 * * 5'      # Fri 20:00 UTC = 23:00 Asia/Jerusalem (summer)
+  workflow_dispatch:           # run manually from the Actions tab (for the first proof run)
+
+permissions:
+  contents: write              # to commit the updated john-alerts.json
+
+concurrency:
+  group: cpt-john-weekly
+  cancel-in-progress: false
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Ingest John + self-critique + digest
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python cpt_john_review.py
+      - name: Commit updated John data (only if changed)
+        run: |
+          if [ -n "$(git status --porcelain john-alerts.json)" ]; then
+            git config user.name "cpt-alert-bot"
+            git config user.email "cpt-alert-bot@users.noreply.github.com"
+            git add john-alerts.json
+            git commit -m "weekly John review: ingest new opens [skip ci]"
+            git push
+          else
+            echo "no John data change"
+          fi
