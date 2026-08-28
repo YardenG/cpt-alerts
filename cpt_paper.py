@@ -116,6 +116,27 @@ def _next_weekly(op, crumb, ticker, spot, target_dte=7):
     return dict(strike=c["strike"], sold=c["bid"], exp_ts=exp, exp=legsmod._fmt_date(exp))
 
 
+def _next_put(op, crumb, ticker, spot, cur_strike=None, target_dte=7):
+    """Re-pick a fresh ~weekly OTM put to WRITE on a CSP roll (John's put management, from his ROLLED-CSP
+    emails: he buys back the tested put and re-sells rather than sit and take assignment). Nearest ~7-DTE
+    expiry; highest strike strictly BELOW spot with a live bid - and, on an ITM roll (cur_strike given),
+    also below the current strike, i.e. a genuine roll DOWN-AND-OUT that lowers the cost basis. Carries
+    the expiry so the new put stays fully re-markable."""
+    root = legsmod._chain(op, crumb, ticker)
+    today = dt.date.today()
+    future = [e for e in sorted(root["expirationDates"]) if legsmod._dte(e, today) > 0]
+    if not future:
+        return None
+    exp = min(future, key=lambda e: abs(legsmod._dte(e, today) - target_dte))
+    ch = legsmod._chain(op, crumb, ticker, exp)
+    cap = spot if cur_strike is None else min(spot, cur_strike)
+    puts = [p for p in ch["options"][0]["puts"] if p["strike"] < cap and (p.get("bid") or p.get("lastPrice"))]
+    if not puts:
+        return None
+    p = max(puts, key=lambda p: p["strike"])
+    return dict(strike=p["strike"], sold=(p.get("bid") or p.get("lastPrice")), exp_ts=exp, exp=legsmod._fmt_date(exp))
+
+
 # --- capture (open a paper position) -------------------------------------------------------------
 def snapshot_legs(ticker, kind):
     """Run the SAME cloud legs the phone gets and normalize them into the ledger's leg schema, keyed
@@ -417,19 +438,44 @@ def _mark_one(pos, op, crumb, log):
                    f"{dte}d, {'ITM' if itm else 'OTM'}. Keep selling time.")
         return
 
-    # ---- CSP path (short put) ----
+    # ---- CSP path (short put): John ROLLS, he does not sit and take assignment ----
+    # From his ROLLED-CSP emails (e.g. TNA $58 -> $57, "rolling down to reduce my cost basis should I get
+    # assigned"): near expiry he buys back the tested put and re-sells one. If it expired OTM he re-sells
+    # at a similar level (keep selling time); if it went ITM he rolls DOWN-AND-OUT to a lower strike for a
+    # fresh credit, lowering the eventual cost basis. Assignment is the FALLBACK only when there is no
+    # strike left to roll into: the CSP then closes a WIN (premium banked), shares come in at the strike
+    # (= cost basis), and it becomes a covered call. He NEVER books an assignment as a loss.
     put_itm = spot is not None and spot < strike
-    if expired and not put_itm:
-        rec = _realize_weekly(pos, sold, 0.0, "CSP expired OTM")
-        log.append(f"  {pos['id']} {ticker}: CSP WEEKLY {rec['income_usd']:+,.0f} ({rec['days']}d) - "
-                   f"re-sell the put (free data: re-open on the next alert).")
-        pos["status"] = "ROLLED"
-        return
-    if put_itm and dte is not None and dte <= NEAR_EXPIRY:
-        pos["events"].append(dict(date=_today(),
-            detail=f"CSP ITM near expiry ({dte}d): assigned at {strike:g} = cost basis; now write the CC."))
-        log.append(f"  {pos['id']} {ticker}: CSP ASSIGNED at {strike:g} (cost basis) - convert to a "
-                   f"covered call (run `open` again on the next green-day alert).")
+    near = dte is not None and dte <= NEAR_EXPIRY
+    at_otm_expiry = expired and not put_itm
+    at_itm_roll = put_itm and near                 # includes an already-expired ITM put (dte <= 0)
+    if at_otm_expiry or at_itm_roll:
+        # Re-bank guard: never realize a leg a prior mark already banked (re-run / catch-up safety).
+        already = any(abs(w["strike"] - strike) < 1e-6 and w["closed"] >= inc.get("cycle_opened", "")
+                      for w in pos["weeklies"])
+        buyback = 0.0 if at_otm_expiry else (cur if cur is not None else max(0.0, strike - (spot or strike)))
+        reason = "CSP expired OTM" if at_otm_expiry else "CSP roll down-and-out (avoid assignment)"
+        banked = "already banked"
+        if not already:
+            rec = _realize_weekly(pos, sold, buyback, reason)
+            banked = f"{rec['income_usd']:+,.0f}"
+        new_put = _next_put(op, crumb, ticker, spot, (strike if at_itm_roll else None)) if spot else None
+        if new_put:
+            pos["income"] = dict(right="P", strike=new_put["strike"], exp=new_put["exp"], exp_ts=new_put["exp_ts"],
+                                 sold=new_put["sold"], cycle_opened=_today(), cost_cc_bid=inc.get("cost_cc_bid"))
+            pos["status"] = "ROLLED"
+            kind_txt = "ROLL down-and-out" if at_itm_roll else "expired OTM -> re-sold"
+            log.append(f"  {pos['id']} {ticker}: CSP {kind_txt} ({banked}) - wrote {new_put['strike']:g}P "
+                       f"@ {new_put['sold']} ({new_put['exp']}); campaign stays alive.")
+        else:
+            pos["income"] = None                  # no active short (cleared) -> stable, never re-banked
+            pos["status"] = "ROLLED"
+            if at_itm_roll:
+                pos["events"].append(dict(date=_today(),
+                    detail=f"CSP assigned at {strike:g} = cost basis (no lower strike to roll); premium banked, write the CC."))
+                log.append(f"  {pos['id']} {ticker}: CSP ASSIGNED at {strike:g} ({banked}) - premium banked (win), write the CC.")
+            else:
+                log.append(f"  {pos['id']} {ticker}: CSP expired OTM ({banked}) - no fresh strike to re-sell now, paused.")
         return
     log.append(f"  {pos['id']} {ticker}: HOLD - CSP {strike:g}P mark {cur and round(cur,2)}, {dte}d, "
                f"{'ITM' if put_itm else 'OTM'}.")
