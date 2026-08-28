@@ -95,6 +95,32 @@ John opened NVDL on 08-24 and posted a members video "NVIDIA EARNINGS TRADE - HO
 plays them via the 2x ETF. This TENSIONS our `cpt_context` "earnings-soon = avoid" flag (which we raised on
 NVDL). Flag for review: John's rule may be "size/structure around earnings," not "avoid." Verify by reading
 the video/body next pass before changing anything.
+## 2026-08-28 - SHORT-PUT (CSP) management: John rolls, he does not sit for assignment (engine gap FIXED)
+
+Yarden: "JohnG never gets assigned on the short put leg - go over his emails." Pulled and read the actual
+bodies (not subjects). The real ladder, in his own words:
+- **ROLLED CSP on TNA (2026-05-18):** on the tested put he BUYS IT BACK and re-sells - "just rolling down
+  to reduce my cost basis should I get assigned ... this CSP is $250 in the positive, I can roll this down
+  to the $57 strike making another credit." -> near expiry he rolls the put **DOWN-AND-OUT** for a fresh
+  credit; capital keeps working, basis drops. This is his DEFAULT.
+- **"KNOW THE TRADE" (2026-06-05):** only sell a CSP where assignment is acceptable; a bad CSP is one where
+  "as it FALLS he will have to pay MORE to close" - i.e. manage/buy-back before it runs against you.
+- **"CLOSED (5) ... I will be assigned NAIL and METU" (2026-05-01):** assignment is NOT never - but those
+  blogs are titled `closed-csp-assigned` and report **"Collected Cash Flow +$1,100 / +$1,665"** = the CSP
+  closes a **WIN** (premium banked), shares come in at the strike = cost basis, then he writes the covered
+  call (the wheel). **Assignment is by design on a name he wants, and never booked as a loss.**
+- **Position Management (2026-08-20):** sizes in 1,000-2,000-sh lots, "stay in my lane," never overreach -
+  so an assignment is always inside a pre-sized, wanted position.
+
+**Verdict:** Yarden is right in PRACTICE (roll first, rarely assigned), not literally (assignment happens,
+by design, as a win). **Engine FIXED (cpt_paper.py, this session, Yarden-triggered):** the CSP near-expiry
+branch no longer dead-ends at "assigned, pending." New ladder = OTM at expiry -> re-sell; ITM near expiry
+-> roll DOWN-AND-OUT (new `_next_put`, lower strike, fresh credit); only if no strike left to roll ->
+accept assignment as a WIN (premium banked, note to write the CC). Added a re-bank guard so a leg a prior
+mark already banked is never double-counted. Validated on a copy of the live cloud ledger: the 4 stuck
+CSPs (TQQQ/TNA/NVDL/AMZU) all resolved, 0 pending, realized +$1,500 (TQQQ+500, LABU+1000; NVDL/AMZU held
+by the guard), no double-count. Still NOT modeled (next iteration): the full assignment->hold-shares->write-CC
+state machine; today's fix rolls instead, which is John's actual default anyway.
 
 ---
 
