@@ -1,0 +1,45 @@
+name: CPT paper account dashboard
+
+# Renders the live paper-account dashboard and publishes it to GitHub Pages.
+# Runs on its own - it does NOT touch the proven alerts pipeline or commit to the repo.
+# It reads the paper-ledger.json the alerts workflow keeps fresh, marks the open legs to the
+# current (delayed) market for live unrealized P&L, and deploys the HTML straight to Pages.
+on:
+  schedule:
+    - cron: '5,35 13-21 * * 1-5'   # twice an hour during ~US market hours (UTC); page refreshes ~30 min
+  workflow_dispatch:               # or hit "Run workflow" in the Actions tab any time
+  workflow_run:
+    workflows: ["CPT JohnG entry alerts"]   # also refresh right after each alert/mark run
+    types: [completed]
+
+permissions:
+  contents: read                   # read-only: never writes to the repo
+  pages: write                     # publish to GitHub Pages
+  id-token: write                  # required by the Pages deploy action
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Render the account dashboard (marks open legs live)
+        run: |
+          python cpt_account.py live
+          mkdir -p _site
+          cp dashboard.html _site/index.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
