@@ -31,6 +31,57 @@ OUT = os.path.join(HERE, "dashboard.html")
 STARTING_CASH = 300000.0     # the account opens here; every realized close moves it from this base.
 MULT = 100                   # option contract multiplier (shares per contract).
 
+# --- position sizing (the "real account" layer, decoupled from the John scorecard) ---------------
+# The scoring engine normalizes every trade to 10 contracts so $ is comparable to John. A real $300k
+# account cannot hold 10 contracts of everything (10 lots of a $330 ETF alone = $330k). So the ACCOUNT
+# view re-sizes each trade to a fixed budget - PER_TRADE_PCT of the account - caps at the engine's
+# 10-lot unit, and never lets total deployed exceed the account. Every position's realized/unrealized
+# $ is then scaled by (real_contracts / 10). CoC% is unchanged. The John scorecard still uses 10 lots.
+PER_TRADE_PCT = 0.10         # each trade gets up to this share of the account as its buying-power budget.
+
+
+def _cap_per_contract(p):
+    """Buying power one contract of this position ties up: a PMCC reserves the long-call debit (the
+    capital-efficient part); a CSP reserves the strike (cash-secured). Per share x 100."""
+    lc = p.get("long_call")
+    if lc and lc.get("ask_paid"):
+        return lc["ask_paid"] * MULT
+    inc = p.get("income")
+    if inc and inc.get("strike"):
+        return inc["strike"] * MULT
+    return None
+
+
+def size_positions(book):
+    """Size every position to the real account. Budget = PER_TRADE_PCT of the account; contracts =
+    min(engine 10-lot, budget // capital-per-contract), then trimmed so cumulative OPEN buying power
+    never exceeds the account. Returns {id: {contracts, capital, factor, cpc, engine_n, reason}} where
+    factor = real/engine is the P&L scaler. Allocated oldest-first (the order a real account filled)."""
+    budget = STARTING_CASH * PER_TRADE_PCT
+    used = 0.0
+    sizing = {}
+    for p in sorted(book["positions"], key=lambda p: (p["opened"], p["id"])):
+        engine_n = p["contracts"] or 10
+        cpc = _cap_per_contract(p)
+        if not cpc:
+            sizing[p["id"]] = dict(contracts=0, capital=0.0, factor=0.0, cpc=None, engine_n=engine_n,
+                                   reason="no live leg")
+            continue
+        n = min(engine_n, int(budget // cpc))
+        if p["status"] != "CLOSED":                        # open trades consume live buying power
+            n = min(n, int(max(0, STARTING_CASH - used) // cpc))
+        cap = n * cpc
+        if p["status"] != "CLOSED":
+            used += cap
+        reason = None
+        if n == 0:
+            reason = f"needs ${cpc:,.0f}/contract > {PER_TRADE_PCT*100:.0f}% slice (${budget:,.0f})"
+        elif n < engine_n:
+            reason = f"trimmed to fit ${budget:,.0f} budget"
+        sizing[p["id"]] = dict(contracts=n, capital=cap, factor=n / engine_n, cpc=cpc,
+                               engine_n=engine_n, reason=reason)
+    return sizing, used
+
 
 # --- ledger IO -----------------------------------------------------------------------------------
 def load():
@@ -56,16 +107,18 @@ def position_realized(p):
     return p["premium_banked"]
 
 
-def equity_curve(book):
-    """Reconstruct the dated realized-equity curve from $300k. Each weekly close adds its income on
-    its close date; a closed campaign adds only its INCREMENTAL leg P&L (realized - already-banked
-    weeklies) on the close date, so nothing is double-counted. Returns [(date, balance), ...]."""
+def equity_curve(book, sizing):
+    """Reconstruct the dated realized-equity curve from $300k, scaled to the REAL account size. Each
+    weekly close adds its income (x the position's sizing factor) on its close date; a closed campaign
+    adds only its INCREMENTAL leg P&L (realized - already-banked weeklies) x factor, so nothing is
+    double-counted. Returns [(date, balance), ...]."""
     events = []
     for p in book["positions"]:
+        f = sizing.get(p["id"], {}).get("factor", 1.0)
         for w in p["weeklies"]:
-            events.append((w["closed"], w["income_usd"]))
+            events.append((w["closed"], w["income_usd"] * f))
         if p["status"] == "CLOSED":
-            incr = p["closed"]["realized"] - p["premium_banked"]
+            incr = (p["closed"]["realized"] - p["premium_banked"]) * f
             events.append((p["closed"]["date"], incr))
     events.sort(key=lambda e: e[0])
     curve, bal = [], STARTING_CASH
@@ -160,17 +213,32 @@ def refresh(live=True):
 
 
 # --- account rollup (from stored state; no network) ----------------------------------------------
+def _pos_real(p, sizing):
+    """This position's realized + unrealized $ scaled to the REAL account size (factor = real/10)."""
+    f = sizing.get(p["id"], {}).get("factor", 1.0)
+    realized = position_realized(p) * f
+    unreal = (p.get("acct", {}).get("unrealized", 0) * f) if p["status"] != "CLOSED" else 0.0
+    return realized, unreal, f
+
+
 def account_state(book):
-    realized = sum(position_realized(p) for p in book["positions"])
-    unreal = sum(p.get("acct", {}).get("unrealized", 0) for p in book["positions"] if p["status"] != "CLOSED")
+    sizing, deployed = size_positions(book)
+    realized = sum(_pos_real(p, sizing)[0] for p in book["positions"])
+    unreal = sum(_pos_real(p, sizing)[1] for p in book["positions"] if p["status"] != "CLOSED")
     value = STARTING_CASH + realized + unreal
+    cash = STARTING_CASH + realized                 # settled cash before open-position mark-to-market
+    available = cash - deployed                      # buying power free for new trades
     opens = [p for p in book["positions"] if p["status"] != "CLOSED"]
     closed = [p for p in book["positions"] if p["status"] == "CLOSED"]
     weeklies = [w for p in book["positions"] for w in p["weeklies"]]
+    skipped = [p for p in opens if sizing.get(p["id"], {}).get("contracts", 0) == 0]
     marked_dates = [p["acct"]["marked"] for p in opens if p.get("acct", {}).get("marked")]
     return dict(starting=STARTING_CASH, realized=realized, unrealized=unreal, value=value,
                 pct=(value / STARTING_CASH - 1) * 100, opens=opens, closed=closed,
-                weekly_count=len(weeklies), curve=equity_curve(book),
+                weekly_count=len(weeklies), curve=equity_curve(book, sizing),
+                sizing=sizing, deployed=deployed, cash=cash, available=available,
+                deployed_pct=deployed / STARTING_CASH * 100, per_trade_pct=PER_TRADE_PCT * 100,
+                budget=STARTING_CASH * PER_TRADE_PCT, skipped=skipped,
                 as_of=max(marked_dates) if marked_dates else book.get("meta", {}).get("last_marked", "-"))
 
 
@@ -184,7 +252,14 @@ def summary():
     print(f"  Unrealized (open)  ${a['unrealized']:>+14,.0f}")
     print(f"  {'-'*40}")
     print(f"  ACCOUNT VALUE      ${a['value']:>14,.0f}   ({a['pct']:+.2f}%)")
+    print(f"  {'-'*40}")
+    print(f"  Sizing: {a['per_trade_pct']:.0f}% per trade (${a['budget']:,.0f})")
+    print(f"  Buying power used  ${a['deployed']:>14,.0f}   ({a['deployed_pct']:.1f}% of account)")
+    print(f"  Available          ${a['available']:>14,.0f}")
     print(f"  Open {len(a['opens'])}  |  Closed {len(a['closed'])}  |  Weekly closes {a['weekly_count']}  |  as of {a['as_of']}")
+    if a["skipped"]:
+        print(f"  Skipped (too capital-heavy for the {a['per_trade_pct']:.0f}% slice): "
+              + ", ".join(p["ticker"] for p in a["skipped"]))
 
 
 # --- HTML dashboard ------------------------------------------------------------------------------
@@ -226,7 +301,7 @@ def _sparkline(curve, w=520, h=120):
 </svg>"""
 
 
-def _leg_rows(p):
+def _leg_rows(p, factor):
     acct = p.get("acct") or {}
     rows = []
     for lg in acct.get("legs", []):
@@ -234,7 +309,7 @@ def _leg_rows(p):
         mark = "-" if markv is None else f"{markv:g}"
         entryv = lg["entry"]
         entry = "-" if entryv is None else f"{entryv:g}"
-        pl = lg["pl"]
+        pl = None if lg["pl"] is None else lg["pl"] * factor      # scale leg P&L to the real position size
         pl_txt = "<span class='muted'>pending</span>" if pl is None else f"<span class='{_cls(pl)}'>{_money(pl, True)}</span>"
         badge = "long" if lg["side"] == "long" else "short"
         note = f" &middot; {html.escape(lg['note'])}" if lg.get("note") and markv is not None else ""
@@ -250,25 +325,38 @@ def _leg_rows(p):
 
 def _open_rows(a):
     rows = []
-    for p in sorted(a["opens"], key=lambda p: -position_realized(p)):
+    sizing = a["sizing"]
+    for p in sorted(a["opens"], key=lambda p: -sizing.get(p["id"], {}).get("capital", 0)):
         acct = p.get("acct") or {}
-        realized = position_realized(p)
-        unreal = acct.get("unrealized", 0)
+        sz = sizing.get(p["id"], {})
+        factor = sz.get("factor", 1.0)
+        n = sz.get("contracts", 0)
+        realized = position_realized(p) * factor
+        unreal = acct.get("unrealized", 0) * factor
         pending = acct.get("pending")
         strat = "PMCC" if p.get("long_call") else "CSP"
-        unreal_txt = f"<span class='{_cls(unreal)}'>{_money(unreal, True)}</span>"
-        if pending:
-            unreal_txt += " <span class='pill warn'>leg pending</span>"
-        rows.append(f"""<tbody class="pos">
+        skipped = n == 0
+        size_txt = (f"<b>{n}</b> lot{'s' if n != 1 else ''} &middot; ${sz.get('capital',0):,.0f}"
+                    if not skipped else "<span class='pill warn'>skipped</span>")
+        if skipped:
+            unreal_txt = realized_txt = "<span class='muted'>&mdash;</span>"
+        else:
+            realized_txt = f"<span class='{_cls(realized)}'>{_money(realized, True)}</span>"
+            unreal_txt = f"<span class='{_cls(unreal)}'>{_money(unreal, True)}</span>"
+            if pending:
+                unreal_txt += " <span class='pill warn'>leg pending</span>"
+        reason = sz.get("reason")
+        reason_txt = f"<div class='sizenote'>{html.escape(reason)}</div>" if reason else ""
+        rows.append(f"""<tbody class="pos{' dim' if skipped else ''}">
   <tr class="pos-head" tabindex="0">
     <td class="tk"><span class="chev">&rsaquo;</span> <b>{p['ticker']}</b> <span class="tag">{strat}</span></td>
     <td class="hide-sm">{html.escape(p['structure'])}</td>
-    <td class="hide-sm">{p['opened']}</td>
-    <td class="num"><span class="{_cls(realized)}">{_money(realized, True)}</span></td>
+    <td class="num">{size_txt}</td>
+    <td class="num">{realized_txt}</td>
     <td class="num">{unreal_txt}</td>
   </tr>
-  <tr class="legwrap"><td colspan="5"><table class="legs"><thead><tr><th>leg</th><th class="num">entry</th><th class="num">mark</th><th class="num">unreal. P&amp;L</th></tr></thead><tbody>{_leg_rows(p)}</tbody></table>
-  <div class="posmeta">Banked so far: <b class="{_cls(realized)}">{_money(realized, True)}</b> &nbsp;·&nbsp; weekly closes: {len(p['weeklies'])} &nbsp;·&nbsp; contracts: {p['contracts']} &nbsp;·&nbsp; regime: {html.escape(str(p.get('regime') or '-'))}</div></td></tr>
+  <tr class="legwrap"><td colspan="5"><table class="legs"><thead><tr><th>leg (at {n} lot{'s' if n != 1 else ''})</th><th class="num">entry</th><th class="num">mark</th><th class="num">unreal. P&amp;L</th></tr></thead><tbody>{_leg_rows(p, factor)}</tbody></table>
+  <div class="posmeta">Opened {p['opened']} &nbsp;·&nbsp; banked: <b class="{_cls(realized)}">{_money(realized, True)}</b> &nbsp;·&nbsp; weekly closes: {len(p['weeklies'])} &nbsp;·&nbsp; buying power: ${sz.get('capital',0):,.0f} &nbsp;·&nbsp; regime: {html.escape(str(p.get('regime') or '-'))}{reason_txt}</div></td></tr>
 </tbody>""")
     return "".join(rows)
 
@@ -280,13 +368,15 @@ def _closed_rows(a):
     for p in sorted(a["closed"], key=lambda p: p["closed"]["date"], reverse=True):
         c = p["closed"]
         strat = "PMCC" if p.get("long_call") else "CSP"
+        f = a["sizing"].get(p["id"], {}).get("factor", 1.0)
+        realized = c["realized"] * f                     # scale the campaign P&L to the real size
         rows.append(f"""<tr>
     <td><b>{p['ticker']}</b> <span class="tag">{strat}</span></td>
     <td class="hide-sm">{html.escape(c.get('detail',''))[:60]}</td>
     <td class="num hide-sm">{p['opened']} &rarr; {c['date']}</td>
     <td class="num">{c.get('days','-')}d</td>
     <td class="num">{'' if c.get('coc') is None else f"{c['coc']:+.1f}%"}</td>
-    <td class="num"><b class="{_cls(c['realized'])}">{_money(c['realized'], True)}</b></td>
+    <td class="num"><b class="{_cls(realized)}">{_money(realized, True)}</b></td>
   </tr>""")
     return "".join(rows)
 
@@ -383,6 +473,18 @@ tbody.pos:last-child{{border-bottom:none}}
   background:var(--surface2);color:var(--muted);border:1px solid var(--border);vertical-align:middle}}
 .pill{{font-size:10px;font-weight:600;letter-spacing:.03em;padding:2px 7px;border-radius:999px;vertical-align:middle}}
 .pill.warn{{background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent)}}
+.pos.dim .pos-head b, .pos.dim .tag{{opacity:.55}}
+.sizenote{{margin-top:6px;color:var(--accent);font-size:11.5px}}
+.bp{{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);
+  padding:18px 20px;margin-bottom:26px}}
+.bp .row{{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}}
+.bp .title{{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}}
+.bp .title b{{color:var(--ink);font-weight:600}}
+.bp .figs{{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:13.5px;color:var(--muted)}}
+.bp .figs b{{color:var(--ink)}}
+.bar{{height:12px;border-radius:7px;background:var(--surface2);overflow:hidden;display:flex}}
+.bar .fill{{background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent) 70%,var(--up)));height:100%}}
+.bar .free{{flex:1}}
 .legwrap{{display:none}}
 .pos.open .legwrap{{display:table-row}}
 .legwrap>td{{padding:0 16px 16px;background:var(--surface2)}}
@@ -435,9 +537,19 @@ footer{{margin-top:30px;font-size:11.5px;color:var(--muted);text-align:center;le
     </div>
   </section>
 
+  <section class="bp">
+    <div class="row">
+      <div class="title">Buying power &bull; <b>{a['per_trade_pct']:.0f}% per trade</b> (${_money(a['budget'])} budget)</div>
+      <div class="figs">deployed <b>${_money(a['deployed'])}</b> ({a['deployed_pct']:.0f}%) &nbsp;|&nbsp; available <b>${_money(a['available'])}</b></div>
+    </div>
+    <div class="bar" role="img" aria-label="Buying power used {a['deployed_pct']:.0f} percent">
+      <div class="fill" style="width:{min(100, a['deployed_pct']):.1f}%"></div><div class="free"></div>
+    </div>
+  </section>
+
   <section class="kpis">
-    <div class="kpi"><div class="k">Open positions</div><div class="v">{len(a['opens'])}</div></div>
-    <div class="kpi"><div class="k">Closed campaigns</div><div class="v">{len(a['closed'])}</div></div>
+    <div class="kpi"><div class="k">Open positions</div><div class="v">{len([p for p in a['opens'] if a['sizing'].get(p['id'],{}).get('contracts',0)>0])}</div></div>
+    <div class="kpi"><div class="k">Buying power used</div><div class="v">{a['deployed_pct']:.0f}%</div></div>
     <div class="kpi"><div class="k">Weekly closes banked</div><div class="v">{a['weekly_count']}</div></div>
     <div class="kpi"><div class="k">Return on account</div><div class="v {_cls(a['pct'])}">{a['pct']:+.2f}%</div></div>
   </section>
@@ -445,7 +557,7 @@ footer{{margin-top:30px;font-size:11.5px;color:var(--muted);text-align:center;le
   <h2 class="sec">Open positions &bull; click a row for the legs</h2>
   <div class="card">
     <table>
-      <thead class="main"><tr><th>Position</th><th class="hide-sm">Structure</th><th class="hide-sm">Opened</th><th class="num">Realized</th><th class="num">Unrealized</th></tr></thead>
+      <thead class="main"><tr><th>Position</th><th class="hide-sm">Structure</th><th class="num">Size &bull; capital</th><th class="num">Realized</th><th class="num">Unrealized</th></tr></thead>
       {_open_rows(a)}
     </table>
   </div>
@@ -459,12 +571,14 @@ footer{{margin-top:30px;font-size:11.5px;color:var(--muted);text-align:center;le
   </div>
 
   <p class="note">
-    <b>How to read this.</b> The account opens at <b>$300,000</b>. <b>Realized</b> is every closed weekly
-    covered-call + closed campaign, booked to the balance exactly as the scorecard records it.
-    <b>Unrealized</b> marks the open legs to the last available (Yahoo, delayed) price - it moves intraday and is an estimate.
-    Positions are normalized to 10 contracts for comparability with John, so deployed notional can exceed cash;
-    the account value (starting + realized + unrealized) is the growth number. A <span class="pill warn">leg pending</span>
-    tag means a short leg already expired and awaits the next mark cycle (assignment / roll).
+    <b>How to read this.</b> The account opens at <b>$300,000</b>. Each trade is sized to <b>{a['per_trade_pct']:.0f}% of the
+    account (${_money(a['budget'])})</b> as its buying-power budget: contracts are set to fit that budget, capped at
+    John's 10-lot unit, and total deployed can never exceed the account. A name too capital-heavy for the slice is
+    <span class="pill warn">skipped</span> (e.g. a $330 ETF needs $33k/contract). <b>Realized</b> and <b>Unrealized</b>
+    are each scaled to the position's real size; <b>Unrealized</b> marks the open legs to the last available (Yahoo,
+    delayed) price and moves intraday. Account value = starting + realized + unrealized. The John scorecard
+    (<span class="mono">cpt_paper.py report</span>) still uses the flat 10-lot unit for comparability with his track record.
+    A <span class="pill warn">leg pending</span> tag = a leg the last render could not mark (thin data); it clears next refresh.
   </p>
 
   <footer>Generated {generated} &bull; read-only view of paper-ledger.json &bull; not financial advice</footer>
