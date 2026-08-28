@@ -81,6 +81,11 @@
       "csp_prem": 1.59
     },
     {
+      "date": "2026-08-19",
+      "ticker": "SOXL",
+      "structure": "OPEN CCW"
+    },
+    {
       "date": "2026-08-18",
       "ticker": "TNA",
       "structure": "OPEN CCW",
