@@ -26,11 +26,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 37.5,
+        "strike": 36.5,
         "exp": "Sep-04",
         "exp_ts": 1788480000,
-        "sold": 1.6,
-        "cycle_opened": "2026-08-27"
+        "sold": 1.1,
+        "cycle_opened": "2026-08-31"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -66,9 +66,20 @@
           "coc": 4.37,
           "days": 9,
           "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-08-31",
+          "strike": 37.5,
+          "sold": 1.6,
+          "buyback": 0.83,
+          "income_ps": 0.78,
+          "income_usd": 775.0,
+          "coc": 3.08,
+          "days": 4,
+          "reason": "expired OTM"
         }
       ],
-      "premium_banked": 1975.0,
+      "premium_banked": 2750.0,
       "events": [],
       "closed": null
     },
@@ -166,11 +177,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 135.0,
+        "strike": 131.0,
         "exp": "Sep-04",
         "exp_ts": 1788480000,
-        "sold": 3.8,
-        "cycle_opened": "2026-08-27"
+        "sold": 2.6,
+        "cycle_opened": "2026-08-31"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -217,9 +228,20 @@
           "coc": 3.76,
           "days": 8,
           "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-08-31",
+          "strike": 135.0,
+          "sold": 3.8,
+          "buyback": 1.48,
+          "income_ps": 2.32,
+          "income_usd": 2325.0,
+          "coc": 2.28,
+          "days": 4,
+          "reason": "expired OTM"
         }
       ],
-      "premium_banked": 8525.0,
+      "premium_banked": 10850.0,
       "events": [],
       "closed": null
     },
@@ -243,11 +265,11 @@
       "long_call": null,
       "income": {
         "right": "P",
-        "strike": 73.0,
-        "exp": "Sep-04",
-        "exp_ts": 1788480000,
-        "sold": 2.0,
-        "cycle_opened": "2026-08-28",
+        "strike": 71.0,
+        "exp": "Sep-09",
+        "exp_ts": 1788912000,
+        "sold": 1.71,
+        "cycle_opened": "2026-08-31",
         "cost_cc_bid": 1.47
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
@@ -309,11 +331,11 @@
       "long_call": null,
       "income": {
         "right": "P",
-        "strike": 37.0,
+        "strike": 34.0,
         "exp": "Sep-04",
         "exp_ts": 1788480000,
-        "sold": 1.7,
-        "cycle_opened": "2026-08-28",
+        "sold": 0.84,
+        "cycle_opened": "2026-08-31",
         "cost_cc_bid": 0.95
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
@@ -328,6 +350,17 @@
           "coc": 0.35,
           "days": 10,
           "reason": "CSP expired OTM"
+        },
+        {
+          "closed": "2026-08-31",
+          "strike": 37.0,
+          "sold": 1.7,
+          "buyback": 3.0,
+          "income_ps": 0.0,
+          "income_usd": 0.0,
+          "coc": 0.0,
+          "days": 3,
+          "reason": "CSP roll down-and-out (avoid assignment)"
         }
       ],
       "premium_banked": 120.0,
@@ -373,11 +406,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 41.0,
+        "strike": 37.0,
         "exp": "Sep-04",
         "exp_ts": 1788480000,
-        "sold": 2.92,
-        "cycle_opened": "2026-08-27"
+        "sold": 1.11,
+        "cycle_opened": "2026-08-31"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -402,9 +435,20 @@
           "coc": 3.97,
           "days": 9,
           "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-08-31",
+          "strike": 41.0,
+          "sold": 2.92,
+          "buyback": 0.2,
+          "income_ps": 2.72,
+          "income_usd": 2720.0,
+          "coc": 9.38,
+          "days": 4,
+          "reason": "expired OTM"
         }
       ],
-      "premium_banked": 2465.0,
+      "premium_banked": 5185.0,
       "events": [],
       "closed": null
     },
@@ -428,11 +472,11 @@
       "long_call": null,
       "income": {
         "right": "P",
-        "strike": 72.5,
+        "strike": 68.0,
         "exp": "Sep-04",
         "exp_ts": 1788480000,
-        "sold": 1.81,
-        "cycle_opened": "2026-08-28",
+        "sold": 1.31,
+        "cycle_opened": "2026-08-31",
         "cost_cc_bid": 0.96
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
@@ -446,6 +490,17 @@
           "income_usd": 0.0,
           "coc": 0.0,
           "days": 11,
+          "reason": "CSP roll down-and-out (avoid assignment)"
+        },
+        {
+          "closed": "2026-08-31",
+          "strike": 72.5,
+          "sold": 1.81,
+          "buyback": 4.53,
+          "income_ps": 0.0,
+          "income_usd": 0.0,
+          "coc": 0.0,
+          "days": 3,
           "reason": "CSP roll down-and-out (avoid assignment)"
         }
       ],
@@ -542,11 +597,11 @@
       "long_call": null,
       "income": {
         "right": "P",
-        "strike": 330.0,
+        "strike": 287.5,
         "exp": "Sep-04",
         "exp_ts": 1788480000,
-        "sold": 17.34,
-        "cycle_opened": "2026-08-28",
+        "sold": 9.9,
+        "cycle_opened": "2026-08-31",
         "cost_cc_bid": 22.1
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
@@ -561,6 +616,17 @@
           "coc": 0.4,
           "days": 8,
           "reason": "CSP expired OTM"
+        },
+        {
+          "closed": "2026-08-31",
+          "strike": 330.0,
+          "sold": 17.34,
+          "buyback": 42.8,
+          "income_ps": 0.0,
+          "income_usd": 0.0,
+          "coc": 0.0,
+          "days": 3,
+          "reason": "CSP roll down-and-out (avoid assignment)"
         }
       ],
       "premium_banked": 1000.0,
@@ -569,7 +635,7 @@
     }
   ],
   "meta": {
-    "last_marked": "2026-08-27",
+    "last_marked": "2026-08-31",
     "last_digest_week": "2026-W34"
   }
 }
