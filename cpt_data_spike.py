@@ -104,15 +104,22 @@ def analyze(ticker):
 
 
 def strategy_pick(a):
-    """Which structure fits THIS entry, per John's doctrine (cpt-doctrine.md sec.4 + 6B/6C).
-    `a` is an analyze() dict. Returns (label, why). SUGGESTION only: account type can override
-    (sec.6C - he does the ITM CC in IRA / unsettled-cash situations; a CSP needs settled cash).
+    """Which structure fits THIS entry, per John's doctrine (cpt-doctrine.md sec.4 + 6B/6C + the
+    v0.5 CSP->99-Delta shift). `a` is an analyze() dict. Returns (label, why). SUGGESTION only.
 
-    Confirmed rules used:
-      - "Buy on down days for CSPs" (put premium fattens on red days; enter with downside cushion).
-      - "Sell covered calls on green/up days" (call premium fattens); the 99-delta ITM CCW is his
-        capital-efficient core and most-common structure.
-      - Long-dated ATM CSP = down-market "parking money" (300-361d, ~26-30%) on a beaten-down ETF.
+    2026 SHIFT (his 2026-09-01 email, captured in doctrine v0.5): John moved his DEFAULT structure
+    from the OTM cash-secured put to the deep-ITM / 99-Delta covered call, for CAPITAL EFFICIENCY -
+    ~half the capital tied up for ~2x the weekly cash return on the SAME trade (his own framing:
+    'the trade is Strike/Expire/Premium; CSP vs 99-Delta is just how we STRUCTURE it'). So we now
+    LEAD with the 99-Delta ITM CCW in every normal entry, and demote the CSP to the noted
+    alternative. He has NOT abandoned the CSP - it stays valid for IRA / unsettled cash, when you
+    actually want the shares, or to place the strike at the expected-move downside on a red day.
+
+    Confirmed rules still honored:
+      - Down days still fatten PUT premium / give downside cushion -> CSP is the day-appropriate
+        ALTERNATIVE, not the lead.
+      - Long-dated ATM CSP = down-market 'parking money' (300-361d, ~26-30%) on a beaten-down ETF -
+        a distinct deep-in-range play, kept as-is.
     """
     pos, day, verdict = a["pos"], a.get("day"), a.get("verdict")
     if verdict == "BELOW CH" or pos < 15:
@@ -120,16 +127,20 @@ def strategy_pick(a):
                 "deep in the range / below the channel = John's down-market 'parking money' play "
                 "(300-361d ATM CSP, ~26-30%). A near-term CSP works too if you want the shares.")
     if day == "red":
-        return ("CSP (cash-secured put)",
-                "down day: put premium is fatter and you enter with downside protection "
-                "(John: 'buy on down days for CSPs').")
+        return ("99-delta ITM CCW",
+                "John now leads with the 99-Delta ITM CC even on down days for capital efficiency "
+                "(~half the capital, same strike/expire/premium). ALT: a CSP has fatter put premium "
+                "+ downside cushion on red days - use it for IRA / unsettled cash or if you want the "
+                "shares.")
     if day == "green":
         return ("99-delta ITM CCW",
-                "up day: call premium is fatter (John: 'sell covered calls on green days'); "
-                "the 99-delta ITM covered call is his capital-efficient core.")
+                "up day: call premium is fattest AND it's John's capital-efficient core since his "
+                "2026 shift (~half the capital, ~2x the weekly cash vs a CSP). ALT: CSP for IRA / "
+                "unsettled cash or if you want the shares.")
     return ("99-delta ITM CCW",
-            "his primary/most-common structure. Prefer a CSP on a down day or if you want the "
-            "shares; account type can override (ITM CC for IRA / unsettled cash).")
+            "his primary structure since the 2026 shift - capital-efficient (~half the capital, "
+            "~2x weekly cash vs the CSP) on the same trade. ALT: CSP on a down day, for IRA / "
+            "unsettled cash, or when you want the shares.")
 
 def series(ticker, n=40):
     """Last `n` daily CANDLES (o/h/l/c + date) + the Keltner band series, for charting (pure stdlib,
