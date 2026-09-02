@@ -1,57 +1,78 @@
 #!/usr/bin/env python3
 """
-CPT DAILY JOHN-WATCH - the headless end-of-day read of John's inbox, run by GitHub Actions
-(no MCP connector, computer off). It exists to guarantee we NEVER miss new John information -
-both new TRADES and, crucially, the TEACHING emails the weekly ingest deliberately throws away
-(the doctrine essays, member Q&A, trader lessons, 99-Delta / roll / assignment notes, market reads).
+CPT DAILY JOHN-WATCH - the headless end-of-day read of EVERYTHING John sends, run by GitHub Actions
+(no MCP connector, computer off). It exists to guarantee we never miss anything John posts - every
+email that day: new trades (opens), closes, rolls, AND the teaching / market-commentary the weekly
+ingest throws away (doctrine essays, member Q&A, trader lessons, 99-Delta / roll / assignment notes).
 
 What it does each run (all pure stdlib + IMAP, same App-Password pattern as cpt_john_review.py):
   1) INGEST     cpt_john_ingest.run() - IMAP-pull John's new trade OPENS into john-alerts.json.
-  2) TEACHING-WATCH  classify every John subject over the lookback window; anything that is NOT a
-                     trade transaction and NOT pure admin = a TEACHING/commentary email. De-dup
-                     against john-teaching-seen.json and surface only the net-new ones.
-  3) PROOF-OF-LIFE   post ONE compact Telegram line every day - either the day's opens + teaching,
-                     or "John quiet today". Yarden chose a daily heartbeat so a silent stall (the
-                     failure that killed the old local scheduler) is impossible to miss.
+  2) FULL SWEEP classify EVERY John subject over the lookback window; report everything NET-NEW since
+                the last run, grouped: opens / closes / rolls / teaching+notes / admin. De-duped
+                against john-seen.json so a re-run never double-reports and a missed run still catches
+                up (net-new, not just "today").
+  3) DIGEST     post ONE Telegram digest every day - the full day's John activity, or "quiet today".
+                Yarden chose a daily heartbeat so a silent stall (the failure that killed the old
+                local scheduler) is impossible to miss.
 
-NEVER silently no-ops: ingest failure, IMAP failure, or stale data print a LOUD flag in the ping.
-The teaching flag is a POINTER - an agent still does the qualitative read-in on demand (updating
-cpt-doctrine.md). This job's job is to make sure nothing sits unread.
+NEVER silently no-ops: ingest failure, IMAP failure, or stale data print a LOUD flag in the digest.
+The teaching lines are POINTERS - an agent still does the qualitative read-in on demand (cpt-doctrine.md).
 
-First run seeds john-teaching-seen.json from the current lookback WITHOUT alerting on the backlog
-(so the heartbeat doesn't fire a 20-item wall of history), then watches incrementally from there.
+First run seeds john-seen.json from the current lookback WITHOUT reporting the backlog (so day one
+isn't a wall of 3 weeks of history), then reports net-new daily from there.
 
 env (GitHub Secrets): GMAIL_ADDRESS, GMAIL_APP_PASSWORD, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 """
-import os, json, html, urllib.request, urllib.parse, datetime as dt
+import os, re, json, html, urllib.request, urllib.parse, datetime as dt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 import cpt_john_ingest as ing
 
-SEEN = os.path.join(HERE, "john-teaching-seen.json")
+SEEN = os.path.join(HERE, "john-seen.json")
 
-# A John email is a TRADE TRANSACTION (already covered by the alert engine + ingest) if its subject
-# carries any of these - we do NOT flag those as teaching.
-_TXN = ("NEW OPEN", "OPEN UCPTD", "OPEN PMCC", "OPEN OTM", "CLOSED", "CLOSE OUT", "CLOSEOUT",
-        "ROLLED", "TRADES HAVE BEEN POSTED", "TRADES | ", "TRADE IS LIVE", "TRADE IS  LIVE",
-        "TRADE IS 1/2", "TRADE 1/2", "FIRST TRADE", "DOUBLE DOWN")
-# Pure admin / plumbing - not teaching, not a trade.
+try:
+    UNIVERSE = set(ing.UNIVERSE)
+except Exception:
+    UNIVERSE = set()
+
 _ADMIN = ("DASHBOARD HAS BEEN UPDATED", "HAS BEEN UPDATED", "MEMBERSHIP LINKS", "MEMBERSHIP LINK",
           "PASSWORD", "UNSUBSCRIBE")
 
 
-def _is_teaching(subject):
-    """True if this John subject is a teaching / commentary email worth a human's eye - i.e. NOT a
-    trade transaction and NOT admin plumbing. Deliberately inclusive: better to over-flag John's
-    discretionary reads (IN FOCUS, market notes) than to miss a doctrine shift."""
+def classify(subject):
+    """Bucket one John subject: 'open' | 'close' | 'roll' | 'teaching' | 'admin'.
+    Trades (open/close/roll) are already modelled by the alert engine; teaching is the doctrine
+    signal; admin is plumbing. Everything is reported so nothing is missed."""
     up = (subject or "").upper()
     if not up.strip():
-        return False
-    if any(k in up for k in _TXN):
-        return False
+        return "admin"
+    if "ROLLED" in up:
+        return "roll"
+    if "CLOSED" in up or "CLOSE OUT" in up or "CLOSEOUT" in up:
+        return "close"
+    if any(k in up for k in ("NEW OPEN", "OPEN UCPTD", "OPEN PMCC", "OPEN OTM", "FIRST TRADE",
+                             "DOUBLE DOWN", "TRADE IS LIVE", "TRADE IS  LIVE", "TRADE IS 1/2",
+                             "TRADE 1/2", "TRADES HAVE BEEN POSTED", "TRADES | ")):
+        return "open"
     if any(k in up for k in _ADMIN):
-        return False
-    return True
+        return "admin"
+    return "teaching"
+
+
+def _ticker(subject):
+    seg = subject.split("|", 1)[1] if "|" in subject else subject
+    for tok in re.findall(r"\b([A-Z]{2,6})\b", seg):
+        if tok in UNIVERSE:
+            return tok
+    return None
+
+
+def _clean(subject):
+    s = (subject or "").strip()
+    for pre in ("🚨 UCPTD | ", "🚨 UCPTD ", "UCPTD | ", "Fwd: 🚨 UCPTD | ", "Fwd: "):
+        if s.startswith(pre):
+            s = s[len(pre):]
+    return s.strip()
 
 
 def _load_seen():
@@ -72,7 +93,7 @@ def _save_seen(keys, meta):
 def tg(text):
     token, chat = os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID")
     if not token or not chat:
-        print("[daily] no telegram token/chat - ping not sent (printed below)\n" + text)
+        print("[daily] no telegram token/chat - digest not sent (printed below)\n" + text)
         return False
     data = urllib.parse.urlencode({"chat_id": chat, "text": text, "parse_mode": "HTML",
                                    "disable_web_page_preview": "true"}).encode()
@@ -85,80 +106,87 @@ def tg(text):
         return False
 
 
-def _clean(subject):
-    """Trim John's boilerplate prefixes for a compact ping line."""
-    s = (subject or "").strip()
-    for pre in ("🚨 UCPTD | ", "🚨 UCPTD ", "UCPTD | ", "Fwd: 🚨 UCPTD | ", "Fwd: "):
-        if s.startswith(pre):
-            s = s[len(pre):]
-    return s.strip()
+def _fmt_trades(items, label):
+    """One compact line per trade bucket, e.g. 'opens: 3 - DPST, TQQQ, LABU'."""
+    if not items:
+        return None
+    tks = [t for t in (_ticker(s) for (s, d) in items) if t]
+    tail = " - " + ", ".join(dict.fromkeys(tks)) if tks else ""
+    return f"{label}: <b>{len(items)}</b>{tail}"
 
 
 def main():
     today = dt.date.today()
     parts = [f"\U0001F4D3 <b>CPT daily John-watch</b> {today.isoformat()}"]
 
-    # 1) INGEST new trade opens (loud on failure) -----------------------------------------------
+    # 1) INGEST new trade opens into john-alerts.json (loud on failure) -------------------------
     ingest_line, subjects = "", []
     try:
         added = ing.run()
         subjects = ing._fetch_john_subjects()          # (subject, date) over the 21d lookback
-        if added:
-            ingest_line = "trades: <b>%d</b> new open(s) - %s" % (
-                len(added), ", ".join(e["ticker"] for e in added))
-        else:
-            ingest_line = "trades: none new"
+        ingest_line = ("ledger: +%d new open(s) captured" % len(added)) if added else \
+                      "ledger: current"
     except Exception as e:
-        ingest_line = f"⚠️ INGEST/IMAP FAILED: {str(e)[:120]}"
-        parts.append(ingest_line)
+        parts.append(f"⚠️ INGEST/IMAP FAILED: {str(e)[:120]}")
         parts.append("John data may be STALE - check the workflow run.")
         tg("\n".join(parts))
         print("[daily] INGEST FAILED:", e)
         return
 
-    # 2) TEACHING-WATCH -------------------------------------------------------------------------
+    # 2) FULL SWEEP - everything John sent, net-new since last run ------------------------------
     seen, meta = _load_seen()
-    teaching = [(s, d) for (s, d) in subjects if _is_teaching(s)]
-    # key = date|subject so the same email is never re-flagged
-    new_keys = [f"{d}|{s}" for (s, d) in teaching if f"{d}|{s}" not in seen]
+    new = [(s, d) for (s, d) in subjects if f"{d}|{s}" not in seen]
 
-    first_run = meta.get("first_seeded") is None
-    if first_run:
-        # seed the backlog silently - don't wall the user with 21 days of history on day one
-        for (s, d) in teaching:
+    if meta.get("first_seeded") is None:
+        # seed the whole lookback silently - don't wall the user with 3 weeks of history on day one
+        for (s, d) in subjects:
             seen.add(f"{d}|{s}")
         meta["first_seeded"] = today.isoformat()
         _save_seen(seen, meta)
         parts.append(ingest_line)
-        parts.append("teaching-watch: seeded <b>%d</b> recent teaching email(s); "
-                     "now watching daily for new ones." % len(teaching))
+        parts.append("full-sweep armed: seeded <b>%d</b> recent John email(s); "
+                     "now reporting everything new, daily." % len(subjects))
         tg("\n".join(parts))
-        print("[daily] seeded", len(teaching), "teaching emails")
+        print("[daily] seeded", len(subjects), "John emails")
         return
 
-    for k in new_keys:
-        seen.add(k)
+    for (s, d) in new:
+        seen.add(f"{d}|{s}")
     _save_seen(seen, meta)
 
-    # 3) PROOF-OF-LIFE ping ---------------------------------------------------------------------
-    parts.append(ingest_line)
-    if new_keys:
-        # newest first
-        rows = sorted(({"date": k.split("|", 1)[0], "subj": k.split("|", 1)[1]} for k in new_keys),
-                      key=lambda r: r["date"], reverse=True)
-        parts.append("📚 teaching: <b>%d</b> new - an agent should read these in:" % len(rows))
-        for r in rows[:8]:
-            parts.append(f"• {html.escape(_clean(r['subj']))}")
-        if len(rows) > 8:
-            parts.append(f"… +{len(rows) - 8} more")
-    else:
-        parts.append("📚 teaching: none new")
+    # bucket the net-new
+    buckets = {"open": [], "close": [], "roll": [], "teaching": [], "admin": []}
+    for (s, d) in new:
+        buckets[classify(s)].append((s, d))
 
-    if "none new" in ingest_line and not new_keys:
+    parts.append(ingest_line)
+
+    trade_lines = [ln for ln in (
+        _fmt_trades(buckets["open"], "opens"),
+        _fmt_trades(buckets["close"], "closes"),
+        _fmt_trades(buckets["roll"], "rolls"),
+    ) if ln]
+    if trade_lines:
+        parts.append("🟢 <b>trades</b>")
+        parts += ["  " + ln for ln in trade_lines]
+
+    teach = sorted(buckets["teaching"], key=lambda r: r[1], reverse=True)
+    if teach:
+        parts.append("📚 <b>teaching / notes: %d</b> - read these in:" % len(teach))
+        for (s, d) in teach[:10]:
+            parts.append(f"• {html.escape(_clean(s))}")
+        if len(teach) > 10:
+            parts.append(f"… +{len(teach) - 10} more")
+
+    if buckets["admin"]:
+        parts.append("⚙️ admin: <b>%d</b>" % len(buckets["admin"]))
+
+    if not new:
         parts.append("\n<i>John quiet today ✓ (watcher alive)</i>")
 
     sent = tg("\n".join(parts))
-    print("[daily] ping sent:", sent, "| new teaching:", len(new_keys))
+    print("[daily] digest sent:", sent, "| net-new:", len(new),
+          "| teaching:", len(buckets["teaching"]))
 
 
 if __name__ == "__main__":
