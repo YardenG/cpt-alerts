@@ -1,0 +1,45 @@
+name: CPT John daily watch
+
+# Headless end-of-day read of John's inbox - runs in GitHub's cloud, no laptop, no MCP connector.
+# Guarantees we never miss new John info: ingests new trade opens AND flags the TEACHING emails the
+# weekly job throws away, then posts a one-line daily proof-of-life to Telegram. Runs every day at
+# 22:00 UTC (after the US close; ~00:00-01:00 Israel). Sibling of cpt-john-weekly.yml (heavier Fri
+# self-critique) - this one is the light daily heartbeat.
+on:
+  schedule:
+    - cron: '0 22 * * *'       # every day 22:00 UTC = after US close, ~1am Israel
+  workflow_dispatch:            # run manually from the Actions tab (first seed / proof run)
+
+permissions:
+  contents: write               # to commit refreshed john-alerts.json + john-teaching-seen.json
+
+concurrency:
+  group: cpt-john-daily
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Daily John read - ingest opens + teaching-watch + heartbeat
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python cpt_john_daily.py
+      - name: Commit refreshed John data (only if changed)
+        run: |
+          if [ -n "$(git status --porcelain john-alerts.json john-teaching-seen.json)" ]; then
+            git config user.name "cpt-alert-bot"
+            git config user.email "cpt-alert-bot@users.noreply.github.com"
+            git add john-alerts.json john-teaching-seen.json
+            git commit -m "daily John watch: ingest + teaching seen [skip ci]"
+            git push
+          else
+            echo "no John data change"
+          fi
