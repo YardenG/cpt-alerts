@@ -2,6 +2,24 @@
   "_note": "John's REAL entry alerts, parsed from the CPT Dashboard Gmail label (sender john@*cptdashboard/corepositiontrading). 'NEW OPEN CCW Campaign' + PMCC opens only (skips closes/rolls/notes). Seeded 2026-08-14 from newer_than:30d. Append new opens as they arrive.",
   "entries": [
     {
+      "date": "2026-09-02",
+      "ticker": "DPST",
+      "structure": "OPEN CCW",
+      "csp_prem": 2.1
+    },
+    {
+      "date": "2026-08-31",
+      "ticker": "TNA",
+      "structure": "OPEN CCW",
+      "csp_prem": 0.65
+    },
+    {
+      "date": "2026-08-31",
+      "ticker": "LABU",
+      "structure": "OPEN CCW",
+      "csp_prem": 3.71
+    },
+    {
       "date": "2026-08-28",
       "ticker": "TQQQ",
       "structure": "OPEN CCW",
