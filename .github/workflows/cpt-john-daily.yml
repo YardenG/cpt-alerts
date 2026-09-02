@@ -34,11 +34,11 @@ jobs:
         run: python cpt_john_daily.py
       - name: Commit refreshed John data (only if changed)
         run: |
-          if [ -n "$(git status --porcelain john-alerts.json john-teaching-seen.json)" ]; then
+          if [ -n "$(git status --porcelain john-alerts.json john-seen.json)" ]; then
             git config user.name "cpt-alert-bot"
             git config user.email "cpt-alert-bot@users.noreply.github.com"
-            git add john-alerts.json john-teaching-seen.json
-            git commit -m "daily John watch: ingest + teaching seen [skip ci]"
+            git add john-alerts.json john-seen.json
+            git commit -m "daily John watch: ingest + full-sweep seen [skip ci]"
             git push
           else
             echo "no John data change"
