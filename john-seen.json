@@ -77,7 +77,13 @@
     "2026-09-02|NEW OPEN CCW Campaign / Trade | DPST > Expires Sep - 11 > UT\r\n (DPST12511.5) > CSP Prem ~$2.10",
     "2026-09-02|OPEN UCPTD OTM CCW Trade | DPST > Expiring Sep - 4 > UT (DPST1361.1)",
     "2026-09-02|OPEN UCPTD OTM CCW Trade | TQQQ > Expiring Sep - 11 > UT (TQQQ740.4)",
-    "2026-09-02|\u2705 CLOSE OUT UCPTD ITM CCW Trade | LABU > MADE $1,800 > 2.58% > (4) days > UT (LABU27022.9)"
+    "2026-09-02|\u2705 CLOSE OUT UCPTD ITM CCW Trade | LABU > MADE $1,800 > 2.58% > (4) days > UT (LABU27022.9)",
+    "2026-09-03|NEW OPEN CCW Campaign / Trade | LABU > Expires Sep - 11 > UT\r\n (LABU27534.6) > CSP Prem ~$5.00",
+    "2026-09-03|NEW OPEN CCW Campaign / Trade | TNA > Expires Sep - 11 > UT\r\n (TNA673.25) > CSP Prem ~$0.87",
+    "2026-09-03|\u2705 CLOSE OUT UCPTD ITM CCW KIDS Trade | TQQQ > MADE $510 > 5.99% > (10) days > UT (TQQQ655)",
+    "2026-09-03|\u2705 CLOSE OUT UCPTD ITM CCW Trade | TNA > MADE $500 > 1.32% > (3) days > UT (TNA65.53.1)",
+    "2026-09-03|\u2705 CLOSE OUT UCPTD ITM CCW Trade | TQQQ > MADE $1,300 > 2.06% > (6) days > UT (TQQQ684.3)",
+    "2026-09-03|\ud83d\udea8 UCPTD | I ROLLED MY TNA $30 STRIKE TO THE $40 STRIKE AND KEPT THE SAME COST"
   ],
   "first_seeded": "2026-09-02"
 }
