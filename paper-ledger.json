@@ -687,6 +687,44 @@
       "premium_banked": 1000.0,
       "events": [],
       "closed": null
+    },
+    {
+      "id": "AAPU-20260904",
+      "ticker": "AAPU",
+      "opened": "2026-09-04",
+      "status": "OPEN",
+      "kind": "CCW",
+      "entry_price": 41.6,
+      "pos_pct": 50.9,
+      "rsi": 53.0,
+      "verdict": "ENTRY *",
+      "day": "red",
+      "structure": "99-delta ITM CCW",
+      "structure_why": "John now leads with the 99-Delta ITM CC even on down days for capital efficiency (~half the capital, same strike/expire/premium). ALT: a CSP has fatter put premium + downside cushion on red days - use it for IRA / unsettled cash or if you want the shares.",
+      "structure_bucket": "itm_ccw",
+      "regime": "RISK-ON",
+      "context": "RISK-ON tape + QQQ uptrend = supportive backdrop",
+      "contracts": 10,
+      "long_call": {
+        "strike": 23.0,
+        "exp": "Oct-16",
+        "exp_ts": 1792108800,
+        "ask_paid": 19.3,
+        "delta": 0.9998444433501127
+      },
+      "income": {
+        "right": "C",
+        "strike": 42.0,
+        "exp": "Sep-18",
+        "exp_ts": 1789689600,
+        "sold": 1.45,
+        "cycle_opened": "2026-09-04"
+      },
+      "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
+      "weeklies": [],
+      "premium_banked": 0.0,
+      "events": [],
+      "closed": null
     }
   ],
   "meta": {
