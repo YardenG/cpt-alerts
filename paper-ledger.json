@@ -652,11 +652,11 @@
       "long_call": null,
       "income": {
         "right": "P",
-        "strike": 287.5,
-        "exp": "Sep-04",
-        "exp_ts": 1788480000,
-        "sold": 9.9,
-        "cycle_opened": "2026-08-31",
+        "strike": 302.5,
+        "exp": "Sep-11",
+        "exp_ts": 1789084800,
+        "sold": 11.4,
+        "cycle_opened": "2026-09-04",
         "cost_cc_bid": 22.1
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
@@ -682,9 +682,20 @@
           "coc": 0.0,
           "days": 3,
           "reason": "CSP roll down-and-out (avoid assignment)"
+        },
+        {
+          "closed": "2026-09-04",
+          "strike": 287.5,
+          "sold": 9.9,
+          "buyback": 0,
+          "income_ps": 9.9,
+          "income_usd": 9900.0,
+          "coc": 3.44,
+          "days": 4,
+          "reason": "CSP expired OTM"
         }
       ],
-      "premium_banked": 1000.0,
+      "premium_banked": 10900.0,
       "events": [],
       "closed": null
     },
@@ -728,7 +739,7 @@
     }
   ],
   "meta": {
-    "last_marked": "2026-09-03",
-    "last_digest_week": "2026-W34"
+    "last_marked": "2026-09-04",
+    "last_digest_week": "2026-W36"
   }
 }
