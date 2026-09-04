@@ -16,9 +16,28 @@ Doctrine inputs (cpt-doctrine.md sec.3-4):
   - Entry gate: price in the LOWER ~25% of the channel, NEVER above the top; RSI ~40-50.
 Data source: Yahoo chart JSON (no key). Swap-in point for IBKR later = fetch().
 """
-import json, urllib.request, sys
+import json, urllib.request, urllib.error, sys, time
 
 KC_LEN, KC_MULT, ATR_LEN = 10, 5.0, 10   # confirmed vs Yarden's Yahoo chart
+
+
+def net_retry(call, tries=4, backoff=3):
+    """Run a zero-arg network `call`, retrying TRANSIENT blips (DNS/connection/timeout/5xx) with a
+    3/6/9s backoff. A single flaky moment on the runner (e.g. URLError [Errno -2] Name or service
+    not known) used to kill a whole run; now it's absorbed. Permanent 4xx (bad request) raise at once."""
+    last = None
+    for i in range(tries):
+        try:
+            return call()
+        except urllib.error.HTTPError as e:
+            if e.code not in (429, 500, 502, 503, 504):
+                raise
+            last = e
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
+            last = e
+        if i < tries - 1:
+            time.sleep(backoff * (i + 1))
+    raise last
 
 UNIVERSE = ["DPST", "TQQQ", "TNA", "IREN", "NVDL", "LABU", "NAIL", "GGLL",
             "METU", "SOXL", "AAPU", "AMZU"]
@@ -27,8 +46,7 @@ def fetch(ticker, rng="3mo", interval="1d"):
     url = (f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}"
            f"?range={rng}&interval={interval}")
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    with urllib.request.urlopen(req, timeout=20) as r:
-        d = json.load(r)
+    d = net_retry(lambda: json.load(urllib.request.urlopen(req, timeout=20)))
     res = d["chart"]["result"][0]
     q = res["indicators"]["quote"][0]
     ts = res.get("timestamp", [])

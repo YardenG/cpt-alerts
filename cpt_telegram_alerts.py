@@ -38,7 +38,7 @@ RUN:
 Then schedule it (next step) - e.g. cron every 15-20 min during market hours.
 """
 import json, os, sys, urllib.request, urllib.parse, datetime as dt
-from cpt_data_spike import analyze, strategy_pick, series, UNIVERSE
+from cpt_data_spike import analyze, strategy_pick, series, UNIVERSE, net_retry
 try:
     import cpt_legs_web                    # cloud exact-legs from free options data (best-effort)
 except Exception:
@@ -76,8 +76,9 @@ def send(token, chat_id, text):
     data = urllib.parse.urlencode({"chat_id": chat_id, "text": text,
                                    "parse_mode": "HTML", "disable_web_page_preview": "true"}).encode()
     try:
-        with urllib.request.urlopen(urllib.request.Request(url, data=data), timeout=15) as r:
-            return json.load(r).get("ok", False)
+        r = net_retry(lambda: json.load(urllib.request.urlopen(
+            urllib.request.Request(url, data=data), timeout=15)))
+        return r.get("ok", False)
     except Exception as e:
         print("telegram send failed:", str(e)[:120]); return False
 
@@ -111,16 +112,16 @@ def chart_url(sym, s, subtitle):
                        "version": "4"}).encode()
     req = urllib.request.Request("https://quickchart.io/chart/create", data=body,
                                  headers={"Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=20) as r:
-        return json.load(r)["url"]
+    return net_retry(lambda: json.load(urllib.request.urlopen(req, timeout=20)))["url"]
 
 def send_photo(token, chat_id, photo_url, caption):
     url = f"https://api.telegram.org/bot{token}/sendPhoto"
     data = urllib.parse.urlencode({"chat_id": chat_id, "photo": photo_url,
                                    "caption": caption, "parse_mode": "HTML"}).encode()
     try:
-        with urllib.request.urlopen(urllib.request.Request(url, data=data), timeout=25) as r:
-            return json.load(r).get("ok", False)
+        r = net_retry(lambda: json.load(urllib.request.urlopen(
+            urllib.request.Request(url, data=data), timeout=25)))
+        return r.get("ok", False)
     except Exception as e:
         print("telegram sendPhoto failed:", str(e)[:160]); return False
 

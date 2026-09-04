@@ -21,7 +21,7 @@ Reuses the validated fetch/ema from cpt_data_spike. Run:
   python3 cpt_context.py AAPU NVDX DPST # several
 """
 import json, sys, urllib.request, urllib.parse, http.cookiejar, datetime as dt
-from cpt_data_spike import fetch, ema, analyze
+from cpt_data_spike import fetch, ema, analyze, net_retry
 
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
 
@@ -67,8 +67,8 @@ def _session():
         op.open(urllib.request.Request("https://fc.yahoo.com", headers=UA), timeout=15)
     except Exception:
         pass
-    crumb = op.open(urllib.request.Request(
-        "https://query1.finance.yahoo.com/v1/test/getcrumb", headers=UA), timeout=15).read().decode()
+    crumb = net_retry(lambda: op.open(urllib.request.Request(
+        "https://query1.finance.yahoo.com/v1/test/getcrumb", headers=UA), timeout=15).read().decode())
     return op, crumb
 
 
@@ -132,7 +132,7 @@ def earnings(underlying, op, crumb):
     try:
         url = (f"https://query1.finance.yahoo.com/v10/finance/quoteSummary/{underlying}"
                f"?modules=calendarEvents&crumb={urllib.parse.quote(crumb)}")
-        d = json.load(op.open(urllib.request.Request(url, headers=UA), timeout=20))
+        d = net_retry(lambda: json.load(op.open(urllib.request.Request(url, headers=UA), timeout=20)))
         ed = d["quoteSummary"]["result"][0]["calendarEvents"]["earnings"]["earningsDate"]
         if ed:
             nd = dt.datetime.utcfromtimestamp(ed[0]["raw"]).date()

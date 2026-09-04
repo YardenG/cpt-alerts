@@ -14,6 +14,7 @@ premium in the broker at execution. Every number here is labeled a delayed estim
 Pure stdlib (runs on GitHub Actions with no install). READ-ONLY: it only reads market data.
 """
 import json, math, urllib.request, urllib.parse, http.cookiejar, datetime as dt
+from cpt_data_spike import net_retry   # transient-blip retry (DNS/5xx/timeout); shared helper
 
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
 RISK_FREE = 0.04
@@ -38,8 +39,8 @@ def _session():
         op.open(urllib.request.Request("https://fc.yahoo.com", headers=UA), timeout=15)
     except Exception:
         pass  # the request 404s but still sets the A3 cookie
-    crumb = op.open(urllib.request.Request(
-        "https://query1.finance.yahoo.com/v1/test/getcrumb", headers=UA), timeout=15).read().decode()
+    crumb = net_retry(lambda: op.open(urllib.request.Request(
+        "https://query1.finance.yahoo.com/v1/test/getcrumb", headers=UA), timeout=15).read().decode())
     return op, crumb
 
 
@@ -48,7 +49,7 @@ def _chain(op, crumb, ticker, date_ts=None):
     if date_ts:
         q["date"] = date_ts
     url = f"https://query1.finance.yahoo.com/v7/finance/options/{ticker}?{urllib.parse.urlencode(q)}"
-    d = json.load(op.open(urllib.request.Request(url, headers=UA), timeout=20))
+    d = net_retry(lambda: json.load(op.open(urllib.request.Request(url, headers=UA), timeout=20)))
     return d["optionChain"]["result"][0]
 
 
