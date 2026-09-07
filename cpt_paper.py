@@ -53,8 +53,15 @@ PENNIES       = 0.10   # [DOCTRINE sec.7] "only pennies of time value" on a near
 NEAR_EXPIRY   = 5      # [OPS] days-to-expiry we call "near expiry" (not a John number).
 
 # --- John's realized benchmark (from _distilled/phase2-findings-v1.md, 299-alert slice) ----------
+# BASIS NOTE (apples-to-apples): John's 4.46% weekly is a PREMIUM YIELD = income / strike-notional,
+# measured on his CSP-era slice. We do NOT have John's realized 99-Delta CoC (his captured alerts are
+# ENTRIES - ticker/structure/premium - with no strike or capital base, so a realized 99-Delta CoC%
+# cannot be derived and is not invented here). By John's own framing ("the trade is Strike/Expire/
+# Premium; CSP vs 99-Delta is just how we STRUCTURE it") the premium is the same trade either way, so
+# his 4.46% premium yield is the correct like-for-like bar - and we now measure OURS the same way
+# (income / strike) instead of income / long-call-debit, which was the mismatch.
 JOHN = dict(
-    weekly=dict(avg=2944, coc=4.46, days=8.7, n=42),        # weekly ITM-CC closes (bread & butter)
+    weekly=dict(avg=2944, coc=4.46, days=8.7, n=42),        # weekly closes - coc = premium yield (income/strike)
     campaign=dict(avg=10683, coc=9.71, days=26.8, n=12),    # PMCC / blended campaign closeouts
     win_by_design=True,                                     # ~100% wins; never closes red (rolls)
     opens=dict(itm_ccw=56, plain_ccw=18, csp=12, pmcc=9),   # structure mix across his 95 opens
@@ -389,14 +396,21 @@ def _mark_one(pos, op, crumb, log):
         long_pl  = ((lc_mark or 0) - paid) * MULT * pos["contracts"]
         short_pl = ((sold or 0) - (buyback or 0)) * MULT * pos["contracts"]
         would_realize = pos["premium_banked"] + long_pl + short_pl
-        if would_realize >= 0:
+        # At/after expiry an ITM covered call IS assigned - the shares get called away, that is not
+        # optional and it ENDS the campaign (John books it as the win it is: full premium + the gain up
+        # to the strike). Pre-expiry we still roll up-and-out to defer a red close; but once dte<=0 and
+        # still ITM, the position resolves - close it, whatever the sign. This is the natural closeout
+        # that was missing (why campaigns rolled forever instead of finishing the way John's do).
+        called_away = dte <= 0
+        if would_realize >= 0 or called_away:
+            tag = "CALLED AWAY at expiry" if called_away else "CASE B WIN"
             _close_campaign(pos, lc_mark, buyback,
-                            f"CASE B WIN: {ticker} {spot:.2f} above {strike:g}C at {dte}d - closed both legs green.")
+                            f"{tag}: {ticker} {spot:.2f} above {strike:g}C at {dte}d - campaign closed.")
             c = pos["closed"]
-            log.append(f"  {pos['id']} {ticker}: CASE B CAMPAIGN CLOSEOUT (win)  {c['realized']:+,.0f}  "
+            log.append(f"  {pos['id']} {ticker}: CAMPAIGN CLOSEOUT ({tag})  {c['realized']:+,.0f}  "
                        f"({c['coc']:.1f}% on the long-call capital, {c['days']}d).")
             return
-        # Closing now would be RED -> roll it (John never books the loss): realize this CC cycle, re-write up-and-out.
+        # Pre-expiry and closing now would be RED -> roll it (John never books the loss early): realize this CC cycle, re-write up-and-out.
         rec = _realize_weekly(pos, sold, buyback, "CASE B roll (avoid closing red)")
         new_cc = _next_weekly(op, crumb, ticker, spot) if spot else None
         if new_cc:
@@ -548,6 +562,10 @@ def report():
     print("OUTCOMES vs John  (the real comparison)")
     print(f"  {'cohort':22} {'metric':12} {'ours':>10} {'John':>12}")
     _cohort_rows("weekly ITM-CC", weeklies, JOHN["weekly"], kind="weekly")
+    # APPLES-TO-APPLES: premium yield = income / strike-notional, the SAME basis as John's 4.46%.
+    pys = [w["income_ps"] / w["strike"] * 100 for w in weeklies if w.get("strike")]
+    if pys:
+        print(f"  {'  (same basis)':22} {'prem yield%':12} {sum(pys)/len(pys):>10.2f} {JOHN['weekly']['coc']:>12.2f}")
     _cohort_rows("campaign closeout", campaigns, JOHN["campaign"], kind="campaign")
     print()
 
@@ -558,9 +576,13 @@ def report():
 
     print("-" * 74)
     print("MEASUREMENT NOTE: win-rate is ~100% for BOTH by design (John never closes red - he rolls;")
-    print("our ledger follows the same rule). Judge on $ / CoC% / days / roll depth - NOT win-rate.")
-    print("$ = 10 contracts (John's ~1000-sh size); CoC% is size-free. Weekly CoC = income / long-call")
-    print("capital (the deployed capital in a PMCC). Premiums are BS-EST (free Yahoo delayed data).")
+    print("our ledger follows the same rule). Judge on premium yield / days / roll depth - NOT win-rate.")
+    print("$ = 10 contracts (John's ~1000-sh size). APPLES-TO-APPLES: 'prem yield%' = income / strike-")
+    print("notional, the SAME basis as John's 4.46% (his CSP-era slice; by his 'same trade, different")
+    print("structure' rule the premium yield carries over to the 99-Delta). The separate CoC% line is")
+    print("income / long-call debit - the 99-Delta's capital-efficiency lens, NOT comparable to John's.")
+    print("We do NOT have John's realized 99-Delta CoC (his alerts are entries, no strike/capital base).")
+    print("Marks are real (delayed) Yahoo bid/ask/last, taken in US hours; held - not modeled - when thin.")
     if not weeklies and not campaigns:
         print("\nNo closes realized yet - positions accrue as the written CCs decay. Run `mark` over the")
         print("coming days (or `open` as alerts fire). Structure-mix above is a live read already.")
@@ -599,15 +621,20 @@ def digest_text():
          f"{len(weeklies)} weekly closes banked"]
     if weeklies:
         avg = sum(w["income_usd"] for w in weeklies) / len(weeklies)
+        # apples-to-apples with John: PREMIUM YIELD = income / strike-notional (same basis for CSP & CCW).
+        pys = [w["income_ps"] / w["strike"] * 100 for w in weeklies if w.get("strike")]
+        py = sum(pys) / len(pys) if pys else 0
         cocs = [w["coc"] for w in weeklies if w["coc"] is not None]
-        coc = sum(cocs) / len(cocs) if cocs else 0
-        L.append(f"weekly ITM-CC: <b>ours ${avg:,.0f} / {coc:.2f}%</b> vs John $2,944 / 4.46%")
+        capeff = sum(cocs) / len(cocs) if cocs else 0
+        L.append(f"weekly premium yield: <b>ours {py:.2f}%</b> vs John 4.46% "
+                 f"<i>(same basis: income ÷ strike)</i>")
+        L.append(f"  └ ${avg:,.0f}/wk avg · capital-efficient CoC {capeff:.2f}% (÷ long-call debit)")
     else:
-        L.append("weekly ITM-CC: none closed yet vs John $2,944 / 4.46%")
+        L.append("weekly: none closed yet vs John 4.46% premium yield")
     if camps:
         cavg = sum(p["closed"]["realized"] for p in camps) / len(camps)
         ccoc = sum(p["closed"]["coc"] for p in camps) / len(camps)
-        L.append(f"campaign: <b>ours ${cavg:,.0f} / {ccoc:.2f}%</b> vs John $10,683 / 9.71%")
+        L.append(f"campaign (n={len(camps)}): <b>ours ${cavg:,.0f} / {ccoc:.2f}%</b> vs John $10,683 / 9.71% (n=12)")
     L.append(f"rolling/underwater: {len(rolling)}")
     L.append("<i>win-rate ~100% both by design - judge $ / CoC% / days / roll depth ($=10 lots).</i>")
     return "\n".join(L)
