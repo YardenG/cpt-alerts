@@ -381,9 +381,58 @@ def _closed_rows(a):
     return "".join(rows)
 
 
+def vs_john(book):
+    """The scorecard numbers, reusing cpt_paper's JOHN benchmark and the SAME apples-to-apples basis
+    (weekly premium yield = income / strike). One source of truth for the Telegram digest and this page."""
+    import cpt_paper as cp
+    pos = book["positions"]
+    weeklies = [w for p in pos for w in p["weeklies"]]
+    pys = [w["income_ps"] / w["strike"] * 100 for w in weeklies if w.get("strike")]
+    wdays = [w["days"] for w in weeklies]
+    camps = [p for p in pos if (p.get("closed") or {}).get("cohort") == "campaign"]
+    J = cp.JOHN
+    return dict(
+        wy=sum(pys) / len(pys) if pys else 0.0, jwy=J["weekly"]["coc"],
+        wd=sum(wdays) / len(wdays) if wdays else 0.0, jwd=J["weekly"]["days"],
+        ccoc=(sum(p["closed"]["coc"] for p in camps) / len(camps)) if camps else None,
+        jccoc=J["campaign"]["coc"],
+        n_week=len(weeklies), jn_week=J["weekly"]["n"],
+        n_camp=len(camps), jn_camp=J["campaign"]["n"])
+
+
+def _cmp_row(label, ours, john, fmt, caption, ours_cls=""):
+    """One comparison card: You-bar over John-bar, both scaled to the pair's max (negatives read as 0
+    width, value shown in red). Same yardstick for both, so the lengths are directly comparable."""
+    denom = max(abs(ours), abs(john)) or 1.0
+    wo, wj = max(0.0, ours) / denom * 100, max(0.0, john) / denom * 100
+    return f"""<div class="vsrow">
+    <div class="h"><span class="m">{html.escape(label)}</span><span class="cap">{html.escape(caption)}</span></div>
+    <div class="vsbar"><span class="who">You</span><div class="track"><div class="fillo" style="width:{wo:.1f}%"></div></div><span class="val {ours_cls}">{fmt(ours)}</span></div>
+    <div class="vsbar"><span class="who">John</span><div class="track"><div class="fillj" style="width:{wj:.1f}%"></div></div><span class="val">{fmt(john)}</span></div>
+  </div>"""
+
+
+def _vs_john_section(v):
+    pct = lambda x: f"{x:.2f}%"
+    days = lambda x: f"{x:.1f}d"
+    rows = [_cmp_row("Weekly premium yield", v["wy"], v["jwy"], pct,
+                     f"income ÷ strike — same math for both · you n={v['n_week']}, John n={v['jn_week']}")]
+    rows.append(_cmp_row("Weekly hold time", v["wd"], v["jwd"], days,
+                         "days per weekly close — shorter = faster turnover"))
+    if v["ccoc"] is not None:
+        rows.append(_cmp_row("Campaign return", v["ccoc"], v["jccoc"], pct,
+                             f"only {v['n_camp']} closed vs John's {v['jn_camp']} — too few to judge yet",
+                             ours_cls=_cls(v["ccoc"])))
+    else:
+        rows.append('<div class="vsrow"><div class="h"><span class="m">Campaign return</span>'
+                    '<span class="cap">no campaigns closed yet</span></div></div>')
+    return "".join(rows)
+
+
 def build():
     book = load()
     a = account_state(book)
+    vs_html = _vs_john_section(vs_john(book))
     val_cls = _cls(a["value"] - STARTING_CASH)
     spark = _sparkline(a["curve"])
     generated = dt.datetime.now().strftime("%Y-%m-%d %H:%M")
@@ -500,6 +549,17 @@ table.legs tr:last-child td{{border-bottom:none}}
 thead.main tr th:first-child, .closed td:first-child{{padding-left:16px}}
 .closed td{{padding:13px 16px;border-bottom:1px solid var(--border)}}
 .closed tr:last-child td{{border-bottom:none}}
+.vs{{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}}
+.vsrow{{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px 17px;box-shadow:var(--shadow)}}
+.vsrow .h{{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:11px;flex-wrap:wrap}}
+.vsrow .h .m{{font-weight:600;font-size:14px}}
+.vsrow .h .cap{{font-size:11px;color:var(--muted);text-align:right}}
+.vsbar{{display:grid;grid-template-columns:38px 1fr 66px;align-items:center;gap:10px;margin:6px 0}}
+.vsbar .who{{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}}
+.vsbar .track{{background:var(--surface2);border-radius:6px;height:16px;overflow:hidden}}
+.vsbar .fillo{{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent) 55%,var(--up)));min-width:2px}}
+.vsbar .fillj{{height:100%;border-radius:6px;background:var(--flat);opacity:.45;min-width:2px}}
+.vsbar .val{{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:13px;text-align:right}}
 .note{{font-size:12px;color:var(--muted);margin-top:14px;line-height:1.6}}
 .note b{{color:var(--ink)}}
 footer{{margin-top:30px;font-size:11.5px;color:var(--muted);text-align:center;letter-spacing:.03em}}
@@ -553,6 +613,17 @@ footer{{margin-top:30px;font-size:11.5px;color:var(--muted);text-align:center;le
     <div class="kpi"><div class="k">Weekly closes banked</div><div class="v">{a['weekly_count']}</div></div>
     <div class="kpi"><div class="k">Return on account</div><div class="v {_cls(a['pct'])}">{a['pct']:+.2f}%</div></div>
   </section>
+
+  <h2 class="sec">You vs John &bull; like-for-like</h2>
+  <div class="vs">{vs_html}</div>
+  <p class="note">
+    <b>Reading it.</b> Each card puts <b>You</b> (top bar) against <b>John</b> (bottom bar) on the SAME
+    yardstick, so bar lengths are directly comparable. <b>Premium yield</b> = the premium collected &divide;
+    the money at stake &mdash; the only fair way to line up our 99-Delta trade against John's. We collect
+    thinner premium right now, and that is the real gap to close. <b>Campaign return</b> is a single closed
+    trade so far &mdash; ignore it until more finish. John's figures are his realized track record; a
+    separate capital-efficiency view (premium &divide; long-call debit) lives in the Telegram scorecard.
+  </p>
 
   <h2 class="sec">Open positions &bull; click a row for the legs</h2>
   <div class="card">
