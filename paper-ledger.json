@@ -26,11 +26,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 35.5,
-        "exp": "Sep-11",
-        "exp_ts": 1789084800,
-        "sold": 1.25,
-        "cycle_opened": "2026-09-07"
+        "strike": 33.0,
+        "exp": "Sep-18",
+        "exp_ts": 1789689600,
+        "sold": 1.7,
+        "cycle_opened": "2026-09-08"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -99,9 +99,20 @@
           "coc": 0.0,
           "days": 6,
           "reason": "CASE B roll (avoid closing red)"
+        },
+        {
+          "closed": "2026-09-08",
+          "strike": 35.5,
+          "sold": 1.25,
+          "buyback": 0.38,
+          "income_ps": 0.88,
+          "income_usd": 875.0,
+          "coc": 3.47,
+          "days": 1,
+          "reason": "expired OTM"
         }
       ],
-      "premium_banked": 3500.0,
+      "premium_banked": 4375.0,
       "events": [],
       "closed": null
     },
@@ -199,11 +210,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 140.0,
-        "exp": "Sep-11",
-        "exp_ts": 1789084800,
-        "sold": 2.7,
-        "cycle_opened": "2026-09-07"
+        "strike": 135.0,
+        "exp": "Sep-18",
+        "exp_ts": 1789689600,
+        "sold": 5.5,
+        "cycle_opened": "2026-09-08"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -283,9 +294,20 @@
           "coc": 0.0,
           "days": 6,
           "reason": "CASE B roll (avoid closing red)"
+        },
+        {
+          "closed": "2026-09-08",
+          "strike": 140.0,
+          "sold": 2.7,
+          "buyback": 1.52,
+          "income_ps": 1.18,
+          "income_usd": 1175.0,
+          "coc": 1.15,
+          "days": 1,
+          "reason": "expired OTM"
         }
       ],
-      "premium_banked": 12025.0,
+      "premium_banked": 13200.0,
       "events": [],
       "closed": null
     },
@@ -439,7 +461,7 @@
       "id": "IREN-20260817",
       "ticker": "IREN",
       "opened": "2026-08-17",
-      "status": "ROLLED",
+      "status": "CLOSED",
       "kind": "CCW",
       "entry_price": 44.9,
       "pos_pct": 57.7,
@@ -527,7 +549,14 @@
       ],
       "premium_banked": 5185.0,
       "events": [],
-      "closed": null
+      "closed": {
+        "date": "2026-09-08",
+        "cohort": "campaign",
+        "realized": 4200.0,
+        "coc": 14.48,
+        "days": 22,
+        "detail": "CASE B WIN: IREN 46.91 above 45C at 3d - campaign closed."
+      }
     },
     {
       "id": "TNA-20260817",
@@ -685,11 +714,11 @@
       "long_call": null,
       "income": {
         "right": "P",
-        "strike": 302.5,
-        "exp": "Sep-11",
-        "exp_ts": 1789084800,
-        "sold": 11.4,
-        "cycle_opened": "2026-09-04",
+        "strike": 290.0,
+        "exp": "Sep-18",
+        "exp_ts": 1789689600,
+        "sold": 13.8,
+        "cycle_opened": "2026-09-08",
         "cost_cc_bid": 22.1
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
@@ -726,6 +755,17 @@
           "coc": 3.44,
           "days": 4,
           "reason": "CSP expired OTM"
+        },
+        {
+          "closed": "2026-09-08",
+          "strike": 302.5,
+          "sold": 11.4,
+          "buyback": 14.45,
+          "income_ps": 0.0,
+          "income_usd": 0.0,
+          "coc": 0.0,
+          "days": 4,
+          "reason": "CSP roll down-and-out (avoid assignment)"
         }
       ],
       "premium_banked": 10900.0,
@@ -772,7 +812,7 @@
     }
   ],
   "meta": {
-    "last_marked": "2026-09-07",
+    "last_marked": "2026-09-08",
     "last_digest_week": "2026-W36"
   }
 }
