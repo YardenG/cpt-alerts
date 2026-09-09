@@ -332,10 +332,10 @@
       "income": {
         "right": "P",
         "strike": 71.0,
-        "exp": "Sep-09",
-        "exp_ts": 1788912000,
-        "sold": 1.71,
-        "cycle_opened": "2026-08-31",
+        "exp": "Sep-16",
+        "exp_ts": 1789516800,
+        "sold": 1.85,
+        "cycle_opened": "2026-09-09",
         "cost_cc_bid": 1.47
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
@@ -350,9 +350,20 @@
           "coc": 0.68,
           "days": 11,
           "reason": "CSP expired OTM"
+        },
+        {
+          "closed": "2026-09-09",
+          "strike": 71.0,
+          "sold": 1.71,
+          "buyback": 0,
+          "income_ps": 1.71,
+          "income_usd": 1710.0,
+          "coc": 2.41,
+          "days": 9,
+          "reason": "CSP expired OTM"
         }
       ],
-      "premium_banked": 500.0,
+      "premium_banked": 2210.0,
       "events": [
         {
           "date": "2026-08-18",
@@ -578,11 +589,11 @@
       "long_call": null,
       "income": {
         "right": "P",
-        "strike": 66.0,
-        "exp": "Sep-11",
-        "exp_ts": 1789084800,
-        "sold": 2.05,
-        "cycle_opened": "2026-09-01",
+        "strike": 65.0,
+        "exp": "Sep-18",
+        "exp_ts": 1789689600,
+        "sold": 1.88,
+        "cycle_opened": "2026-09-09",
         "cost_cc_bid": 0.96
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
@@ -619,9 +630,20 @@
           "coc": 0.0,
           "days": 1,
           "reason": "CSP roll down-and-out (avoid assignment)"
+        },
+        {
+          "closed": "2026-09-09",
+          "strike": 66.0,
+          "sold": 2.05,
+          "buyback": 1.25,
+          "income_ps": 0.79,
+          "income_usd": 795.0,
+          "coc": 1.2,
+          "days": 8,
+          "reason": "CSP roll down-and-out (avoid assignment)"
         }
       ],
-      "premium_banked": 0.0,
+      "premium_banked": 795.0,
       "events": [
         {
           "date": "2026-08-20",
@@ -850,7 +872,7 @@
     }
   ],
   "meta": {
-    "last_marked": "2026-09-08",
+    "last_marked": "2026-09-09",
     "last_digest_week": "2026-W36"
   }
 }
