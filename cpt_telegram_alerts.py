@@ -37,7 +37,7 @@ RUN:
   python3 cpt_telegram_alerts.py --force          # scan even when the US market is closed (testing)
 Then schedule it (next step) - e.g. cron every 15-20 min during market hours.
 """
-import json, os, sys, urllib.request, urllib.parse, datetime as dt
+import json, os, sys, re, html, urllib.request, urllib.parse, datetime as dt
 from cpt_data_spike import analyze, strategy_pick, series, UNIVERSE, net_retry
 try:
     import cpt_legs_web                    # cloud exact-legs from free options data (best-effort)
@@ -81,6 +81,62 @@ def send(token, chat_id, text):
         return r.get("ok", False)
     except Exception as e:
         print("telegram send failed:", str(e)[:120]); return False
+
+
+# --- paper-account ACTION notifications (best-effort; must NEVER break the live alert path) --------
+# Closes Yarden's "I'm out of the loop" gap: tell him on his phone whenever the PAPER book itself
+# opens / rolls / closes a position (the engine already decides + logs these; we just surface them).
+_PAPER_HOLD = ("HOLD", "no legs captured", "data fetch failed", "no live mark")
+
+
+def _paper_action_lines(log):
+    """From cpt_paper.mark()'s returned log, keep only lines that are a real book ACTION
+    (roll / weekly-close / campaign-closeout / CSP roll / assign); drop HOLD / skip / no-data."""
+    out = []
+    for ln in (log or []):
+        s = ln.strip()
+        if s and not any(k in s for k in _PAPER_HOLD):
+            out.append(s)
+    return out
+
+
+def _fmt_paper_action(line):
+    """One engine action line -> (emoji, text). Strips the leading position id and tags by keyword;
+    reuses the engine's own wording (and its $ figures) as the single source of truth."""
+    s = re.sub(r"^\s*\S+\s+", "", line)          # drop leading "<id> " -> text starts at "TICKER: ..."
+    up = s.upper()
+    if "CAMPAIGN CLOSEOUT" in up or "ASSIGNED" in up:
+        emo = "\U0001F534"                        # red: a campaign ended
+    elif any(k in up for k in ("ROLL", "ROLLED", "RE-SOLD", "WEEKLY", "PAUSED")):
+        emo = "\U0001F501"                        # roll: campaign continues
+    else:
+        emo = "•"
+    return emo, s
+
+
+def notify_paper_opens(token, chat, opens):
+    """opens = list of position dicts cpt_paper.auto_open() returned during this scan."""
+    if not opens:
+        return
+    lines = ["\U0001F4D7 <b>Paper account - OPENED</b>"]
+    for pos in opens:
+        inc = pos.get("income") or {}
+        leg = f" · {inc['strike']:g}{inc['right']} @ {inc['sold']}" if inc else ""
+        lines.append(f"\U0001F7E2 {html.escape(pos['ticker'])} - {html.escape(pos.get('structure',''))}{leg}")
+    send(token, chat, "\n".join(lines))
+
+
+def notify_paper_actions(token, chat, log):
+    """After the daily mark: ONE message listing each roll / close / assign the book just did.
+    Silent when the book only HELD (no noise)."""
+    acts = _paper_action_lines(log)
+    if not acts:
+        return
+    lines = ["\U0001F4D7 <b>Paper account - actions today</b>"]
+    for a in acts:
+        emo, text = _fmt_paper_action(a)
+        lines.append(f"{emo} {html.escape(text)}")
+    send(token, chat, "\n".join(lines))
 
 def chart_config(sym, s, subtitle):
     """Chart.js config: daily CANDLESTICKS + the three Keltner bands overlaid, last ~40 bars."""
@@ -275,13 +331,20 @@ def main():
         return
 
     reg = shared_regime() if fresh else None      # compute the regime ONCE, only if we have alerts to send
+    opened = []
     for a in sorted(fresh, key=lambda x: (not x["strong"], x["t"])):
         send_alert(token, chat, a, reg=reg)
         if cpt_paper is not None:             # auto-capture the fired alert into the paper ledger (best-effort)
             try:
-                cpt_paper.auto_open(a, reg=reg)
+                pos = cpt_paper.auto_open(a, reg=reg)
+                if pos:
+                    opened.append(pos)
             except Exception as e:
                 print("paper auto-open skipped:", str(e)[:120])
+    try:                                      # tell Yarden the BOOK opened (best-effort; never break the scan)
+        notify_paper_opens(token, chat, opened)
+    except Exception as e:
+        print("paper open-notify skipped:", str(e)[:120])
     print(f"scan {dt.datetime.now():%H:%M}: {len(fresh)} fresh alert(s) sent.")
 
     paper_maintenance(token, chat)            # once/day mark + Friday digest (self-gated, best-effort)
@@ -302,8 +365,12 @@ def paper_maintenance(token, chat):
     today = dt.date.today().isoformat()
     try:
         if cpt_paper.meta_get("last_marked") != today:
-            cpt_paper.mark()
+            log = cpt_paper.mark()
             cpt_paper.meta_set("last_marked", today)
+            try:                                    # notify the day's rolls/closes (best-effort)
+                notify_paper_actions(token, chat, log)
+            except Exception as e:
+                print("paper action-notify skipped:", str(e)[:120])
     except Exception as e:
         print("paper daily mark skipped:", str(e)[:120])
     try:
