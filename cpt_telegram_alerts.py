@@ -292,6 +292,20 @@ def main():
         ok = send(token, chat, "✅ <b>CPT alert bot connected.</b> You'll get JohnG entry alerts here.")
         print("test message sent:", ok); return
 
+    if "--test-paper" in sys.argv:
+        # Smoke-test the paper-ACTION notifications end-to-end (mirrors --test / --preview). Sends a
+        # clearly-labelled sample OPEN + sample ACTIONS message through the real notify_* functions,
+        # so we confirm the phone path without waiting for a live open/roll/close. No ledger change.
+        send(token, chat, "🧪 <b>TEST - paper-action alerts</b>\nThe next 2 messages are samples "
+                          "(not real trades), confirming you'll be notified when the paper book acts.")
+        notify_paper_opens(token, chat, [{"ticker": "TEST", "structure": "99-delta ITM CCW",
+                                          "income": {"strike": 44, "right": "C", "sold": 1.61}}])
+        notify_paper_actions(token, chat, [
+            "  TEST-1 TEST: WEEKLY +1,075 (1.5% , 7d, expired OTM) -> rolled to 44C @ 1.61.",
+            "  TEST-2 TEST: CAMPAIGN CLOSEOUT (CALLED AWAY at expiry)  +925  (4.8% on the long-call capital, 10d).",
+        ])
+        print("paper test notifications sent."); return
+
     if "--preview" in sys.argv:
         args = [x for x in sys.argv[1:] if not x.startswith("-")]
         tk = (args[0] if args else "TQQQ").upper()
