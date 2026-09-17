@@ -208,7 +208,7 @@ def _assemble(a, reg=None):
 def auto_open(a, reg=None):
     """Cloud hook: paper-open a position from a fresh alert's analyze() read. Dup-guarded (one open
     campaign per name) and gate-guarded (only real ENTRY signals). Best-effort caller wraps this.
-    Returns True if a new paper position was recorded."""
+    Returns the new position dict if one was recorded, else False (both truthy/falsy as before)."""
     if not a.get("valid"):
         return False
     book = load()
@@ -223,7 +223,7 @@ def auto_open(a, reg=None):
     inc = pos.get("income")
     leg = f" {inc['strike']:g}{inc['right']} @ {inc['sold']}" if inc else " (legs pending live)"
     print(f"[paper] OPEN {pos['id']} {pos['structure']}{leg}")
-    return True
+    return pos
 
 
 def meta_get(key, default=None):
@@ -513,6 +513,7 @@ def mark():
     save(book)
     print("\n".join(log))
     print("\nSaved. Run `python3 cpt_paper.py report` for the scorecard vs John.")
+    return log            # the per-position action/HOLD lines, so a caller can notify on actions
 
 
 # --- list ----------------------------------------------------------------------------------------
