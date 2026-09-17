@@ -122,6 +122,25 @@ CSPs (TQQQ/TNA/NVDL/AMZU) all resolved, 0 pending, realized +$1,500 (TQQQ+500, L
 by the guard), no double-count. Still NOT modeled (next iteration): the full assignment->hold-shares->write-CC
 state machine; today's fix rolls instead, which is John's actual default anyway.
 
+## 2026-09-16 - weekly pass (RE-VISIT email; 1 correction, no new trade)
+
+### 99-Delta roll on expiration - RE-VISIT (2026-09-16, "RE-VISIT HOW TO ROLL A 99 DELTA TRADE ON EXPIRATION?")
+John re-answers the same member question captured 2026-08-08 (see 2026-08-15 pass). The 5 steps are
+IDENTICAL - buy back the near CC, sell the losing 99-delta long, buy the next 99-delta 2-3wk out, resume
+the weekly CC, roll BEFORE expiry or the market maker assigns the shares. **~90% duplicate.**
+
+**Net-new = one CORRECTION to our cost-basis formula.** His NAIL worked example spells out that BOTH
+terms get added to the share cost basis, not just the new time value:
+- Start basis $46 (the $20 strike + $26 he paid for the original 99-delta).
+- He SELLS the old losing 99-delta at -$0.02  -> ADD $0.02 to basis.
+- He BUYS the new 99-delta paying +$0.09 time value -> ADD $0.09 to basis.
+- **New share cost basis = $46 + 0.02 + 0.09 = $46.11.** "REGARDLESS of what I paid I need to get out at
+  $46.11" - that number becomes the covered-call exit target.
+
+Our earlier capture (running signal #4) had new basis = old basis + new long's time value only - it
+DROPPED the realized loss on the old leg. That undercounts the exit target on every underwater roll.
+Corrected below. Still advise-only; the engine models no long-call roll yet, so this is doc-only.
+
 ---
 
 ### RUNNING LEARNING SIGNAL (advise-only - do NOT wire without Yarden's ok; updated each week)
@@ -136,10 +155,12 @@ state machine; today's fix rolls instead, which is John's actual default anyway.
    ~2-3 weeks past the covered-call expiration as standard practice, not just when rolling underwater -
    a deliberate management buffer. Check whether `cpt_legs.py` matches this offset; if not, candidate
    parameter change (advise-only, one data point so far).
-4. **(2026-08-27) 99-delta long-call roll = cost-basis carry-forward.** New effective cost basis = old basis
-   + the new long's time value; that number becomes the CC-selling exit target. Always roll the long BEFORE
-   expiry or you get assigned the shares. Our engine models no long-call roll at all - this email is the spec
-   for when we build it. Advise-only.
+4. **(2026-08-27; corrected 2026-09-16) 99-delta long-call roll = cost-basis carry-forward.** New effective
+   share cost basis = old basis + REALIZED LOSS on the old 99-delta + time value paid on the new 99-delta
+   (all three, per John's NAIL example $46 + 0.02 + 0.09 = $46.11). That number becomes the CC-selling exit
+   target - you must exit above it regardless of what you paid. Always roll the long BEFORE expiry or the
+   market maker assigns you the shares. Our engine models no long-call roll at all - this is the spec for
+   when we build it. Advise-only.
 5. **(2026-08-27) John trades earnings via 2x ETFs; he does NOT blanket-avoid.** He played NVDA earnings
    through NVDL (+$2,900 / 3 days). Tensions our `cpt_context` "earnings-soon = avoid" flag. Candidate: soften
    from AVOID to a size/structure caution. Verify against his earnings-trade video first; advise-only.
