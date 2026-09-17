@@ -13,6 +13,11 @@ on:
         description: 'Ticker for a one-off TEST alert (e.g. TQQQ). Leave blank for a normal scan.'
         required: false
         default: ''
+      test_paper:
+        description: 'Set true to send a SAMPLE paper open/roll/close notification (smoke test).'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: write                 # needed to save the fire-once state back to the repo
@@ -34,8 +39,12 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           PREVIEW: ${{ github.event.inputs.preview }}
+          TEST_PAPER: ${{ github.event.inputs.test_paper }}
         run: |
-          if [ -n "$PREVIEW" ]; then
+          if [ "$TEST_PAPER" = "true" ]; then
+            echo "Sending SAMPLE paper-action notifications (smoke test)"
+            python cpt_telegram_alerts.py --test-paper
+          elif [ -n "$PREVIEW" ]; then
             echo "Sending one-off TEST alert for $PREVIEW (from the cloud runner)"
             python cpt_telegram_alerts.py --preview "$PREVIEW"
           else
