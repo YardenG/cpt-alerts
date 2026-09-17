@@ -172,11 +172,21 @@ def main():
 
     teach = sorted(buckets["teaching"], key=lambda r: r[1], reverse=True)
     if teach:
-        parts.append("📚 <b>teaching / notes: %d</b> - read these in:" % len(teach))
+        parts.append("📚 <b>teaching / notes: %d</b>:" % len(teach))
         for (s, d) in teach[:10]:
             parts.append(f"• {html.escape(_clean(s))}")
         if len(teach) > 10:
             parts.append(f"… +{len(teach) - 10} more")
+        # capture the BODIES headlessly so the lesson is never lost (non-fatal: never abort the
+        # heartbeat). Distilling inbox -> john-thinking-log.md stays an at-desk agent job.
+        try:
+            import cpt_john_teaching as tch
+            grabbed = tch.capture_bodies(teach, today.isoformat())
+            if grabbed:
+                parts.append("  📥 captured <b>%d</b> full body(ies) → john-teaching-inbox.md" % len(grabbed))
+        except Exception as e:
+            parts.append("  ⚠️ teaching-body capture skipped: %s" % str(e)[:80])
+            print("[daily] teaching capture failed:", e)
 
     if buckets["admin"]:
         parts.append("⚙️ admin: <b>%d</b>" % len(buckets["admin"]))
