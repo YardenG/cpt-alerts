@@ -6,6 +6,19 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-09-17 | MEMBERS VIDEO | TRADE UPDATE / CHART BREAKDOWN - ELIL (Eli Lilly) 30 DAY TRADES
+_john@corepositiontrading.com - captured 2026-09-18_
+
+MEMBERS VIDEO
+- TRADE UPDATE / CHART BREAKDOWN - ELIL (Eli Lilly) 30 DAY TRADES
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/_L1BQuPJvgw>
+
+---
+
+
 ## 2026-09-17 | TNA COULD BE A TRADE I ADD MORE 👇
 _john@corepositiontrading.com - captured 2026-09-17_
 
