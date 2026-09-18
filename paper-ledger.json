@@ -1003,6 +1003,44 @@
       "premium_banked": 0.0,
       "events": [],
       "closed": null
+    },
+    {
+      "id": "METU-20260918",
+      "ticker": "METU",
+      "opened": "2026-09-18",
+      "status": "OPEN",
+      "kind": "CCW",
+      "entry_price": 26.74,
+      "pos_pct": 57.8,
+      "rsi": 66.8,
+      "verdict": "ENTRY",
+      "day": "red",
+      "structure": "99-delta ITM CCW",
+      "structure_why": "John now leads with the 99-Delta ITM CC even on down days for capital efficiency (~half the capital, same strike/expire/premium). ALT: a CSP has fatter put premium + downside cushion on red days - use it for IRA / unsettled cash or if you want the shares.",
+      "structure_bucket": "itm_ccw",
+      "regime": "RISK-ON",
+      "context": "RISK-ON tape + QQQ uptrend = supportive backdrop",
+      "contracts": 10,
+      "long_call": {
+        "strike": 19.5,
+        "exp": "Oct-23",
+        "exp_ts": 1792713600,
+        "ask_paid": 7.8,
+        "delta": 0.9366903157651313
+      },
+      "income": {
+        "right": "C",
+        "strike": 27.0,
+        "exp": "Sep-25",
+        "exp_ts": 1790294400,
+        "sold": 0.95,
+        "cycle_opened": "2026-09-18"
+      },
+      "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
+      "weeklies": [],
+      "premium_banked": 0.0,
+      "events": [],
+      "closed": null
     }
   ],
   "meta": {
