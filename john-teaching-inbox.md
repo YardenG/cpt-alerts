@@ -6,6 +6,24 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-09-20 | SOXL IS RANGE BOUND AND I AM GOING TO TRADE IT AS SUCH 🔥
+_john@corepositiontrading.com - captured 2026-09-20_
+
+SOXL IS RANGE BOUND AND I AM GOING TO TRADE IT AS SUCH 🔥
+VIDEO DROP coming later today, I believe SOXL is range bound and with a
+$124 strike covered call possibly being taken off the board this Friday
+Sep-25th , this trade will have rendered $16,805 or 23% in 35 days ...
+there is no catalyst in my opinion for the semi's to go higher so I feel
+SOXL will trade between $130 / $100 with moments in the $90's if the
+markets sell off ... but its now a trade I will be doing , that AI Bubble
+Burst and SOXL (IMO) will never see $300 again but is in my wheelhouse to
+trade like LABU ... big swings , lets just get favorable entries 🙏
+
+The highlighted trade below is an OPEN $124 trade that could end this Friday
+
+---
+
+
 ## 2026-09-17 | MEMBERS VIDEO | TRADE UPDATE / CHART BREAKDOWN - ELIL (Eli Lilly) 30 DAY TRADES
 _john@corepositiontrading.com - captured 2026-09-18_
 
