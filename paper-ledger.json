@@ -29,8 +29,8 @@
         "strike": 30.0,
         "exp": "Sep-25",
         "exp_ts": 1790294400,
-        "sold": 0.8,
-        "cycle_opened": "2026-09-18"
+        "sold": 1.0,
+        "cycle_opened": "2026-09-21"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -143,6 +143,17 @@
           "coc": 4.76,
           "days": 4,
           "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-09-21",
+          "strike": 30.0,
+          "sold": 0.8,
+          "buyback": 1.07,
+          "income_ps": 0.0,
+          "income_usd": 0.0,
+          "coc": 0.0,
+          "days": 3,
+          "reason": "expired OTM"
         }
       ],
       "premium_banked": 6850.0,
@@ -243,11 +254,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 126.0,
+        "strike": 125.0,
         "exp": "Sep-25",
         "exp_ts": 1790294400,
-        "sold": 1.85,
-        "cycle_opened": "2026-09-18"
+        "sold": 1.55,
+        "cycle_opened": "2026-09-21"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -371,6 +382,17 @@
           "coc": 2.95,
           "days": 4,
           "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-09-21",
+          "strike": 126.0,
+          "sold": 1.85,
+          "buyback": 2.38,
+          "income_ps": 0.0,
+          "income_usd": 0.0,
+          "coc": 0.0,
+          "days": 3,
+          "reason": "expired OTM"
         }
       ],
       "premium_banked": 19075.0,
@@ -397,11 +419,11 @@
       "long_call": null,
       "income": {
         "right": "P",
-        "strike": 70.0,
-        "exp": "Sep-21",
-        "exp_ts": 1789948800,
-        "sold": 1.74,
-        "cycle_opened": "2026-09-14",
+        "strike": 78.0,
+        "exp": "Sep-28",
+        "exp_ts": 1790553600,
+        "sold": 1.67,
+        "cycle_opened": "2026-09-21",
         "cost_cc_bid": 1.47
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
@@ -427,9 +449,20 @@
           "coc": 2.41,
           "days": 9,
           "reason": "CSP expired OTM"
+        },
+        {
+          "closed": "2026-09-21",
+          "strike": 70.0,
+          "sold": 1.74,
+          "buyback": 0,
+          "income_ps": 1.74,
+          "income_usd": 1740.0,
+          "coc": 2.49,
+          "days": 7,
+          "reason": "CSP expired OTM"
         }
       ],
-      "premium_banked": 2210.0,
+      "premium_banked": 3950.0,
       "events": [
         {
           "date": "2026-08-18",
@@ -1089,7 +1122,7 @@
       "id": "METU-20260918",
       "ticker": "METU",
       "opened": "2026-09-18",
-      "status": "OPEN",
+      "status": "CLOSED",
       "kind": "CCW",
       "entry_price": 26.74,
       "pos_pct": 57.8,
@@ -1121,11 +1154,18 @@
       "weeklies": [],
       "premium_banked": 0.0,
       "events": [],
-      "closed": null
+      "closed": {
+        "date": "2026-09-21",
+        "cohort": "campaign",
+        "realized": 650.0,
+        "coc": 8.33,
+        "days": 3,
+        "detail": "CASE B WIN: METU 32.97 above 27C at 4d - campaign closed."
+      }
     }
   ],
   "meta": {
-    "last_marked": "2026-09-18",
+    "last_marked": "2026-09-21",
     "last_digest_week": "2026-W38"
   }
 }
