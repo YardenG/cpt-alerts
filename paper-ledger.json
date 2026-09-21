@@ -1078,10 +1078,11 @@
       "closed": {
         "date": "2026-09-18",
         "cohort": "campaign",
-        "realized": -2800.0,
-        "coc": -14.58,
+        "realized": 3500.0,
+        "coc": 18.23,
         "days": 3,
-        "detail": "CALLED AWAY at expiry: AAPU 45.40 above 44C at 0d - campaign closed."
+        "detail": "CALLED AWAY at expiry: AAPU 45.40 above 44C at 0d - campaign closed.",
+        "correction": "2026-09-21: re-marked long 22C to intrinsic 23.40 (free-feed mis-mark was 17.10, below intrinsic). Booked -2,800 -> corrected +3,500. Guardrail _floor_intrinsic added same day so this can't recur."
       }
     },
     {
