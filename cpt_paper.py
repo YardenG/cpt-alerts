@@ -163,8 +163,13 @@ def snapshot_legs(ticker, kind):
     lc, csp, ccw_cc = L.get("lc"), L.get("csp"), L.get("ccw_cc")
 
     if kind == "CCW" and lc:
+        # Floor the long-call cost basis at intrinsic: the feed sometimes quotes a deep-ITM ask BELOW
+        # intrinsic (impossible), a fake-cheap entry that would inflate EVERY future gain on the campaign
+        # (AAPU 2026-09-18: ask 19.20 vs 21.92 intrinsic -> a +780 trade looked like +3,500). We only
+        # floor what we PAY, never what we SELL (flooring a sold premium up would overstate income).
+        ask_paid = _floor_intrinsic(lc.get("ask"), "C", lc["strike"], L.get("px"))
         pack["long_call"] = dict(strike=lc["strike"], exp=legsmod._fmt_date(L["lc_exp"]),
-                                 exp_ts=L["lc_exp"], ask_paid=lc.get("ask"), delta=L.get("lc_delta"))
+                                 exp_ts=L["lc_exp"], ask_paid=ask_paid, delta=L.get("lc_delta"))
         if ccw_cc:
             pack["income"] = dict(right="C", strike=ccw_cc["strike"], exp=legsmod._fmt_date(L["csp_exp"]),
                                   exp_ts=L["csp_exp"], sold=ccw_cc.get("bid"), cycle_opened=today)

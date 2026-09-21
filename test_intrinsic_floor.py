@@ -57,8 +57,8 @@ def realized(long_mark, buyback):
 old = realized(bad_lc_mark, short_buyback)                                  # what the ledger booked
 new = realized(P._floor_intrinsic(bad_lc_mark, "C", lc_strike, spot), short_buyback)  # with the floor
 check("old (bad mark) reproduces the booked loss", old, -2800.0)
-check("floored mark turns it into the real win", new, 3500.0)
-print(f"     -> AAPU: {old:+,.0f} (booked)  ->  {new:+,.0f} (corrected)")
+check("exit-only floor removes the phantom loss", new, 3500.0)
+print(f"     -> exit floored alone: {old:+,.0f} -> {new:+,.0f}  (still overstated - entry also bad; see section 5)")
 
 
 print("\n3) No over-correction - a genuine red close still books red")
@@ -69,6 +69,31 @@ honest = realized(P._floor_intrinsic(18.20, "C", lc_strike, 40.00), sold)
 check("real loss is preserved (no rescue)", honest, round((18.20 - 19.20) * MULT * contracts, 0))
 print(f"     -> honest red close stays {honest:+,.0f}")
 
+
+print("\n4) Entry-side floor - a fake-cheap cost basis can't inflate the win")
+# AAPU entry: feed quoted the long 22C at 19.20 when spot was 43.92 (intrinsic 21.92) - impossible.
+# The capture path floors ask_paid at intrinsic so the cost basis is honest.
+entry_ask, entry_spot, k = 19.20, 43.92, 22.0
+floored_paid = P._floor_intrinsic(entry_ask, "C", k, entry_spot)
+check("impossible entry ask is floored to intrinsic", floored_paid, 21.92)
+# A normal entry (ask above intrinsic, real time value) is left alone.
+check("normal entry ask passes through", P._floor_intrinsic(25.20, "C", 19.0, 42.14), 25.20)
+
+print("\n5) AAPU with BOTH ends floored - the honest number")
+# paid floored 21.92, long exit floored 23.40 (intrinsic at spot 45.40), short buyback 1.40, no banked.
+def realized_paid(paid, long_mark, buyback):
+    pos = {"long_call": {"ask_paid": paid}, "income": {"sold": sold}, "contracts": contracts,
+           "premium_banked": 0.0, "opened": "2026-09-15"}
+    P._close_campaign(pos, long_mark, buyback, "test")
+    return pos["closed"]["realized"]
+
+honest_both = realized_paid(21.92, 23.40, 1.40)
+check("both-ends floored gives the true +780", honest_both, 780.0)
+# Independent cross-check: deep-ITM long tracks the stock 1:1, which rose 45.40-43.92 = +1.48/share.
+stock_move = round((45.40 - 43.92) * MULT * contracts, 0)          # +1,480 long-leg gain
+short_cost = round((0.70 - 1.40) * MULT * contracts, 0)            # -700 short leg
+check("cross-check: stock move + short leg = +780", round(stock_move + short_cost, 0), 780.0)
+print(f"     -> AAPU honest: long +{stock_move:,.0f} (stock +1.48) short {short_cost:,.0f} = +780")
 
 print(f"\n{'='*48}\n{passed} passed, {failed} failed")
 sys.exit(1 if failed else 0)
