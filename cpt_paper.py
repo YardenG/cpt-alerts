@@ -328,6 +328,20 @@ def _roll_to(pos, new_cc):
     pos["status"] = "ROLLED"
 
 
+def _floor_intrinsic(mark, right, strike, spot):
+    """Guardrail: no option ever trades below its intrinsic value. The free Yahoo feed (delayed ~15m,
+    BS-EST greeks) sometimes mis-marks a deep-ITM leg BELOW intrinsic; used raw in the realized-$ math
+    that would fabricate P&L - a phantom LOSS on a winning long call, or a phantom GAIN on a short we
+    buy back. Floor any fetched mark at intrinsic so a bad quote can't invent money. A None mark falls
+    back to intrinsic (same as before). Call 'C' -> max(0, spot-strike); put 'P' -> max(0, strike-spot).
+    (AAPU 2026-09-18: a 22C with spot 45.40 was marked 17.10 vs 23.40 intrinsic -> booked -2,800 on a
+    real ~+3,500 called-away win.)"""
+    if spot is None:
+        return mark if mark is not None else 0.0
+    intrinsic = max(0.0, spot - strike) if right == "C" else max(0.0, strike - spot)
+    return max(mark if mark is not None else 0.0, intrinsic)
+
+
 def _close_campaign(pos, long_mark, short_buyback, detail):
     """CASE B campaign closeout: long-call P&L + banked weeklies + current short-leg P&L."""
     lc = pos.get("long_call") or {}
@@ -389,8 +403,8 @@ def _mark_one(pos, op, crumb, log):
                 lc_mark = lm["mark"] if lm else None
             except Exception:
                 pass
-        lc_mark = lc_mark if lc_mark is not None else max(0.0, (spot or 0) - lc.get("strike", 0))
-        buyback = cur if cur is not None else max(0.0, (spot or 0) - strike)
+        lc_mark = _floor_intrinsic(lc_mark, "C", lc.get("strike", 0), spot)   # winning long call: never below intrinsic
+        buyback = _floor_intrinsic(cur, "C", strike, spot)                     # short we buy back: never below intrinsic
         # Would closing BOTH legs now realize a win? (banked weeklies + long-call P&L + short-leg P&L)
         paid = lc.get("ask_paid") or 0
         long_pl  = ((lc_mark or 0) - paid) * MULT * pos["contracts"]
