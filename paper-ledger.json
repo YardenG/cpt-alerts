@@ -1078,11 +1078,11 @@
       "closed": {
         "date": "2026-09-18",
         "cohort": "campaign",
-        "realized": 3500.0,
-        "coc": 18.23,
+        "realized": 780.0,
+        "coc": 3.56,
         "days": 3,
         "detail": "CALLED AWAY at expiry: AAPU 45.40 above 44C at 0d - campaign closed.",
-        "correction": "2026-09-21: re-marked long 22C to intrinsic 23.40 (free-feed mis-mark was 17.10, below intrinsic). Booked -2,800 -> corrected +3,500. Guardrail _floor_intrinsic added same day so this can't recur."
+        "correction": "2026-09-21: BOTH feed marks on this trade were below intrinsic (impossible). Entry ask 19.20 -> floored to 21.92; exit mark 17.10 -> floored to 23.40; short bought back at 1.40 intrinsic. Honest result = +780 (long +1,480 as stock rose 1.48, short -700). Booked -2,800 was a double mis-mark; a prior +3,500 fix floored only the exit and overstated it. Guardrail _floor_intrinsic now floors both entry and exit so this can't recur."
       }
     },
     {
