@@ -6,6 +6,31 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-09-21 | MEMBERS VIDEO | TRADE UPDATE / CHART BREAKDOWN - SOXL IS TRADEABLE🔥
+_john@corepositiontrading.com - captured 2026-09-22_
+
+MEMBERS VIDEO
+- TRADE UPDATE / CHART BREAKDOWN - SOXL IS TRADEABLE 🔥
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/QGOPFylltM4>
+
+---
+
+## 2026-09-21 | MEMBERS VIDEO | MEMBERS QUESTION - 99 DELTA
+_john@corepositiontrading.com - captured 2026-09-22_
+
+MEMBERS VIDEO
+- MEMBERS QUESTION - 99 DELTA
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/KkIBEBDTmvA>
+
+---
+
+
 ## 2026-09-20 | SOXL IS RANGE BOUND AND I AM GOING TO TRADE IT AS SUCH 🔥
 _john@corepositiontrading.com - captured 2026-09-20_
 
