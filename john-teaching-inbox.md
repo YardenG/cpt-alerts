@@ -6,6 +6,46 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-09-24 | GOOGLE (GGLL) FELL TO MY STRIKE , NOW BOUNCING HIGHER  👍
+_john@cptdashboard.com - captured 2026-09-25_
+
+GOOGLE (GGLL) FELL TO MY STRIKE , NOW BOUNCING HIGHER 👍
+🤔 *WHO KNOWS* where this market goes but one thing I love is when greate
+companies like Google fall to support and then rally higher proving that
+Wall Street seems to 'rotate' money ... buying the Mag-7 low , running them
+higher , taking profits and then once back at those lows they get back in
+... we will see what happens by Oct-16th where I have a 1,000 share $96
+strike ... but for now it would seem a good place to start for another ITM
+CC or Cash Secured Put ... maybe use the $90 strike for added downside IF
+you're asking me.
+
+Let's not forgot, they had some of the most explosive earnings of the
+companies history ... so why its drifted so far can only be explained as:
+
+ *'Wall Street runs them up to sell them off to run them up again'*
+
+---
+
+## 2026-09-24 | TNA @ IS AT THE 250 MOVING AVERAGE ... GOSH I LIKE THAT $57 ITM STRIKE
+_john@corepositiontrading.com - captured 2026-09-25_
+
+TNA @ ITS 250 MOVING AVERAGE ... GOSH I LIKE THAT $57 ITM STRIKE
+Just look at that chart below ... its RSI is @ 23 (oversold by every
+measure) ... its trading outside of the KC Bottom (my indication to enter a
+trade) and the interest rates is behind us, the stock has fallen -22% (IWM
+has fallen -7%) so it would seem were near the bottom ... TNA is a focus
+stock for me right now and yesterday I entered a $57 ITM CC for just this
+reason
+
+*SKIN IN THE GAME: *
+$68.50 strike 👀 YIKES
+$60 strike 👍 SO FAR
+$59 strike  👍 SO FAR
+$57 strike  👍 SO FAR
+
+---
+
+
 ## 2026-09-22 | IN FOCUS > DPST AS ITS HIT SUPPORT 🤔👇
 _john@cptdashboard.com - captured 2026-09-22_
 
