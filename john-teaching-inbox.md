@@ -6,6 +6,82 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-09-25 | NVDA IS GOLDILOCKS... NOT TOO HOT 🔥 NOT TOO COLD ❄️
+_john@cptdashboard.com - captured 2026-09-26_
+
+NVDA IS GOLDILOCKS... NOT TOO HOT 🔥  NOT TOO COLD ❄️
+I’m highly considering using NVDL for *another in-the-money covered call*
+trade, probably using the October 9th expiration.
+
+Nvidia has been walking along its 20-day moving average, and notice where
+the next level of support sits — right around the 50-day moving average.
+That 50-day moving average could give us a great area to consider for our
+strike price.
+
+I would also use the Expected Stock Move Calculator for this time frame to
+determine the lower end of the expected range, and then look for a strike
+price somewhere in and around that level.
+
+*For me, $33.50 looks like a great place to plant a flag  👈 💯*
+
+If the markets were to turn around and I were assigned shares of NVDL at
+$33.50, that would put me near the bottom of its recent range. From there,
+we could potentially sell a one- or two-week $33.50 covered call at our
+cost basis and look to exit the position clean and green.
+
+*Do note: I already have 40 contracts at the $33.50 strike expiring October
+2nd.*
+
+Just some of my thoughts as I consider the next NVDL trade.
+
+*CURRENT Candle stick says stay short but notice past Go Long 👇🙏*
+
+---
+
+## 2026-09-25 | TALES FROM A TRADE: 99-Delta ITM Covered Call goes to Expiration 🤔
+_john@ucptdashboard.com - captured 2026-09-26_
+
+TALES FROM A TRADE: 99-Delta ITM Covered Call goes to Expiration 🤔
+*Members Question:* "John, my SOXL $124 ITM CC is seriously ITM trading @
+$151.45 and I was wondering what happens if I just let the market maker
+handle the trade over the weekend"
+
+If you let everything go through expiration, here’s how it should play
+out: 👇
+
+✅  Your short call is assigned at the $124 strike. Since you don’t own the
+actual shares, the assignment will leave you short the stock at $124.
+(NORMAL)
+
+✅   You’ll now have a short-stock position. Based on the numbers you sent
+me, that position is currently showing approximately -$24.45 per share.
+(NORMAL)
+
+✅   Your 99-delta long call is still there. Because it has approximately
+tracked 99% of the stock’s move, you’re showing roughly +$27.17 per share
+on that side of the trade. (EXACTLY WHY WE BUY THE 99 DELTA LONG CALL)
+
+👉 Close the short-stock position by buying the shares back.
+
+👉   Close the 99-delta long call by selling the call to close.
+
+At that point, all the money is off the table, and you can calculate the
+final result of the entire trade.
+
+The important thing to remember is that the loss showing on the short
+shares doesn't tell the whole story. You have to look at it together with
+the gain in your 99-delta long call.
+
+I have this happen to me all the time ... normally I CLOSE OUT both
+positions so I can then use the added TIME on that Friday to then do a next
+week CC with the money ... 🚨 remember, *I DO NOT ROLL ITM trades* as the
+intrinsic value you add when you buy back the near term covered call ADDS
+and increases your cost basis ... I love the one and done trade, WE MOVE
+ON 😍
+
+---
+
+
 ## 2026-09-24 | GOOGLE (GGLL) FELL TO MY STRIKE , NOW BOUNCING HIGHER  👍
 _john@cptdashboard.com - captured 2026-09-25_
 
