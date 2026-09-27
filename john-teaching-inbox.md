@@ -6,6 +6,19 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-09-26 | MEMBERS VIDEO | 📈 CHART READING CLASSROOM 📉 - TNA
+_john@ucptdashboard.com - captured 2026-09-27_
+
+MEMBERS VIDEO
+- 📈 CHART READING CLASSROOM 📉 - TNA
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/oK03eziHuSY>
+
+---
+
+
 ## 2026-09-25 | NVDA IS GOLDILOCKS... NOT TOO HOT 🔥 NOT TOO COLD ❄️
 _john@cptdashboard.com - captured 2026-09-26_
 
