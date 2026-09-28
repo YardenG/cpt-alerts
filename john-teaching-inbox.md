@@ -6,6 +6,46 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-09-26 | A MEMBERS PARTING WORDS ... TOUCHED MY HEART ♥️
+_john@ucptdashboard.com - captured 2026-09-28_
+
+A MEMBERS PARTING WORDS ... TOUCHED MY HEART ♥️
+*Hi John,*
+I wanted to express my sincere appreciation for everything you have shared
+and taught me over the past year.
+
+Your mentorship has been truly transformative. When I joined the community
+last September, I could never have imagined the growth I’ve experienced.
+Through your guidance, I was able to navigate the markets with confidence.
+
+In just three quarters of 2026, my year-to-date gains have reached over
+$414,000. This result is a direct reflection of selling puts and
+implementing the frameworks you taught.
+
+Above all, I have to specifically thank you for introducing the 99 Delta
+strategy. It is, without exaggeration, a complete game changer. The way it
+reframes risk, premium collection, probability, and theta decay has
+entirely altered my approach to trading. It’s the most powerful framework
+I’ve ever implemented.
+
+------------------
+
+I offer the membership to both pay it forward from my mentor Jerry showing
+me the path to financial freedom and to help others as they walk there
+journey ... members come and go and I totally understand that what I do is
+not for everyone ... but what I hope is that when they leave they continue
+to have success ... its a true dog eat dog world and the stock market is*
+NOT* successful for over 93% of home investors ... 👉 *93% of ALL home
+investors LOSE MONEY, BREAKEVEN or just STOP trading *... yet here at the
+membership I show you how I trade my retirement making over $900,000 this
+year (2026) and over $3.2 Million since 2016 ... just keeping it simple
+... and most important ... take what I've shown you and build your future
+... not many will give you a front row seat like I do with our members
+... 🙏 I know, because I too was just like you
+
+---
+
+
 ## 2026-09-26 | MEMBERS VIDEO | 📈 CHART READING CLASSROOM 📉 - TNA
 _john@ucptdashboard.com - captured 2026-09-27_
 
