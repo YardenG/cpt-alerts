@@ -6,6 +6,25 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-09-28 | TQQQ TRADE > MISTAKENLY WENT ON MARGIN 👀🙏 🤞
+_john@corepositiontrading.com - captured 2026-09-29_
+
+TQQQ TRADE > MISTAKENLY WENT ON MARGIN 👀🙏 🤞
+I recently placed the 99 Delta ITM CC using TQQQ , that trade was placed in
+my taxable account where I didn't notice ... so this trade is now using
+margin ... I did not intend for this but now in the trade I decided to
+input all the numbers into the Covered Call on Margin calc and see how much
+I will be charge and although I hat being charged anything , $165.62 in
+margin debt for this 2 week trade seems reasonable. ANY time you are using
+margin (ie, over extending your account size) just make sure you know the
+true cost of the trade
+
+👉 Here is the link to the CPT_Covered Call using Margin calc
+<https://docs.google.com/spreadsheets/d/13lkWy62o6g0GN259zU87vJYdcPCdal-g2R14qXI4j3U/edit?usp=sharing>
+
+---
+
+
 ## 2026-09-26 | A MEMBERS PARTING WORDS ... TOUCHED MY HEART ♥️
 _john@ucptdashboard.com - captured 2026-09-28_
 
