@@ -1409,7 +1409,7 @@
       "id": "SOXL-20260929",
       "ticker": "SOXL",
       "opened": "2026-09-29",
-      "status": "OPEN",
+      "status": "ROLLED",
       "kind": "CCW",
       "entry_price": 148.0,
       "pos_pct": 57.7,
@@ -1432,20 +1432,32 @@
       "income": {
         "right": "C",
         "strike": 148.0,
-        "exp": "Oct-05",
-        "exp_ts": 1791158400,
-        "sold": 7.15,
-        "cycle_opened": "2026-09-29"
+        "exp": "Oct-07",
+        "exp_ts": 1791331200,
+        "sold": 6.95,
+        "cycle_opened": "2026-09-30"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
-      "weeklies": [],
-      "premium_banked": 0.0,
+      "weeklies": [
+        {
+          "closed": "2026-09-30",
+          "strike": 148.0,
+          "sold": 7.15,
+          "buyback": 6.0,
+          "income_ps": 1.15,
+          "income_usd": 1150.0,
+          "coc": 1.86,
+          "days": 1,
+          "reason": "expired OTM"
+        }
+      ],
+      "premium_banked": 1150.0,
       "events": [],
       "closed": null
     }
   ],
   "meta": {
-    "last_marked": "2026-09-29",
+    "last_marked": "2026-09-30",
     "last_digest_week": "2026-W38"
   }
 }
