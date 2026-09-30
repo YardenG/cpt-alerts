@@ -6,6 +6,71 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-09-29 | MEMBERS VIDEO | MARGIN TRADE BREAKDOWN - TQQQ (IN VIDEO)
+_john@cptdashboard.com - captured 2026-09-30_
+
+MEMBERS VIDEO
+- MARGIN TRADE BREAKDOWN - TQQQ (IN VIDEO)
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/bHyrSGyIlvc>
+
+GET your copy of the 'Using Margin for Covered Call Trades' CALC
+<https://docs.google.com/spreadsheets/d/13lkWy62o6g0GN259zU87vJYdcPCdal-g2R14qXI4j3U/edit?usp=sharing>
+
+---
+
+## 2026-09-29 | MEMBERS QUESTION ABOUT USING IV IN MY TRADE SELECTION 🤔
+_john@corepositiontrading.com - captured 2026-09-30_
+
+MEMBERS QUESTION ABOUT USING IV IN MY TRADE SELECTION 🤔
+I keep it very, VERY simple and do not do some of the very common
+approaches you will see people online use in options trade.
+
+The key take away is: I keep it simple ... I do not SELL premium based on
+delta (many YouTuber will suggest sell the 20 delta as an example)  , I do
+not use implied IV for any trades (we use leveraged ETF's so we get high IV
+just based on what we trade) ... I do this below to determine everything 👇
+
+I mostly start every trade with an ITM covered call. If the trade goes
+against me and the stock falls below that strike, I’ll then move to an OTM
+covered call until we can work our way out of the trade. The goal is to
+never let the position get so “dirty” that we can no longer use it for
+premium harvesting.
+
+As for low IV, I actually do not use IV in my trading decisions. I’ve just
+never found it particularly helpful for the way I trade.
+
+For the long call, I use the 99 Delta because I want as close to a 1-to-1
+move with the underlying stock as possible when doing my ITM covered calls.
+
+When it comes to the call where I’m SELLING premium, I don’t use Delta to
+select that strike either. My goal is to generate approximately 1.2% to
+1.5% or more per week on my trades. From there, I look at where that strike
+sits on the chart and within the stock’s current trading range.
+
+*So, my process is basically:*
+
+*1)* Buy the 99 Delta long call, usually about two weeks out.
+
+*2)* Look for an ITM strike that will pay me at least 1.2% to 1.5% or more
+in premium. In many ways, the percentage return I’m looking for helps
+select the strike for me.
+
+*3*) Then I ask the most important question: Where does that strike sit on
+the current chart?
+
+Is it low in the trading range? Is it near an area where I’m comfortable
+owning the position if the trade goes against me?
+
+*THAT’S when I act.*
+
+Hope that helps explain how I select my trades and strikes.
+
+---
+
+
 ## 2026-09-28 | TQQQ TRADE > MISTAKENLY WENT ON MARGIN 👀🙏 🤞
 _john@corepositiontrading.com - captured 2026-09-29_
 
