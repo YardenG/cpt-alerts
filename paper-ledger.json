@@ -1283,7 +1283,7 @@
       "id": "AAPU-20260923",
       "ticker": "AAPU",
       "opened": "2026-09-23",
-      "status": "OPEN",
+      "status": "ROLLED",
       "kind": "CCW",
       "entry_price": 45.55,
       "pos_pct": 55.8,
@@ -1305,15 +1305,27 @@
       },
       "income": {
         "right": "C",
-        "strike": 46.0,
+        "strike": 44.0,
         "exp": "Oct-16",
         "exp_ts": 1792108800,
-        "sold": 1.65,
-        "cycle_opened": "2026-09-23"
+        "sold": 0.95,
+        "cycle_opened": "2026-10-01"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
-      "weeklies": [],
-      "premium_banked": 0.0,
+      "weeklies": [
+        {
+          "closed": "2026-10-01",
+          "strike": 46.0,
+          "sold": 1.65,
+          "buyback": 0.6,
+          "income_ps": 1.05,
+          "income_usd": 1050.0,
+          "coc": 4.95,
+          "days": 8,
+          "reason": "-50% rule"
+        }
+      ],
+      "premium_banked": 1050.0,
       "events": [],
       "closed": null
     },
@@ -1457,7 +1469,7 @@
     }
   ],
   "meta": {
-    "last_marked": "2026-09-30",
+    "last_marked": "2026-10-01",
     "last_digest_week": "2026-W38"
   }
 }
