@@ -6,6 +6,45 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-09-30 | TNA IS STILL THE VALUE PLAY IF YOU'RE ASKING ME
+_john@cptdashboard.com - captured 2026-10-01_
+
+TNA IS STILL THE VALUE PLAY IF YOU'RE ASKING ME
+TNA suffered big time from the Fed's news they will raise interest rates
+and its played out as TNA has been sold off under its normal trading range
+ever since the rumor hit that rates would be raised ... the IWM (Russell
+2000 is down -7.41% which means TNA is down -21x%)
+
+TNA is now at its 250 day moving average and its slow grind down could be
+coming to an end ... I have a VERY large stake in TNA with various strikes
+.... $68.50, $60, $59, $57 ... so for me I've got skin in this game ... any
+NEW money would be placed even deeper in the money , $55 , $56 strikes ...
+
+Just keep an eye on it ... this slow walk down from $77 to now $58 sucks
+but still something I would put money into ... its the Russell 2000 ...
+unless the Dow, Nasdaq and S&P 500 sell off , it should start its move back
+to its normal trading range which would be $64 (KC MID)
+
+👇 these OPEN + the uncovered $68.50 position 😡
+my plan is to consolidate these into (1) trade and lower my cost basis 🙏
+
+---
+
+## 2026-09-30 | CURRENT TRADE DESK WEB SHARE LINK (SAME)
+_john@corepositiontrading.com - captured 2026-10-01_
+
+CURRENT TRADE DESK WEB SHARE LINK  👇
+*Click this link
+<https://docs.google.com/spreadsheets/d/e/2PACX-1vRTLA9TCO6bzPX78h3DnAS3qOUUFQzLEIce1ACFKkB63nMbwVj_ccIbjPo1y2kU2MvbbODBbAlOUl8o/pubhtml>
+*
+
+This is a static list of all my current OPEN trades ... I will refresh this
+list as I place trades ... later / soon I will add position that I own but
+do not have calls opn on.
+
+---
+
+
 ## 2026-09-29 | MEMBERS VIDEO | MARGIN TRADE BREAKDOWN - TQQQ (IN VIDEO)
 _john@cptdashboard.com - captured 2026-09-30_
 
