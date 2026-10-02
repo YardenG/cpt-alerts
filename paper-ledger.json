@@ -1421,7 +1421,7 @@
       "id": "SOXL-20260929",
       "ticker": "SOXL",
       "opened": "2026-09-29",
-      "status": "ROLLED",
+      "status": "CLOSED",
       "kind": "CCW",
       "entry_price": 148.0,
       "pos_pct": 57.7,
@@ -1465,11 +1465,18 @@
       ],
       "premium_banked": 1150.0,
       "events": [],
-      "closed": null
+      "closed": {
+        "date": "2026-10-02",
+        "cohort": "campaign",
+        "realized": 4700.0,
+        "coc": 7.6,
+        "days": 3,
+        "detail": "CASE B WIN: SOXL 163.68 above 148C at 5d - campaign closed."
+      }
     }
   ],
   "meta": {
-    "last_marked": "2026-10-01",
-    "last_digest_week": "2026-W38"
+    "last_marked": "2026-10-02",
+    "last_digest_week": "2026-W40"
   }
 }
