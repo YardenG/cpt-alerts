@@ -6,6 +6,64 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-01 | UNDERSTAND WHAT IS HAPPENING IN THE MARKETS... do you see it? 👀
+_john@corepositiontrading.com - captured 2026-10-02_
+
+UNDERSTAND WHAT IS HAPPENING IN THE MARKETS ... do you see it? 👀
+The markets (Nasdaq shown below) are trying to break through resistance,
+and when they can't, it's a clear sign for Wall Street to take a *RISK-OFF*
+approach.
+
+They are slowly and methodically selling off this market.
+
+Yesterday was a sign to me that we might be headed for a sell-off  , *not a
+crash*  as the markets rallied strongly and then faded into the red. The
+Nasdaq finished green, but only +63 after being up more than +250 earlier
+in the trading day. That's a sell-off.
+
+So, just be mindful of this as some of our favorite trades continue to
+drift lower.
+
+Some, like TNA and DPST, took a double whammy from the interest-rate news.
+These are thorns in my side right now, and they might simply have to sit
+for a bit.
+
+*These are also the moments when I reflect and ask myself: *
+🤔 Did I overextend myself?
+🤔   Was I missing something obvious on the charts?
+
+📉 Remember February 2025, when the correction happened before the tariff
+crash? The writing for a correction was already on the wall. The Nasdaq
+tried to break through top resistance **eight times** before Wall Street
+finally gave up and took a risk-off approach.
+
+The correction happened. The dead-cat bounce happened. The retest of that
+correction was happening — and then Trump announced the tariff news, and
+the markets went into a full-on crash.
+
+I'm not suggesting anything like that is happening now, but I do want you
+to notice how much trouble the markets are having making new highs and
+breaking through resistance.
+
+So, prepare your mindset.
+
+We've been here. We've done this before. Stay the course 💯
+
+---
+
+## 2026-10-01 | MEMBERS VIDEO | MEMBERS TRADE IDEA vs MINE (NKE / GOOGLE)
+_john@cptdashboard.com - captured 2026-10-02_
+
+MEMBERS VIDEO
+- MEMBERS TRADE IDEA vs MINE (NKE / GOOGLE)
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/9UkxrFi5RT4>
+
+---
+
+
 ## 2026-09-30 | TNA IS STILL THE VALUE PLAY IF YOU'RE ASKING ME
 _john@cptdashboard.com - captured 2026-10-01_
 
