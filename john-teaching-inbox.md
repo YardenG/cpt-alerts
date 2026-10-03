@@ -6,6 +6,18 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-02 | DRIVING TO A CONCERT THE REST OF THE DAY
+_john@cptdashboard.com - captured 2026-10-03_
+
+DRIVING TO A CONCERT THE REST OF THE DAY 👍
+I will be stepping away from my desk the rest of the day ... will be back
+Monday with over $300,000 bucks ready to deploy ... DAM I hate when I can
+not do something for next week selling time!!! but Monday I will for sure!
+Cheers
+
+---
+
+
 ## 2026-10-01 | UNDERSTAND WHAT IS HAPPENING IN THE MARKETS... do you see it? 👀
 _john@corepositiontrading.com - captured 2026-10-02_
 
