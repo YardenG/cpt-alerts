@@ -39,6 +39,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           PREVIEW: ${{ github.event.inputs.preview }}
+          CPT_SIM_FREEZE_NEW: "1"
           TEST_PAPER: ${{ github.event.inputs.test_paper }}
         run: |
           if [ "$TEST_PAPER" = "true" ]; then
