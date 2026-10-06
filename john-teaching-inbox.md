@@ -6,6 +6,156 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-05 | TQQQ > TOP OF RANGE TRADE > $76 STRIKE KNOWING IT COULD GO TO $72 👈
+_john@cptdashboard.com - captured 2026-10-06_
+
+TQQQ > TOP OF RANGE TRADE > $76 STRIKE KNOWING IT COULD GO TO $72 👈
+Yes, if I took on a TQQQ's trade for the Oct-16th expiration I would select
+the $76 ITM strike expecting it to fall to $72 ... the first trade would
+render 0.95 cents or 1.15% or 2.05% for the 99 Delta ... the 2nd trade if
+it were to tumble to $72 would possibly yield (*hypothetically*) $1.35 for
+a trade that would have to , again hypothetically, reach up from $72 to $76
+on the rebound ...
+
+That would be 1.77% on $76 or based on your 99 Delta strike (probably the
+$40 strike - 3.3%) ... PLAY THE FADE because I feel it coming ...
+
+many will ask, *"John you never use stocks that are above the KC** TOP"*
+...
+
+*YES!!!* you are learning *HOWEVER* I get people emailing me what to do
+with the TQQQ's as they want action ... I am NOT taking this position but
+if I did, this is the thinking and I want YOU to think the same ... FADE
+this rally because I see it pulling back.
+
+*NO SKIN * 👈
+
+---
+
+## 2026-10-05 | WHY I STOPPED SELLING OTM COVERED CALLS -> AND SWITCHED TO ITM 🤔
+_john@cptdashboard.com - captured 2026-10-06_
+
+WHY I STOPPED SELLING OTM COVERED CALLS -> AND SWITCHED TO ITM 🤔
+I've been asked about this quite a bit lately, and I thought you might be
+interested in how my trading strategy evolved. 👇
+
+Back in 2021, I was the *KING of the OTM covered call!* I would buy shares
+and then sell an OTM strike, looking to make money from both the option
+premium and the stock moving higher. It worked perfectly—until it didn't.
+Many of the individual stocks I was using, such as DraftKings, Pinterest,
+Penn Gaming, and Las Vegas Sands, started to dump. Some of those stocks
+remained depressed for a very long time, and I learned a valuable lesson
+about what happens when you're selling OTM calls while the underlying stock
+continues moving against you.
+
+ 🤔  Then I discovered 3X leveraged ETFs and realized something important:
+they move *UP and DOWN*. Instead of trying to predict where an individual
+company would be years from now, I could focus on trading the ranges. I
+also realized that these ETFs don't all move together or sit at the same
+place within their trading ranges. If one ETF was trading too high for me,
+I could leave it alone and trade something else that was near the bottom of
+its range. Eventually, the first one would come back down while the other
+moved higher. This teeter-totter happens ALL THE TIME, and I realized I
+didn't need to chase anything. I needed to focus on BUYING LOW and creating
+a more favorable entry point for the move higher.
+
+💯  That's when the “GREEN TRADE” became my motto. Based on the way I
+trade, if I can keep creating green trades, my capital keeps moving. I'm
+collecting premium weekly, closing winning positions, and getting that
+money back so I can put it to work again. *Capital movement became more
+important to me than trying to squeeze every possible dollar out of a
+single trade.*
+
+But there was still another lesson to learn. Even with a favorable entry,
+these leveraged ETFs can have wild swings, and occasionally I would still
+find myself holding a position considerably below my original entry. That's
+when my thinking changed again: *take LESS premium upfront in exchange for
+MORE downside protection and a better second trade if I have to stay in the
+position.*
+
+I call it “planting my flag” lower. By starting with an ITM covered call
+and placing that strike considerably below the current price, I'm giving
+myself downside protection from Day One. If the ETF pulls back, my cost
+basis and strike are already lower, potentially giving me a much better
+opportunity to continue selling premium and eventually exit the position
+clean and green.
+
+👉 That's a huge difference from the trader I used to be—*buying high,
+selling OTM strikes, chasing maximum premium and upside, and then
+potentially being left holding a serious drawdown bag when the stock
+collapsed.*
+
+And THAT is why I'm now so dedicated to the *ITM covered call with added
+downside protection.* I'm willing to sacrifice some of the potential upside
+today if it gives me a better position tomorrow. My goal isn't to hit a
+home run on every trade.
+
+*✅  My goal is to sell time, protect capital, keep my money moving, and
+consistently create GREEN TRADES.*
+
+---
+
+## 2026-10-05 | HOW I CHOOSE MY 'IN-THE-MONEY COVERED CALL) STRIKES (ITM CC) 🤔
+_john@cptdashboard.com - captured 2026-10-06_
+
+-HOW I CHOOSE MY 'IN-THE-MONEY COVERED CALL) STRIKES (ITM CC) 🤔
+  (Members Question on how I select my ITM strikes)
+✅ First, have you had a chance to watch the Masterclass videos in the
+Download Hub? If not, I would definitely start there because I go into much
+more detail about how I structure these trades. 👈 I included this because
+many do not know that on the Download Hub I have many videos posted 💯
+
+*When deciding how far ITM I want to go with my covered call, I’m generally
+looking at several things together: 👇*
+
+*1. *Favorable entry. I want to enter the underlying when I believe it is
+trading in a favorable area of its range. I would much rather wait and buy
+something low than chase it higher.
+
+*2. *Where my strike sits on the chart. I pay particular attention to the
+Keltner Channel, especially the KC bottom and other areas of support. I'm
+essentially asking myself: If this moves against me, where would I be
+comfortable planting my flag and establishing my cost basis?
+
+*3. *Expected move. I use the Expected Stock Move Calculator to estimate
+how far the underlying could reasonably move lower during the timeframe of
+my trade. That can help me identify a potential ITM strike.
+
+*4. *Return on my invested capital. After finding the strike that gives me
+the downside protection I want, I still need the trade to pay me enough.
+For a one-week trade, I'm generally looking for approximately 1.2%–1.5% on
+the cash I have invested.
+
+*Here's a simple example*. Let's say TNA is trading at $60, and the
+expected downside move over the next week is approximately $56. The $56
+area might be a good place for me to start looking at an ITM strike. Then
+I'll look at where $56 sits on the chart, whether it lines up with the
+KC/support area, how much downside protection it provides, and finally
+whether the premium gives me the return I'm looking for.  👉 *Expected
+Stock Move Calc link*
+<https://docs.google.com/spreadsheets/d/1uGdP2OgzvsO5IQZscmSYqKh2tSFmO1uelXKkyK_hjfk/edit?usp=sharing>
+
+The big thing to understand is that I don't choose an ITM strike based on
+one number or a specific delta on the short call. *I'm combining the chart,
+favorable entry, expected downside move, downside protection, and return on
+invested capital.*
+
+The 99-Delta long call is designed to give me as close to that 1-for-1
+stock movement as possible. The ITM covered-call strike is where I'm making
+the bigger strategic decision. I'm willing to give up some upside and even
+take a little less premium upfront if it means planting my flag lower and
+putting myself in a better position if I have to stay in the trade for a
+second or third round of premium.
+For me, it's always about creating the highest probability of a *GREEN
+TRADE*, keeping my capital moving, and giving myself downside protection
+from Day One.
+Hope that helps explain my thought process a little better!
+
+*Today's DPST trade and strike price selection 👇*
+
+---
+
+
 ## 2026-10-02 | DRIVING TO A CONCERT THE REST OF THE DAY
 _john@cptdashboard.com - captured 2026-10-03_
 
