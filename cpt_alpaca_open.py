@@ -189,9 +189,16 @@ def plan(ticker, force=False, acct=None, qty_override=None):
     equity = float(acct.get("equity") or 0)
     avail = float(acct.get("options_buying_power") or 0)
 
-    # dup guard: one campaign per name (mirror cpt_paper)
-    held = {parse_occ(p["symbol"])[0] for p in A.get_positions()
-            if p.get("asset_class") == "us_option" or "C" in p["symbol"][-9:] or "P" in p["symbol"][-9:]}
+    # dup guard: one campaign per name (mirror cpt_paper) - count both open POSITIONS and RESTING orders
+    held = set()
+    for p in A.get_positions():
+        s = p["symbol"]
+        if len(s) >= 15 and s[-9] in "CP":
+            held.add(parse_occ(s)[0])
+    for o in A.get_orders(status="open"):
+        for s in ([lg.get("symbol") for lg in (o.get("legs") or [])] or [o.get("symbol")]):
+            if s and len(s) >= 15 and s[-9] in "CP":
+                held.add(parse_occ(s)[0])
     if ticker in held and not force:
         print(f"  NOTE: an Alpaca option position on {ticker} already exists - one campaign per name, skipping.")
         return None
