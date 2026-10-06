@@ -214,6 +214,8 @@ def auto_open(a, reg=None):
     """Cloud hook: paper-open a position from a fresh alert's analyze() read. Dup-guarded (one open
     campaign per name) and gate-guarded (only real ENTRY signals). Best-effort caller wraps this.
     Returns the new position dict if one was recorded, else False (both truthy/falsy as before)."""
+    if os.environ.get("CPT_SIM_FREEZE_NEW") == "1":
+        return False   # CUTOVER: new names open in Alpaca, not the sim; existing still mark/roll
     if not a.get("valid"):
         return False
     book = load()
