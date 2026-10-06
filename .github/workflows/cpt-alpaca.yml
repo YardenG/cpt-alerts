@@ -1,0 +1,58 @@
+name: CPT-Alpaca (paper broker book)
+
+# Full-auto CPT book on Alpaca PAPER: opens new valid entries + manages (roll/close)
+# on live Alpaca data. run_alpaca.py guards to real market hours (Alpaca /v2/clock),
+# so off-hours runs do nothing. GitHub cron is UTC and jittery, so several staggered
+# slots (never one). The go-live switch is the repo VARIABLE ALPACA_LIVE:
+#   ALPACA_LIVE = "1"  -> places real paper orders
+#   unset / "0"        -> DRY run, Telegram proposals only (no orders)
+on:
+  schedule:
+    - cron: '0,30 14-19 * * 1-5'    # every 30 min, ~US market hours (UTC), Mon-Fri
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'open | manage | both'
+        required: false
+        default: 'both'
+      live:
+        description: 'Override ALPACA_LIVE for THIS run only: 1 = place orders, 0 = dry'
+        required: false
+        default: ''
+
+permissions:
+  contents: write                   # to commit the Alpaca book state back
+
+concurrency:
+  group: cpt-alpaca
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run the CPT-Alpaca orchestrator
+        env:
+          ALPACA_CPT_KEY_ID: ${{ secrets.ALPACA_CPT_KEY_ID }}
+          ALPACA_CPT_SECRET_KEY: ${{ secrets.ALPACA_CPT_SECRET_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ALPACA_LIVE: ${{ github.event.inputs.live != '' && github.event.inputs.live || vars.ALPACA_LIVE }}
+          TASK: ${{ github.event.inputs.task || 'both' }}
+          PYTHONUNBUFFERED: '1'
+        run: python run_alpaca.py "$TASK"
+      - name: Persist the Alpaca book state (only if changed)
+        run: |
+          if [ -n "$(git status --porcelain alpaca_book.json)" ]; then
+            git config user.name "cpt-alpaca-bot"
+            git config user.email "cpt-alpaca-bot@users.noreply.github.com"
+            git add alpaca_book.json
+            git commit -m "update alpaca book state [skip ci]"
+            git push
+          else
+            echo "no state change"
+          fi
