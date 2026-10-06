@@ -52,6 +52,11 @@ def _summ(payload):
 def do_open(acct):
     camps = manager.group_campaigns()
     held = {k for k, v in camps.items() if v["short"] or v["short_put"] or v["long"]}
+    # also exclude names with a RESTING (unfilled) order, so a not-yet-filled open isn't doubled
+    for o in A.get_orders(status="open"):
+        for s in ([lg.get("symbol") for lg in (o.get("legs") or [])] or [o.get("symbol")]):
+            if s and len(s) >= 15 and s[-9] in "CP":
+                held.add(opener.parse_occ(s)[0])
     n = len(held)
     lines = []
     for tk in ds.UNIVERSE:
