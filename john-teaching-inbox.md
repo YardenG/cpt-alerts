@@ -6,6 +6,32 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-07 | DPST HAS DONE THIS (3) TIMES AND HERE ARE THE PERCENTAGES DOWN 👇
+_john@corepositiontrading.com - captured 2026-10-08_
+
+DPST HAS DONE THIS 3 TIMES AND HERE ARE THE PERCENTAGES DOWN 👇
+🤔 This looks very fimiliar ...
+
+DPST (*fall #1*) fell because of the end of year sell off and the AI ghost
+trade where they found out many banks were over leveraged in AI companies
+debt. (*fall #2*) is the Iran war and the many worries that came from that.
+(*fall #3*) was the interest rate news/hike ... this happens with the
+regional banks and everytime the banks find themself trading at 52 week
+lows / at there 200 day moving average and wall street comes back and sucks
+them up as 'buy low, sell high' ... so Im waiting with a 5,000 share
+position @ $137 ... Why am I sending this email? Because this is how wall
+street plays the game ... and this current sell off caught be in the
+whirlpool that is this this current -32% sell off.
+
+😡 Ugh!
+
+I do have a $105 ITM CC in my taxable account ... I would *have to believe*
+this is nearing a bottom with this stock market just staying strong (maybe
+over bought) but still strong ...
+
+---
+
+
 ## 2026-10-05 | TQQQ > TOP OF RANGE TRADE > $76 STRIKE KNOWING IT COULD GO TO $72 👈
 _john@cptdashboard.com - captured 2026-10-06_
 
