@@ -6,6 +6,22 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-08 | THIS TQQQ TRADE IS LIMIT 👇 WAITING
+_john@ucptdashboard.com - captured 2026-10-09_
+
+THIS TQQQ TRADE IS IN LIMIT  👇
+
+I have purchased the 99 delta ( *DONE* )
+I have this ITM CC in LIMIT ORDER ( *WAITING* )
+
+I have to leave my desk ... if this does not execute by close I will have
+(10) 99 Delta long calls not covered and will look to do something tomorrow
+
+ see below the CSP trade idea > *Same Strike Same Expire*
+
+---
+
+
 ## 2026-10-07 | DPST HAS DONE THIS (3) TIMES AND HERE ARE THE PERCENTAGES DOWN 👇
 _john@corepositiontrading.com - captured 2026-10-08_
 
