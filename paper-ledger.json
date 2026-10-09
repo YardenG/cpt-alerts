@@ -26,11 +26,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 28.5,
+        "strike": 26.0,
         "exp": "Oct-16",
         "exp_ts": 1792108800,
         "sold": 1.05,
-        "cycle_opened": "2026-10-06"
+        "cycle_opened": "2026-10-09"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -176,9 +176,20 @@
           "coc": 3.57,
           "days": 7,
           "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-10-09",
+          "strike": 28.5,
+          "sold": 1.05,
+          "buyback": 0.42,
+          "income_ps": 0.62,
+          "income_usd": 625.0,
+          "coc": 2.48,
+          "days": 3,
+          "reason": "-50% rule"
         }
       ],
-      "premium_banked": 8750.0,
+      "premium_banked": 9375.0,
       "events": [],
       "closed": null
     },
@@ -596,10 +607,10 @@
       "income": {
         "right": "P",
         "strike": 36.5,
-        "exp": "Oct-09",
-        "exp_ts": 1791504000,
-        "sold": 1.1,
-        "cycle_opened": "2026-09-29",
+        "exp": "Oct-16",
+        "exp_ts": 1792108800,
+        "sold": 0.9,
+        "cycle_opened": "2026-10-09",
         "cost_cc_bid": 0.95
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
@@ -669,9 +680,20 @@
           "coc": 2.74,
           "days": 11,
           "reason": "CSP expired OTM"
+        },
+        {
+          "closed": "2026-10-09",
+          "strike": 36.5,
+          "sold": 1.1,
+          "buyback": 0,
+          "income_ps": 1.1,
+          "income_usd": 1100.0,
+          "coc": 3.01,
+          "days": 10,
+          "reason": "CSP expired OTM"
         }
       ],
-      "premium_banked": 2830.0,
+      "premium_banked": 3930.0,
       "events": [
         {
           "date": "2026-08-19",
@@ -1609,7 +1631,7 @@
     }
   ],
   "meta": {
-    "last_marked": "2026-10-08",
-    "last_digest_week": "2026-W40"
+    "last_marked": "2026-10-09",
+    "last_digest_week": "2026-W41"
   }
 }
