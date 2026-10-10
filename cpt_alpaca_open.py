@@ -229,8 +229,10 @@ def plan(ticker, force=False, acct=None, qty_override=None):
         print(f"  SHORT  sell_to_open {legs['short_occ']}  ({legs['short_strike']:g}C {legs['short_exp']}, "
               f"{_dte(legs['short_exp'])}d, OTM)  bid {legs['short_bid']}")
         print(f"  net debit/spread ${legs['net_debit']:.2f}  x{n}  =  ${legs['net_debit']*100*n:,.0f} capital")
+        # marketable buffer: pay up to ~3% more net debit so the spread actually crosses and fills
+        buf = round(legs["net_debit"] * 1.03, 2)
         payload = dict(order_class="mleg", qty=str(n), type="limit", time_in_force="day",
-                       limit_price=f"{legs['net_debit']:.2f}",
+                       limit_price=f"{buf:.2f}",
                        legs=[{"symbol": legs["long_occ"], "ratio_qty": "1", "side": "buy",
                               "position_intent": "buy_to_open"},
                              {"symbol": legs["short_occ"], "ratio_qty": "1", "side": "sell",
@@ -240,8 +242,9 @@ def plan(ticker, force=False, acct=None, qty_override=None):
         print(f"  SELL   sell_to_open {legs['put_occ']}  ({legs['put_strike']:g}P {legs['put_exp']}, "
               f"{_dte(legs['put_exp'])}d, ATM)  bid {legs['put_bid']}" + (f"  ~{c:.1f}% CoC" if c else ""))
         print(f"  cash secured ${legs['cpc']:,.0f}/contract  x{n}  =  ${legs['cpc']*n:,.0f}")
+        # marketable buffer: accept ~3% under the bid so the sell actually fills
         payload = dict(symbol=legs["put_occ"], qty=str(n), side="sell", type="limit",
-                       time_in_force="day", limit_price=f"{legs['put_bid']:.2f}",
+                       time_in_force="day", limit_price=f"{round(legs['put_bid']*0.97, 2):.2f}",
                        position_intent="sell_to_open")
 
     print(f"  ORDER (would submit): {payload}")
