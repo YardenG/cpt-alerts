@@ -103,10 +103,11 @@ def main():
             return
         acct = A.get_account()
         out = []
-        if task in ("open", "both"):
-            out += do_open(acct)
+        # MANAGE first (a CCW roll CLOSES the diagonal), then OPEN re-enters the name fresh same run
         if task in ("manage", "both"):
             out += do_manage()
+        if task in ("open", "both"):
+            out += do_open(acct)
         if out:
             body = f"CPT-Alpaca {mode} ({task})\n" + "\n".join(out)
             print("\n=== SUMMARY ===\n" + body + "\n")
