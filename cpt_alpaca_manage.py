@@ -197,27 +197,31 @@ def _close(occ, qty, px):
 
 
 def plan_orders(camp, action, spot):
-    """Return (orders, note). Each order is a ready /v2/orders body."""
-    qty = abs((camp["short"] or camp["short_put"])["qty"])
+    """Alpaca-native orders (return (orders, note)).
+
+    KEY CONSTRAINT (verified live + in Alpaca docs): Alpaca rejects selling a new short CALL
+    against a long you already hold ('uncovered'), so a CCW cannot be rolled in place. A CCW
+    roll OR close therefore CLOSES the whole diagonal in one mleg, and do_open re-enters the
+    name fresh next run (= the close+reopen model). CSP rolls stay standalone (a cash-secured
+    put is covered by cash)."""
     uc = camp["underlying"]
-    if action == "ROLL":
-        s = camp["short"]; sm = _mark(uc, s["occ"]) or {}
-        o = [dict(symbol=s["occ"], qty=str(qty), side="buy", type="limit", time_in_force="day",
-                  position_intent="buy_to_close", limit_price=f"{(sm.get('ask') or sm.get('mark') or 0.05):.2f}")]
-        ns = _pick_new_short(uc, spot, after_exp=s["exp"])
-        if ns:
-            o.append(dict(symbol=ns["occ"], qty=str(qty), side="sell", type="limit", time_in_force="day",
-                          position_intent="sell_to_open", limit_price=f"{ns['bid']:.2f}"))
-        return o, (f"roll -> {ns['strike']:g}C {ns['exp']}" if ns else "NO new short strike found")
-    if action == "CLOSE_WIN":
-        s, l = camp["short"], camp["long"]; sm = _mark(uc, s["occ"]) or {}; lm = _mark(uc, l["occ"]) or {}
-        return ([dict(symbol=s["occ"], qty=str(qty), side="buy", type="limit", time_in_force="day",
-                      position_intent="buy_to_close", limit_price=f"{(sm.get('ask') or sm.get('mark') or 0.05):.2f}"),
-                 dict(symbol=l["occ"], qty=str(qty), side="sell", type="limit", time_in_force="day",
-                      position_intent="sell_to_close", limit_price=f"{(lm.get('bid') or lm.get('mark') or 0.05):.2f}")],
-                "close both legs")
-    if action in ("CSP_RESELL", "CSP_ROLL_DOWN"):
-        sp = camp["short_put"]; pm = _mark(uc, sp["occ"]) or {}
+    # --- CCW roll OR close -> close the whole diagonal (one mleg, market); reopens fresh next ---
+    if action in ("ROLL", "CLOSE_WIN") and camp["long"] and camp["short"]:
+        qty = abs(camp["short"]["qty"])
+        orders = [dict(order_class="mleg", qty=str(qty), type="market", time_in_force="day",
+                       legs=[{"symbol": camp["long"]["occ"], "ratio_qty": "1", "side": "sell",
+                              "position_intent": "sell_to_close"},
+                             {"symbol": camp["short"]["occ"], "ratio_qty": "1", "side": "buy",
+                              "position_intent": "buy_to_close"}])]
+        return orders, "close the diagonal (Alpaca can't roll the short in place) -> reopens fresh"
+    # --- repair a stranded NAKED LONG (short leg lost in a pre-fix failed roll): close it ---
+    if action == "REPAIR_CLOSE" and camp["long"]:
+        qty = abs(camp["long"]["qty"])
+        return [dict(symbol=camp["long"]["occ"], qty=str(qty), side="sell", type="market",
+                     time_in_force="day", position_intent="sell_to_close")], "close the stranded long leg"
+    # --- CSP: standalone roll is allowed (a cash-secured put is covered by cash) ---
+    if action in ("CSP_RESELL", "CSP_ROLL_DOWN") and camp["short_put"]:
+        sp = camp["short_put"]; qty = abs(sp["qty"]); pm = _mark(uc, sp["occ"]) or {}
         o = []
         if not (sp["dte"] is not None and sp["dte"] <= 0):           # expired-worthless needs no buyback
             o.append(dict(symbol=sp["occ"], qty=str(qty), side="buy", type="limit", time_in_force="day",
@@ -226,7 +230,7 @@ def plan_orders(camp, action, spot):
         np_ = _pick_new_put(uc, spot, after_exp=sp["exp"], max_strike=max_strike)
         if np_:
             o.append(dict(symbol=np_["occ"], qty=str(qty), side="sell", type="limit", time_in_force="day",
-                          position_intent="sell_to_open", limit_price=f"{np_['bid']:.2f}"))
+                          position_intent="sell_to_open", limit_price=f"{round(np_['bid']*0.97, 2):.2f}"))
         return o, (f"{'roll down' if max_strike else 're-sell'} -> {np_['strike']:g}P {np_['exp']}" if np_ else "NO new put strike found")
     return [], ""
 
@@ -243,31 +247,20 @@ def _submit_and_fill(order):
     return A.get_order(oid)
 
 
-def _execute(orders, action, camp, banked, st):
-    """Submit the orders, confirm fills, update banked/rolls in st. Returns a log line."""
-    short = camp["short"] or camp["short_put"]
-    sold, qty = short["avg_entry"], abs(short["qty"])
-    buyback = new_sold = None
+def _execute(orders, action, camp, st):
+    """Submit the orders, confirm fills, log. Handles single and mleg/market orders. Records a
+    terminal close in the book (the Alpaca positions are the source of truth; the close+reopen
+    scorecard accounting is a separate layer)."""
     fills = []
     for o in orders:
         f = _submit_and_fill(o)
-        px = f.get("filled_avg_price")
-        px = float(px) if px else float(o["limit_price"])
-        fills.append((o["position_intent"], o["symbol"], f.get("status"), px))
-        if o["position_intent"] == "buy_to_close":
-            buyback = px
-        elif o["position_intent"] == "sell_to_open":
-            new_sold = px
-    if action in ("ROLL", "CSP_RESELL", "CSP_ROLL_DOWN"):
-        inc = realize(sold, buyback if buyback is not None else 0.0, qty)
-        st["banked"] = round(float(st.get("banked", 0.0)) + inc, 0)
-        st.setdefault("rolls", []).append(dict(date=dt.date.today().isoformat(), action=action,
-                                               sold=sold, buyback=buyback, new_sold=new_sold, income=inc))
-        return f"{action}: banked +${inc:,.0f} (sold {sold} - buyback {buyback}); new short sold {new_sold}. now banked ${st['banked']:,.0f}"
-    if action == "CLOSE_WIN":
-        st["closed"] = True
-        return f"CLOSE_WIN: both legs closed. fills={fills}"
-    return f"{action}: fills={fills}"
+        who = o.get("position_intent") or ("mleg-close" if o.get("order_class") == "mleg" else "order")
+        sym = o.get("symbol") or "+".join(l["symbol"] for l in (o.get("legs") or []))
+        fills.append(f"{who} {sym}: {f.get('status')}@{f.get('filled_avg_price')}")
+    if action in ("ROLL", "CLOSE_WIN", "REPAIR_CLOSE"):
+        st.setdefault("closes", []).append(dict(date=dt.date.today().isoformat(), action=action,
+                                                underlying=camp["underlying"]))
+    return f"{action}: " + " | ".join(fills)
 
 
 # --- main -----------------------------------------------------------------------------------------
@@ -276,27 +269,28 @@ def run(live=False):
     camps = group_campaigns()
     ccws = {k: v for k, v in camps.items() if v["short"] and v["long"]}
     csps = {k: v for k, v in camps.items() if v["short_put"] and not v["short"] and not v["long"]}
+    nakeds = {k: v for k, v in camps.items() if v["long"] and not v["short"]}   # broken: long only (a failed roll)
     print(f"\n  CPT->Alpaca MANAGEMENT  ({'LIVE' if live else 'DRY-RUN, no orders'})  "
-          f"{len(ccws)} CCW + {len(csps)} CSP campaign(s)")
-    if not ccws and not csps:
+          f"{len(ccws)} CCW + {len(csps)} CSP + {len(nakeds)} stranded-long")
+    if not (ccws or csps or nakeds):
         print("  no open campaigns to manage.\n")
         return []
 
     dirty = False
     results = []
-    for sym, camp in list(ccws.items()) + list(csps.items()):
+    for sym, camp in list(ccws.items()) + list(csps.items()) + list(nakeds.items()):
         spot = A.latest_trade(sym)
         st = book["campaigns"].setdefault(sym, {"opened": dt.date.today().isoformat(), "banked": 0.0, "rolls": []})
-        banked = float(st.get("banked", 0.0))
         if camp["short"] and camp["long"]:
-            (action, detail), cur = decide_ccw(camp, spot, banked)
+            (action, detail), cur = decide_ccw(camp, spot, float(st.get("banked", 0.0)))
             legs = [camp["long"], camp["short"]]
+        elif camp["long"] and not camp["short"]:
+            action, detail, legs = "REPAIR_CLOSE", "stranded naked long (short lost in a pre-fix roll) - close it; open re-enters fresh", [camp["long"]]
         else:
             (action, detail), cur = decide_csp(camp, spot)
             legs = [camp["short_put"]]
-        print(f"\n  == {sym}  spot {spot and round(spot,2)}  banked ${banked:,.0f} ==")
+        print(f"\n  == {sym}  spot {spot and round(spot,2)} ==")
         for lg in legs:
-            kind = {"long": "long", "short": "short"}.get("long" if lg["qty"] > 0 else "short")
             print(f"     {('long ' if lg['qty']>0 else 'short')} {lg['strike']:g}{lg['right']} {lg['exp']} ({lg['dte']}d)  "
                   f"{'paid' if lg['qty']>0 else 'sold'} {lg['avg_entry']}")
         print(f"     >> {action}: {detail}")
@@ -305,17 +299,19 @@ def run(live=False):
         if note:
             print(f"        ({note})")
         for o in orders:
-            print(f"        ORDER {o['side']:4} {o['position_intent']:14} {o['symbol']}  x{o['qty']} @ {o['limit_price']}")
+            desc = o.get("position_intent") or o.get("order_class") or "order"
+            sym_d = o.get("symbol") or " + ".join(l["symbol"] for l in (o.get("legs") or []))
+            print(f"        ORDER {desc:14} {sym_d}  x{o.get('qty')} {o.get('type')}")
         if live and orders:
             print("        submitting + confirming fills...")
-            log = _execute(orders, action, camp, banked, st)
+            log = _execute(orders, action, camp, st)
             print(f"        -> {log}")
             dirty = True
     if live and dirty:
         save_book(book)
         print("\n  book state saved (alpaca_book.json).")
     if not live:
-        print("\n  DRY-RUN: nothing submitted. Add --live to place the orders + update state.\n")
+        print("\n  DRY-RUN: nothing submitted. Add --live to place the orders.\n")
     return results
 
 
