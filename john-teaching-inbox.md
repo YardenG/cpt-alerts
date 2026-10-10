@@ -6,6 +6,28 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-09 | TRADE IDEA > ELIL > CC/CSP TRADE IDEA AND SETUP I WOULD CONSIDER
+_john@corepositiontrading.com - captured 2026-10-10_
+
+ELIL CC/CSP TRADE IDEA AND SETUP I WOULD CONSIDER
+With the markets moving sideways to lower I would consider a:
+
+ITM CC using the $27 strike making about $2.45 in premium profit or 9.07%
+Cash on Cash % gain for the 42 days on.
+
+1) open position (buy shares or buy 99 delta long calls or CSP)
+2) sell to open the $27 ITM CC strike
+3) collect about $3.50 in total premium or $2.45 in extrinsic
+4) use the Nov-20 strike and just 'set it and forget it'
+*5) the $27 Cash Secured Put works the same *
+
+👉 💯 ❤️ this trade and will be trying to get it today (10/9/2026) 🚨
+
+---------------------------------------------------------------------
+
+---
+
+
 ## 2026-10-08 | THIS TQQQ TRADE IS LIMIT 👇 WAITING
 _john@ucptdashboard.com - captured 2026-10-09_
 
