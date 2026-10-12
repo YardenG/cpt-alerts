@@ -6,6 +6,19 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-11 | MEMBERS VIDEO | CHART / TRADE BREAKDOWN - SOXL NVDL ELIL
+_john@ucptdashboard.com - captured 2026-10-12_
+
+MEMBERS VIDEO
+- CHART / TRADE BREAKDOWN - SOXL NVDL ELIL
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/WkJrmzdwidg>
+
+---
+
+
 ## 2026-10-09 | TRADE IDEA > ELIL > CC/CSP TRADE IDEA AND SETUP I WOULD CONSIDER
 _john@corepositiontrading.com - captured 2026-10-10_
 
