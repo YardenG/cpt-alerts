@@ -6,6 +6,18 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-12 | MAG-7 I AM TRADING NOW > NVDA (NVDL)
+_john@ucptdashboard.com - captured 2026-10-13_
+
+MAG-7 I AM TRADING NOW > NVDA (NVDL)
+Apple higher, META higher, Microsoft higher, Lilly higher, Google higher
+... that leaves Amazon and Nvidia and right now Nvidia is testing support
+... I'm in 2 trades and would add more if it goes lower ... Amazon is still
+in play but its about mid in the range ... let the others come back.
+
+---
+
+
 ## 2026-10-11 | MEMBERS VIDEO | CHART / TRADE BREAKDOWN - SOXL NVDL ELIL
 _john@ucptdashboard.com - captured 2026-10-12_
 
