@@ -27,10 +27,10 @@
       "income": {
         "right": "C",
         "strike": 26.0,
-        "exp": "Oct-16",
-        "exp_ts": 1792108800,
-        "sold": 1.05,
-        "cycle_opened": "2026-10-09"
+        "exp": "Oct-23",
+        "exp_ts": 1792713600,
+        "sold": 1.15,
+        "cycle_opened": "2026-10-13"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -187,9 +187,20 @@
           "coc": 2.48,
           "days": 3,
           "reason": "-50% rule"
+        },
+        {
+          "closed": "2026-10-13",
+          "strike": 26.0,
+          "sold": 1.05,
+          "buyback": 0.95,
+          "income_ps": 0.1,
+          "income_usd": 100.0,
+          "coc": 0.4,
+          "days": 4,
+          "reason": "expired OTM"
         }
       ],
-      "premium_banked": 9375.0,
+      "premium_banked": 9475.0,
       "events": [],
       "closed": null
     },
@@ -287,11 +298,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 112.0,
-        "exp": "Oct-16",
-        "exp_ts": 1792108800,
-        "sold": 5.2,
-        "cycle_opened": "2026-10-06"
+        "strike": 108.0,
+        "exp": "Oct-23",
+        "exp_ts": 1792713600,
+        "sold": 4.2,
+        "cycle_opened": "2026-10-13"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -448,9 +459,20 @@
           "coc": 0.88,
           "days": 7,
           "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-10-13",
+          "strike": 112.0,
+          "sold": 5.2,
+          "buyback": 1.58,
+          "income_ps": 3.62,
+          "income_usd": 3625.0,
+          "coc": 3.56,
+          "days": 7,
+          "reason": "expired OTM"
         }
       ],
-      "premium_banked": 21525.0,
+      "premium_banked": 25150.0,
       "events": [],
       "closed": null
     },
@@ -474,11 +496,11 @@
       "long_call": null,
       "income": {
         "right": "P",
-        "strike": 79.0,
-        "exp": "Oct-16",
-        "exp_ts": 1792108800,
-        "sold": 1.96,
-        "cycle_opened": "2026-10-08",
+        "strike": 78.0,
+        "exp": "Oct-19",
+        "exp_ts": 1792368000,
+        "sold": 1.52,
+        "cycle_opened": "2026-10-13",
         "cost_cc_bid": 1.47
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
@@ -559,9 +581,20 @@
           "coc": 0.0,
           "days": 1,
           "reason": "CSP roll down-and-out (avoid assignment)"
+        },
+        {
+          "closed": "2026-10-13",
+          "strike": 79.0,
+          "sold": 1.96,
+          "buyback": 1.74,
+          "income_ps": 0.22,
+          "income_usd": 220.0,
+          "coc": 0.28,
+          "days": 5,
+          "reason": "CSP roll down-and-out (avoid assignment)"
         }
       ],
-      "premium_banked": 6840.0,
+      "premium_banked": 7060.0,
       "events": [
         {
           "date": "2026-08-18",
@@ -606,11 +639,11 @@
       "long_call": null,
       "income": {
         "right": "P",
-        "strike": 36.5,
-        "exp": "Oct-16",
-        "exp_ts": 1792108800,
-        "sold": 0.9,
-        "cycle_opened": "2026-10-09",
+        "strike": 36.0,
+        "exp": "Oct-23",
+        "exp_ts": 1792713600,
+        "sold": 1.15,
+        "cycle_opened": "2026-10-13",
         "cost_cc_bid": 0.95
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
@@ -831,11 +864,11 @@
       "long_call": null,
       "income": {
         "right": "P",
-        "strike": 57.0,
-        "exp": "Oct-16",
-        "exp_ts": 1792108800,
-        "sold": 1.53,
-        "cycle_opened": "2026-10-07",
+        "strike": 56.5,
+        "exp": "Oct-23",
+        "exp_ts": 1792713600,
+        "sold": 1.66,
+        "cycle_opened": "2026-10-13",
         "cost_cc_bid": 0.96
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
@@ -927,9 +960,20 @@
           "coc": 1.57,
           "days": 8,
           "reason": "CSP roll down-and-out (avoid assignment)"
+        },
+        {
+          "closed": "2026-10-13",
+          "strike": 57.0,
+          "sold": 1.53,
+          "buyback": 1.33,
+          "income_ps": 0.2,
+          "income_usd": 200.0,
+          "coc": 0.35,
+          "days": 6,
+          "reason": "CSP roll down-and-out (avoid assignment)"
         }
       ],
-      "premium_banked": 1710.0,
+      "premium_banked": 1910.0,
       "events": [
         {
           "date": "2026-08-20",
@@ -1033,11 +1077,11 @@
       "long_call": null,
       "income": {
         "right": "P",
-        "strike": 230.0,
-        "exp": "Oct-16",
-        "exp_ts": 1792108800,
-        "sold": 13.2,
-        "cycle_opened": "2026-10-06",
+        "strike": 212.5,
+        "exp": "Oct-23",
+        "exp_ts": 1792713600,
+        "sold": 11.2,
+        "cycle_opened": "2026-10-13",
         "cost_cc_bid": 22.1
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
@@ -1124,6 +1168,17 @@
           "strike": 260.0,
           "sold": 15.9,
           "buyback": 28.9,
+          "income_ps": 0.0,
+          "income_usd": 0.0,
+          "coc": 0.0,
+          "days": 7,
+          "reason": "CSP roll down-and-out (avoid assignment)"
+        },
+        {
+          "closed": "2026-10-13",
+          "strike": 230.0,
+          "sold": 13.2,
+          "buyback": 19.7,
           "income_ps": 0.0,
           "income_usd": 0.0,
           "coc": 0.0,
@@ -1332,7 +1387,7 @@
       "id": "GGLL-20260922",
       "ticker": "GGLL",
       "opened": "2026-09-22",
-      "status": "ROLLED",
+      "status": "CLOSED",
       "kind": "CCW",
       "entry_price": 104.61,
       "pos_pct": 54.6,
@@ -1376,7 +1431,14 @@
       ],
       "premium_banked": 3550.0,
       "events": [],
-      "closed": null
+      "closed": {
+        "date": "2026-10-13",
+        "cohort": "campaign",
+        "realized": 40.0,
+        "coc": 0.06,
+        "days": 21,
+        "detail": "CASE B WIN: GGLL 105.34 above 98C at 3d - campaign closed."
+      }
     },
     {
       "id": "AAPU-20260923",
@@ -1404,11 +1466,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 44.0,
+        "strike": 47.0,
         "exp": "Oct-16",
         "exp_ts": 1792108800,
-        "sold": 0.95,
-        "cycle_opened": "2026-10-01"
+        "sold": 0.5,
+        "cycle_opened": "2026-10-13"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -1422,6 +1484,17 @@
           "coc": 4.95,
           "days": 8,
           "reason": "-50% rule"
+        },
+        {
+          "closed": "2026-10-13",
+          "strike": 44.0,
+          "sold": 0.95,
+          "buyback": 2.78,
+          "income_ps": 0.0,
+          "income_usd": 0.0,
+          "coc": 0.0,
+          "days": 12,
+          "reason": "CASE B roll (avoid closing red)"
         }
       ],
       "premium_banked": 1050.0,
@@ -1454,11 +1527,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 36.0,
-        "exp": "Oct-16",
-        "exp_ts": 1792108800,
-        "sold": 1.33,
-        "cycle_opened": "2026-10-08"
+        "strike": 35.0,
+        "exp": "Oct-23",
+        "exp_ts": 1792713600,
+        "sold": 1.71,
+        "cycle_opened": "2026-10-13"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -1505,9 +1578,20 @@
           "coc": 4.1,
           "days": 1,
           "reason": "-50% rule"
+        },
+        {
+          "closed": "2026-10-13",
+          "strike": 36.0,
+          "sold": 1.33,
+          "buyback": 0.69,
+          "income_ps": 0.65,
+          "income_usd": 645.0,
+          "coc": 2.42,
+          "days": 5,
+          "reason": "expired OTM"
         }
       ],
-      "premium_banked": 4910.0,
+      "premium_banked": 5555.0,
       "events": [],
       "closed": null
     },
@@ -1537,11 +1621,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 31.0,
-        "exp": "Oct-16",
-        "exp_ts": 1792108800,
-        "sold": 0.7,
-        "cycle_opened": "2026-10-08"
+        "strike": 34.0,
+        "exp": "Oct-23",
+        "exp_ts": 1792713600,
+        "sold": 2.2,
+        "cycle_opened": "2026-10-13"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -1566,6 +1650,17 @@
           "coc": 12.78,
           "days": 2,
           "reason": "-50% rule"
+        },
+        {
+          "closed": "2026-10-13",
+          "strike": 31.0,
+          "sold": 0.7,
+          "buyback": 3.0,
+          "income_ps": 0.0,
+          "income_usd": 0.0,
+          "coc": 0.0,
+          "days": 5,
+          "reason": "CASE B roll (avoid closing red)"
         }
       ],
       "premium_banked": 575.0,
@@ -1631,7 +1726,7 @@
     }
   ],
   "meta": {
-    "last_marked": "2026-10-09",
+    "last_marked": "2026-10-13",
     "last_digest_week": "2026-W41"
   }
 }
