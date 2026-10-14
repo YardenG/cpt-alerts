@@ -6,6 +6,19 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-13 | MEMBERS VIDEO | 😡 FUMBLED MY GGLL 99 DELTA EXIT - -$3,000 MISTAKE?
+_john@corepositiontrading.com - captured 2026-10-14_
+
+MEMBERS VIDEO
+- FUMBLED MY GGLL 99 DELTA EXIT - -$3,000 MISTAKE? 😡
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/WkJrmzdwidg>
+
+---
+
+
 ## 2026-10-12 | MAG-7 I AM TRADING NOW > NVDA (NVDL)
 _john@ucptdashboard.com - captured 2026-10-13_
 
