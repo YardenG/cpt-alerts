@@ -6,6 +6,46 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-14 | PREPARING OURSELF FOR A SELL-OFF 🤔
+_john@corepositiontrading.com - captured 2026-10-15_
+
+PREPARING OURSELF FOR A SELL-OFF 🤔
+I hate to be the 'half cup empty' guy ... but with the swirling headlines
+that inflation is higher, the Fed isn't about to cut rates and the ever
+present worry of Iran / Oil prices , so on ... just prepare yourself for a
+sell -off as Wall Street will go RISK=OFF and leave us holding the bag.
+What to do? Any NEW money being added to trades NEEDS extra diligence ...
+NEEDS extra downside and NEEDS an understanding that the stock COULD FALL
+and challenge your strike. I'm not 'the sky is falling' John ... but I
+smell it in the air ... 5 times trying to get to new highs , break through
+resistance and its now apparent to me if by Friday it doesn't make that
+move ... then they will probably take some profits which means some red
+days ahead ... ugh!
+
+I have NO crystal ball and everything Im feeling could be wrong but the
+chart below is telling us a story ... just keep an eye on it.
+
+What to do? Maybe sit on your hands ... maybe close out of a position that
+you do not feel comfortable in , wait and RE-ENTER it with the same cost
+basis and work it AFTER the next couple days, weeks ... NO PRIDE LOST
+stepping back for the moment is how I feel. We will see 🤞🙏
+
+---
+
+## 2026-10-14 | MEMBERS VIDEO | MAG-7 UPDATE - OCT-14TH (AAPL AMZN GOOG LLY META MSFT NVDA)
+_john@corepositiontrading.com - captured 2026-10-15_
+
+MEMBERS VIDEO
+- MAG-7 UPDATE - OCT-14TH (AAPL AMZN GOOG LLY META MSFT NVDA)
+   - (using AAPU AMZU GGLL ELIL METU MSFU NVDL)
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/9wWwfH_YpUg>
+
+---
+
+
 ## 2026-10-13 | MEMBERS VIDEO | 😡 FUMBLED MY GGLL 99 DELTA EXIT - -$3,000 MISTAKE?
 _john@corepositiontrading.com - captured 2026-10-14_
 
