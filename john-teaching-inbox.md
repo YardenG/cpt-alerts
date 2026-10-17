@@ -6,6 +6,53 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-16 | THE PAIN!!! 🤬 I CALLED $68 ON TQQQ, DIDN'T BELIEVE IT THOUGH UGH!
+_john@ucptdashboard.com - captured 2026-10-17_
+
+THE PAIN!!! 🤬 I CALLED $68 ON TQQQ, DIDN'T BELIEVE IT THOUGH UGH!
+Well , I *ADDED to my position* @ $71.75 to reduce my cost basis and well,
+as my luck would have it Im down on that as well ... TQQQ is trading at
+$68.65 as of this email and my cost is $74 ... I did the $74 OTM CC to
+print some money but this sucks ... for the record *I am in drawdown now
+some -$300,000 since this sell off* with position like LABU, DPST and TNA
+AMONGST others just under water such we can not do much ... BUT we scratch
+and claw what we can ... stay the course , have been here, done that so
+many times I just shake my head ... on the bright side , the NASDAQ is
+trading nears its bottom and based on the past 3 times its rallied off ...
+with inflation and interest rates being the issue , most of this seems
+baked in already , I believe this is the SELL -OFF into the Fed's next
+decision on rates where they will NOT raise rates and Wall Street will have
+shook the loose hands, gobbled up all these cheaper tech shares and rally
+the news ... my TIN HAT thought of the day ... stay the course
+
+---
+
+## 2026-10-16 | ANOTHER AI SELL-OFF CAUSES EVERYONE TO THINK THE SKY IS FALLING 😳
+_john@cptdashboard.com - captured 2026-10-17_
+
+ANOTHER AI SELL-OFF CAUSES EVERYONE TO THINK THE SKY IS FALLING 😳
+Keep this in mind when thinking about today's -600pt Nasdaq down day
+
+Apple + 0.43%
+Amazon - 1.87%
+Google - 2.37%
+Eli Lilly +0.43%
+Meta - 3.72%
+Microsoft - 1.93%
+Nvidia -1.43%
+
+pretty normal day ... and the S&P 500 was -1.09% ... and Nvidia, the poster
+child for AI wasn't down but -$3 bucks on this day 🤔
+
+just see the big picture that this is a AI related sell off which causes
+incredible volitiaity yet the real companies that make up the markets were
+as steady as ever.
+
+This too will pass IF you're asking me. 👉 💯 🙏
+
+---
+
+
 ## 2026-10-14 | PREPARING OURSELF FOR A SELL-OFF 🤔
 _john@corepositiontrading.com - captured 2026-10-15_
 
