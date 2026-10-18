@@ -6,6 +6,19 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-18 | MEMBERS VIDEO | 📈 IN FOCUS - DPST SHOWS SIGNS OF A BOTTOM
+_john@cptdashboard.com - captured 2026-10-18_
+
+MEMBERS VIDEO
+- 📈  IN FOCUS - DPST SHOWS SIGNS OF A BOTTOM 🤔
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/JeOI1TL8osY>
+
+---
+
+
 ## 2026-10-16 | THE PAIN!!! 🤬 I CALLED $68 ON TQQQ, DIDN'T BELIEVE IT THOUGH UGH!
 _john@ucptdashboard.com - captured 2026-10-17_
 
