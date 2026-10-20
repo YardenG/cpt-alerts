@@ -6,6 +6,41 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-19 | IN FOCUS > ELI LILLY (ELIL) > TOO HOTT 🔥
+_john@cptdashboard.com - captured 2026-10-20_
+
+IN FOCUS > ELI LILLY (ELIL) > TOO HOTT 🔥
+I send this email today just so you can see the world through my eyes 🤔
+
+Eli Lilly has rocketed off the bottom (where we took (2) position in
+October and November and now its the highest in its range ... they announce
+earnings this come week ...
+
+*What do you think is going to happen with Eli Lilly stock?*
+I do not know and You do not know but based on our experience with
+companies that blow there the KC TOP before earnings , chances are this
+will *FALL back* to at least the KC MID so this is *HANDS OFF* 🛑  until
+earnings and we see where it goes.
+
+I will take bets ... 👉 it will sell off IF you're asking me 👈
+
+*My current Nov-20th ITM CC ... currently tradin @ $31.86*
+
+---
+
+## 2026-10-19 | MEMBERS VIDEO | MY THOUGHTS ON - 🤔 TRADING WHILE WORKING THE 9 TO 5 🤔
+_john@corepositiontrading.com - captured 2026-10-20_
+
+MEMBERS VIDEO
+- MY THOUGHTS ON - TRADING WHILE WORKING THE 9 TO 5 🤔
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/Xc4i7eaJgx4>
+
+---
+
+
 ## 2026-10-18 | MEMBERS VIDEO | 📈 IN FOCUS - DPST SHOWS SIGNS OF A BOTTOM
 _john@cptdashboard.com - captured 2026-10-18_
 
