@@ -6,6 +6,43 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-20 | WHAT DID I TELL YOU?! META WOULD FALL BACK > NOW IN FOCUS 👈
+_john@corepositiontrading.com - captured 2026-10-21_
+
+WHAT DID I TELL YOU?! META WOULD FALL BACK > NOW IN FOCUS 👈
+*  250 DAY MOVING AVERAGE ALERT - META 👇*
+
+With META (METU) reporting earnings this week, this is one we're going to
+keep a close eye on. META has pulled back significantly from its all-time
+high and is now trading below its 250-day moving average. Where it goes
+from here is anyone's guess. A strong earnings report could certainly spark
+a rally, but there's also the possibility of additional downside.
+
+For now, the 250-day moving average will be our watermark as we evaluate a
+potential entry point. Personally, I think it's a little too early to
+establish a position, especially with earnings approaching. If you're more
+of a speculator, you might see an opportunity to make a move today, but I'm
+choosing to remain on the sidelines. Hands off for now, but definitely
+watching!
+
+*NO SKIN in this game*, but Im watching as METU has been a good Mag-7 trade
+for me in 2026 ... 🤞  🤔
+
+---
+
+## 2026-10-20 | MEMBERS VIDEO | CHART / TRADE BREAKDOWN - 📉 WHERE COULD GOOGLE (GGLL) FALL
+_john@corepositiontrading.com - captured 2026-10-21_
+
+MEMBERS VIDEO
+- CHART / TRADE BREAKDOWN -  📉   WHERE COULD GOOGLE (GGLL) FALL
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/q_YKGIbPOiM>
+
+---
+
+
 ## 2026-10-19 | IN FOCUS > ELI LILLY (ELIL) > TOO HOTT 🔥
 _john@cptdashboard.com - captured 2026-10-20_
 
