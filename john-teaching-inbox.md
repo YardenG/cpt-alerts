@@ -6,6 +6,19 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-21 | MEMBERS VIDEO | ⭐COMPLETE TRADE SETUP - 99 DELTA DPST TRADE ⭐
+_john@corepositiontrading.com - captured 2026-10-22_
+
+MEMBERS VIDEO
+- COMPLETE TRADE SETUP - 99 DELTA DPST TRADE ⭐
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/VdY4qxl25ic>
+
+---
+
+
 ## 2026-10-20 | WHAT DID I TELL YOU?! META WOULD FALL BACK > NOW IN FOCUS 👈
 _john@corepositiontrading.com - captured 2026-10-21_
 
