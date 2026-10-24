@@ -6,6 +6,50 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-23 | MEMBERS VIDEO | 📈 WHERE'S THE TRADE JOHN? - 8 STOCKS
+_john@cptdashboard.com - captured 2026-10-24_
+
+MEMBERS VIDEO
+-  WHERE'S THE TRADE JOHN? - 8 STOCKS
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/KUs-kAB6QEo>
+
+---
+
+## 2026-10-23 | 👉 PROVE ME WRONG APPLE 🤔 WAITING LIKE WE DID WITH NVIDIA 💯
+_john@corepositiontrading.com - captured 2026-10-24_
+
+👉 PROVE ME WRONG APPLE 🤔  WAITING LIKE WE DID WITH NVIDIA 💯
+Keep a close eye on Apple (AAPL), as its stock appears to be behaving much
+like it did around its last earnings report. Remember, the so-called
+"plunge" following those earnings was blamed on potential supply chain
+issues—concerns that, in my opinion, Wall Street had already been aware of
+for more than three months.
+
+I believe Apple has become something of a safe haven in this market. Wall
+Street runs these stocks up to all-time highs, takes profits, and then
+looks for opportunities to reestablish positions at lower prices. It's the
+same pattern we discussed with NVIDIA (NVDA). NVIDIA ran up to $241, and as
+we anticipated, it eventually pulled back to approximately its 200-day
+moving average. Run them up, sell them off, and then run them up again!
+
+My approach remains the same: Look to enter MAG-7 trades near the bottom of
+their trading ranges and let the stocks trading near their highs come back
+to us. There's no need to chase them. Google and Amazon over the past three
+months are perfect examples of this strategy playing out, if you ask me.
+
+Patience is key. Let the opportunities come to us rather than chasing
+stocks that have already made their moves. *(see the charts below)*
+
+*AAPL*
+
+*NVDA*
+
+---
+
+
 ## 2026-10-21 | MEMBERS VIDEO | ⭐COMPLETE TRADE SETUP - 99 DELTA DPST TRADE ⭐
 _john@corepositiontrading.com - captured 2026-10-22_
 
