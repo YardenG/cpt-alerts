@@ -6,6 +6,36 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-26 | THIS WEEK SHOULD WE SHOULD SEE APPLE SELL OFF AND GOOGLE HIGHER 🤔
+_john@cptdashboard.com - captured 2026-10-27_
+
+THIS WEEK SHOULD WE SHOULD SEE APPLE SELL OFF AND GOOGLE HIGHER
+🤔 Just nonsense to me that Apple is worth $1.8T ⬆️ more than Google ...
+I've 2 position's in GGLL , $96 and $87 ITM CC's ... I'm thinking the
+rotation happens, Google will go higher and Apple will come down , just
+like last earnings and I'll flip the position's ... I've done this all
+year, its like clockwork 🤔 IF you're asking me
+
+GGLL $96 is about low/middle of range where $87 is at the bottom now
+No position in AAPU but will should Apple do as I expect after
+earnings 🙏 👇
+
+---
+
+## 2026-10-26 | MEMBERS VIDEO | MAG-7 UPDATE OCT 26th - AAPL AMZN LLY GOOG MSFT META NVDA
+_john@corepositiontrading.com - captured 2026-10-27_
+
+MEMBERS VIDEO
+- MAG-7 UPDATE OCT 26th - AAPL AMZN LLY GOOG MSFT META NVDA
+  - Using AAPU , AMZU , ELIL , GGLL , METU , MSFU , NVDL
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/SkhEorm_zCA>
+
+---
+
+
 ## 2026-10-23 | MEMBERS VIDEO | 📈 WHERE'S THE TRADE JOHN? - 8 STOCKS
 _john@cptdashboard.com - captured 2026-10-24_
 
