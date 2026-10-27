@@ -1662,11 +1662,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 26.0,
-        "exp": "Oct-30",
-        "exp_ts": 1793318400,
-        "sold": 1.36,
-        "cycle_opened": "2026-10-26"
+        "strike": 27.5,
+        "exp": "Nov-06",
+        "exp_ts": 1793923200,
+        "sold": 2.24,
+        "cycle_opened": "2026-10-27"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -1757,6 +1757,17 @@
           "coc": 4.57,
           "days": 7,
           "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-10-27",
+          "strike": 26.0,
+          "sold": 1.36,
+          "buyback": 1.75,
+          "income_ps": 0.0,
+          "income_usd": 0.0,
+          "coc": 0.0,
+          "days": 1,
+          "reason": "CASE B roll (avoid closing red)"
         }
       ],
       "premium_banked": 8395.0,
@@ -1790,10 +1801,10 @@
       "income": {
         "right": "C",
         "strike": 23.0,
-        "exp": "Oct-30",
-        "exp_ts": 1793318400,
+        "exp": "Nov-06",
+        "exp_ts": 1793923200,
         "sold": 0.75,
-        "cycle_opened": "2026-10-26"
+        "cycle_opened": "2026-10-27"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -1862,9 +1873,20 @@
           "coc": 38.89,
           "days": 7,
           "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-10-27",
+          "strike": 23.0,
+          "sold": 0.75,
+          "buyback": 0.4,
+          "income_ps": 0.35,
+          "income_usd": 350.0,
+          "coc": 7.78,
+          "days": 1,
+          "reason": "expired OTM"
         }
       ],
-      "premium_banked": 4075.0,
+      "premium_banked": 4425.0,
       "events": [],
       "closed": null
     },
@@ -1927,7 +1949,7 @@
     }
   ],
   "meta": {
-    "last_marked": "2026-10-26",
+    "last_marked": "2026-10-27",
     "last_digest_week": "2026-W42"
   }
 }
