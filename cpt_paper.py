@@ -417,21 +417,24 @@ def _mark_one(pos, op, crumb, log):
         long_pl  = ((lc_mark or 0) - paid) * MULT * pos["contracts"]
         short_pl = ((sold or 0) - (buyback or 0)) * MULT * pos["contracts"]
         would_realize = pos["premium_banked"] + long_pl + short_pl
-        # At/after expiry an ITM covered call IS assigned - the shares get called away, that is not
-        # optional and it ENDS the campaign (John books it as the win it is: full premium + the gain up
-        # to the strike). Pre-expiry we still roll up-and-out to defer a red close; but once dte<=0 and
-        # still ITM, the position resolves - close it, whatever the sign. This is the natural closeout
-        # that was missing (why campaigns rolled forever instead of finishing the way John's do).
+        # [FIX #1 2026-10-28] John's rule: a called-away close is booked ONLY when it is a WIN - i.e.
+        # closing BOTH legs nets >= 0 (stock has recovered to/above the campaign's net basis). When
+        # closing now would realize a LOSS we DO NOT book it, EVEN at/after expiry: we roll the short
+        # up-and-out and keep the (deep-ITM) long call + the campaign alive, deferring the drawdown to
+        # UNREALIZED until the name recovers. This is John's "never book an assignment as a loss."
+        # The old `or called_away` force-closed red at dte<=0 - the doctrine bug that manufactured the
+        # DPST -20,550 / NAIL -7,675 realized losses on 2026-10-26 (stocks had fallen 20-29% from entry).
         called_away = dte <= 0
-        if would_realize >= 0 or called_away:
-            tag = "CALLED AWAY at expiry" if called_away else "CASE B WIN"
+        if would_realize >= 0:
+            tag = "CALLED AWAY at expiry (win)" if called_away else "CASE B WIN"
             _close_campaign(pos, lc_mark, buyback,
                             f"{tag}: {ticker} {spot:.2f} above {strike:g}C at {dte}d - campaign closed.")
             c = pos["closed"]
             log.append(f"  {pos['id']} {ticker}: CAMPAIGN CLOSEOUT ({tag})  {c['realized']:+,.0f}  "
                        f"({c['coc']:.1f}% on the long-call capital, {c['days']}d).")
             return
-        # Pre-expiry and closing now would be RED -> roll it (John never books the loss early): realize this CC cycle, re-write up-and-out.
+        # Closing now would be RED (incl. an ITM short at/after expiry) -> roll, never book the loss early:
+        # realize this CC cycle, re-write up-and-out, campaign stays alive and the drawdown stays unrealized.
         rec = _realize_weekly(pos, sold, buyback, "CASE B roll (avoid closing red)")
         new_cc = _next_weekly(op, crumb, ticker, spot) if spot else None
         if new_cc:
