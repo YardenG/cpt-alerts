@@ -51,6 +51,9 @@ CHEAP         = 0.10   # [DOCTRINE sec.7] < $0.10 with 2+ wks left = the trade's
 CHEAP_MIN_DTE = 14     # [DOCTRINE sec.7] "2+ weeks left" for cheap-to-close.
 PENNIES       = 0.10   # [DOCTRINE sec.7] "only pennies of time value" on a near-expiry CSP.
 NEAR_EXPIRY   = 5      # [OPS] days-to-expiry we call "near expiry" (not a John number).
+LONG_ROLL_DTE = 10     # [OPS, Fix #2] roll the 99-delta long when <= this DTE. John: "ALWAYS roll the
+                       # 99-delta before expiry" (members Q&A 2026-08-08) - letting a deep-ITM long expire
+                       # assigns the shares. The exact day is ours; the roll-before-expiry rule is his.
 
 # --- John's realized benchmark (from _distilled/phase2-findings-v1.md, 299-alert slice) ----------
 # BASIS NOTE (apples-to-apples): John's 4.46% weekly is a PREMIUM YIELD = income / strike-notional,
@@ -355,12 +358,99 @@ def _close_campaign(pos, long_mark, short_buyback, detail):
     paid = lc.get("ask_paid") or 0
     long_pl = ((long_mark or 0) - paid) * MULT * pos["contracts"]
     short_pl = ((pos["income"]["sold"] or 0) - (short_buyback or 0)) * MULT * pos["contracts"]
-    realized = round(pos["premium_banked"] + long_pl + short_pl, 0)
+    # [Fix #2] carry-forward: realized losses on PRIOR long-call rolls ride with the campaign (John:
+    # "we don't reset the trade because we rolled the expiration"). Defaults 0 for un-rolled campaigns.
+    realized = round(pos["premium_banked"] + pos.get("long_roll_realized", 0.0) + long_pl + short_pl, 0)
     cap = (paid * MULT * pos["contracts"]) or 1
     pos["closed"] = dict(date=_today(), cohort="campaign", realized=realized,
                          coc=round(realized / cap * 100, 2), days=_days_between(pos["opened"], _today()),
                          detail=detail)
     pos["status"] = "CLOSED"
+
+
+def _pick_99delta(op, crumb, ticker, spot, target_dte=None):
+    """[Fix #2] Re-pick a fresh ~99-delta ITM long call ~target_dte out - the new stock-replacement leg
+    on a long roll. Mirrors cpt_legs_web.legs()'s 99-delta selection exactly: the expiry nearest
+    target_dte, the strike whose Black-Scholes delta is closest to 0.99 with a live ask. Off-hours / thin
+    data (ATM IV ~0) returns None so we never roll into a nonsense deep strike. Returns
+    {strike, exp, exp_ts, ask (>= intrinsic), delta} or None."""
+    if target_dte is None:
+        target_dte = getattr(legsmod, "LC_DTE", 35)
+    root = legsmod._chain(op, crumb, ticker)
+    today = dt.date.today()
+    future = [e for e in sorted(root["expirationDates"]) if legsmod._dte(e, today) > 0]
+    if not future or spot is None:
+        return None
+    exp = min(future, key=lambda e: abs(legsmod._dte(e, today) - target_dte))
+    ch = legsmod._chain(op, crumb, ticker, exp)
+    ddte = legsmod._dte(exp, today)
+    calls = ch["options"][0]["calls"]
+    if not calls:
+        return None
+    atm = min(calls, key=lambda c: abs(c["strike"] - spot))
+    atm_iv = atm.get("impliedVolatility")
+    if not atm_iv or atm_iv < 0.05:                      # thin / off-hours: don't fabricate a leg
+        return None
+    scored = []
+    for c in calls:
+        iv = c.get("impliedVolatility") or atm_iv
+        d = legsmod.bs_call_delta(spot, c["strike"], iv, ddte)
+        if d is not None and c.get("ask"):
+            scored.append((c, d))
+    if not scored:
+        return None
+    c, d = min(scored, key=lambda cd: abs(cd[1] - 0.99))
+    ask = _floor_intrinsic(c.get("ask"), "C", c["strike"], spot)   # new long cost is never below intrinsic
+    return dict(strike=c["strike"], exp=legsmod._fmt_date(exp), exp_ts=exp, ask=ask, delta=d)
+
+
+def _roll_long_call(pos, op, crumb, spot, log):
+    """[Fix #2] John's 99-delta long-call roll (members Q&A 2026-08-08 + 'Simple Way' 2026-08-27). ALWAYS
+    roll the deep-ITM long BEFORE it expires (a left-to-expire ITM long assigns the shares and ties up
+    capital). Steps: realize the OLD long's P&L (a loss is fine - it CARRIES FORWARD into campaign P&L),
+    buy the next ~99-delta further out, and carry the basis (old basis + the new long's time value) so the
+    campaign is NOT reset, only its expiration rolled. We accumulate the old-long realized into
+    pos['long_roll_realized'] (the carry-forward bucket) and reset the long leg to the new contract. Fires
+    only when the long is within LONG_ROLL_DTE of (or past) its own expiry. Returns True if it rolled."""
+    if pos.get("kind") != "CCW":
+        return False
+    lc = pos.get("long_call")
+    if not lc or not lc.get("exp_ts") or spot is None:
+        return False
+    lc_dte = legsmod._dte(lc["exp_ts"], dt.date.today())
+    if lc_dte is None or lc_dte > LONG_ROLL_DTE:
+        return False                                      # long leg still has room; nothing to do
+    ticker = pos["ticker"]
+    # realize the OLD long at its current (floored) mark - usually a loss when the name has fallen
+    old_mark = None
+    try:
+        old_chain = legsmod._chain(op, crumb, ticker, lc["exp_ts"]) if lc_dte > 0 else None
+        om = _pick_option(old_chain, lc["strike"], "C") if old_chain else None
+        old_mark = om["mark"] if om else None
+    except Exception:
+        old_mark = None
+    old_mark = _floor_intrinsic(old_mark, "C", lc.get("strike", 0), spot)   # >= intrinsic (certain floor)
+    old_paid = lc.get("ask_paid") or 0
+    old_pl = (old_mark - old_paid) * MULT * pos["contracts"]
+    # pick the new ~99-delta further out; refuse to roll on thin/off-hours data (no fabricated price)
+    new_lc = _pick_99delta(op, crumb, ticker, spot)
+    if not new_lc:
+        log.append(f"  {pos['id']} {ticker}: LONG near expiry ({lc_dte}d) but no fresh 99-delta to roll "
+                   f"into (thin / off-hours) - HOLD the long, retry in-hours.")
+        return False
+    new_tv = round(new_lc["ask"] - max(0.0, spot - new_lc["strike"]), 2)    # the new long's time value
+    pos["long_roll_realized"] = round(pos.get("long_roll_realized", 0.0) + old_pl, 0)
+    pos.setdefault("long_rolls", []).append(dict(
+        date=_today(), old_strike=lc["strike"], old_exp=lc.get("exp"), old_paid=round(old_paid, 2),
+        old_mark=round(old_mark, 2), old_pl=round(old_pl, 0), new_strike=new_lc["strike"],
+        new_exp=new_lc["exp"], new_ask=round(new_lc["ask"], 2), new_time_value=new_tv,
+        new_delta=round(new_lc["delta"], 3) if new_lc.get("delta") is not None else None))
+    pos["long_call"] = dict(strike=new_lc["strike"], exp=new_lc["exp"], exp_ts=new_lc["exp_ts"],
+                            ask_paid=new_lc["ask"], delta=new_lc.get("delta"))
+    log.append(f"  {pos['id']} {ticker}: LONG ROLL - sold {lc['strike']:g}C ({old_pl:+,.0f} carried "
+               f"forward) -> bought {new_lc['strike']:g}C {new_lc['exp']} @ {new_lc['ask']:.2f} "
+               f"(~{new_lc.get('delta') and round(new_lc['delta'], 2)}d, +{new_tv:.2f} time value); basis carries forward.")
+    return True
 
 
 def _mark_one(pos, op, crumb, log):
@@ -375,6 +465,11 @@ def _mark_one(pos, op, crumb, log):
     except Exception as e:
         log.append(f"  {pos['id']}: data fetch failed ({e.__class__.__name__}) - skipped.")
         return
+
+    # [Fix #2] long-leg maintenance FIRST: roll the 99-delta before it expires (orthogonal to the short
+    # leg; self-guards to CCW positions whose long is within LONG_ROLL_DTE of expiry). Falls through so
+    # the short leg is still managed in the same pass.
+    _roll_long_call(pos, op, crumb, spot, log)
 
     # re-mark the income leg (the managed short). Prefer its own expiry chain; fall back to root.
     inc_chain = None
@@ -416,7 +511,7 @@ def _mark_one(pos, op, crumb, log):
         paid = lc.get("ask_paid") or 0
         long_pl  = ((lc_mark or 0) - paid) * MULT * pos["contracts"]
         short_pl = ((sold or 0) - (buyback or 0)) * MULT * pos["contracts"]
-        would_realize = pos["premium_banked"] + long_pl + short_pl
+        would_realize = pos["premium_banked"] + pos.get("long_roll_realized", 0.0) + long_pl + short_pl  # [Fix #2] incl. carried long-roll losses
         # [FIX #1 2026-10-28] John's rule: a called-away close is booked ONLY when it is a WIN - i.e.
         # closing BOTH legs nets >= 0 (stock has recovered to/above the campaign's net basis). When
         # closing now would realize a LOSS we DO NOT book it, EVEN at/after expiry: we roll the short
