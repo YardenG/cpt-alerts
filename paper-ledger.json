@@ -26,11 +26,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 26.0,
-        "exp": "Oct-23",
-        "exp_ts": 1792713600,
-        "sold": 1.05,
-        "cycle_opened": "2026-10-19"
+        "strike": 29.5,
+        "exp": "Nov-06",
+        "exp_ts": 1793923200,
+        "sold": 0.5,
+        "cycle_opened": "2026-10-28"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -209,6 +209,17 @@
           "coc": 0.0,
           "days": 6,
           "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-10-28",
+          "strike": 26.0,
+          "sold": 1.05,
+          "buyback": 3.25,
+          "income_ps": 0.0,
+          "income_usd": 0.0,
+          "coc": 0.0,
+          "days": 9,
+          "reason": "CASE B roll (avoid closing red)"
         }
       ],
       "premium_banked": 9475.0,
@@ -308,11 +319,11 @@
       },
       "income": {
         "right": "C",
-        "strike": 108.0,
-        "exp": "Oct-23",
-        "exp_ts": 1792713600,
-        "sold": 3.1,
-        "cycle_opened": "2026-10-19"
+        "strike": 120.5,
+        "exp": "Nov-06",
+        "exp_ts": 1793923200,
+        "sold": 3.9,
+        "cycle_opened": "2026-10-28"
       },
       "legs_note": "BS-EST from free Yahoo data (~15m delayed) - confirm live at execution",
       "weeklies": [
@@ -491,6 +502,17 @@
           "coc": 0.0,
           "days": 6,
           "reason": "expired OTM"
+        },
+        {
+          "closed": "2026-10-28",
+          "strike": 108.0,
+          "sold": 3.1,
+          "buyback": 12.23,
+          "income_ps": 0.0,
+          "income_usd": 0.0,
+          "coc": 0.0,
+          "days": 9,
+          "reason": "CASE B roll (avoid closing red)"
         }
       ],
       "premium_banked": 25150.0,
@@ -1933,7 +1955,7 @@
     }
   ],
   "meta": {
-    "last_marked": "2026-10-27",
+    "last_marked": "2026-10-28",
     "last_digest_week": "2026-W42"
   }
 }
