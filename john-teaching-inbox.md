@@ -6,6 +6,24 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-27 | IF YOU ARE WATCHING METU LIKE I AM, LET IT COME TO US > $20.50 👇
+_john@cptdashboard.com - captured 2026-10-28_
+
+IF YOU ARE WATCHING METU LIKE I AM, LET IT COME TO US > $20.50 👇
+🤔 Current 'watching' META .. if/when it hits $600 , METU (2x ETF)
+should/will touch $20.50 ... that is the favorable entry for me ...
+actually , $20.50 is the favorable entry and I would ADD downside to that
+... I will be looking to do an ITM or ATM (figuring META has already been
+ripped enough) for a 2 week CC , which right now a 2 week 1 strike OTM pays
+$1.20 ... on $22,260 (buying shares) , $20,000 (cash secured put) or about
+$10,200 (99 delta, buying the $12 strike for about $10.20) invested making
+about $1,200 in 2 weeks ... just me thinking out loud , ask questions.
+
+*I have NO SKIN in METU now*
+
+---
+
+
 ## 2026-10-26 | THIS WEEK SHOULD WE SHOULD SEE APPLE SELL OFF AND GOOGLE HIGHER 🤔
 _john@cptdashboard.com - captured 2026-10-27_
 
