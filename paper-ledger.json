@@ -4,7 +4,7 @@
       "id": "NAIL-20260813",
       "ticker": "NAIL",
       "opened": "2026-08-13",
-      "status": "CLOSED",
+      "status": "ROLLED",
       "kind": "CCW",
       "entry_price": 42.14,
       "pos_pct": 49.9,
@@ -212,15 +212,7 @@
         }
       ],
       "premium_banked": 9475.0,
-      "events": [],
-      "closed": {
-        "date": "2026-10-26",
-        "cohort": "campaign",
-        "realized": -7675.0,
-        "coc": -30.46,
-        "days": 74,
-        "detail": "CALLED AWAY at expiry: NAIL 30.11 above 26C at -3d - campaign closed."
-      }
+      "events": []
     },
     {
       "id": "GGLL-20260813",
@@ -294,7 +286,7 @@
       "id": "DPST-20260813",
       "ticker": "DPST",
       "opened": "2026-08-13",
-      "status": "CLOSED",
+      "status": "ROLLED",
       "kind": "CCW",
       "entry_price": 154.66,
       "pos_pct": 57.5,
@@ -502,15 +494,7 @@
         }
       ],
       "premium_banked": 25150.0,
-      "events": [],
-      "closed": {
-        "date": "2026-10-26",
-        "cohort": "campaign",
-        "realized": -20550.0,
-        "coc": -20.19,
-        "days": 74,
-        "detail": "CALLED AWAY at expiry: DPST 124.32 above 108C at -3d - campaign closed."
-      }
+      "events": []
     },
     {
       "id": "TQQQ-20260817",
