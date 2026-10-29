@@ -6,6 +6,79 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-28 | NOTICE A TREND 🤔 Nvidia and AMD Take $4B Chunk of Meta's Equity
+_john@cptdashboard.com - captured 2026-10-29_
+
+NOTICE A TREND 🤔 Nvidia and AMD Take $4B Chunk of Meta's Equity
+Read if interested in NVDA's and AMD's investment in META but also see what
+could be really happening here and how it could affect you and me ... NVDA
+and AMD are basically 'buying' META's business with this equity purchase
+... this happened with IREN about 6 months ago where Nvidia invested $1.5
+Billion in IREN and IREN turned around and purchased $1.5 Billion in Nvidia
+GPU's ... the 'hand feeding the hand' is a self sustaining strategy as you
+will read below ... but what word comes to might when you have a company
+like Nvidia investing in a company then that company buying your chips for
+which the money you made then gets invested in another company that will
+buy your chips , repeat , repeat , repeat ... the question is , are those
+real profits. real growth? Yes ... but is it?
+
+  Oh, how does this affect us? Every single index and sector and Mag-7 we
+trade is tied closely to this AI buildout and if this (what some are
+calling) 'house of cards' come☠️ down, so will the markets ... 😡 ☠️  not
+to worry anyone , just know the trade and see the play developing is all
+
+*Very interesting article about this below IF interested 👇*
+
+👉 The artificial-intelligence chip ecosystem just keeps getting more
+tangled. Nvidia and Advanced Micro Devices are both investing in Meta
+Platforms as they look to stave off the threat of custom AI chips.
+
+Nvidia said late Monday that it would invest $3 billion in Meta's recently
+announced share offer. In exchange, Meta will expand its deployment of
+Nvidia hardware to support its AI agents and the two companies are
+considering other technological collaborations.
+
+Separately, AMD said Tuesday it would invest $1 billion in Meta's equity
+offering. The companies said AMD's Helios server racks would power Meta's
+AI models and services.
+
+Nvidia shares were up 1.1% in early trading Tuesday, while AMD was rising
+4.2%. Meta was down 0.9%.
+
+Nvidia making big investments in the AI ecosystem is hardly a new thing,
+but this one is a bit different. Nvidia has mostly backed smaller AI
+start-ups or hardware suppliers who could do with the boost of its public
+backing to strengthen their financial position. This deal is with a huge
+publicly-listed customer who already does plenty of business with Nvidia
+and presumably could raise its targeted funds without Nvidia's help.
+
+Still, there is logic behind Nvidia and AMD's move. Meta has suddenly
+become a more important AI player with the success of its Muse agent. And
+there was a risk that Meta might become confident enough in its own custom
+chips -- developed jointly with Broadcom -- that it would eventually seek
+to reduce its business with Nvidia. Becoming an investor in Meta should
+lessen that concern.
+
+But it doesn't look like Nvidia is about to win an exclusive partnership
+with Meta, like it has with Elon Musk's SpaceX. Meta has already disclosed
+that Broadcom has also indicated an interest in participating in its stock
+offering. And Broadcom CEO Hock Tan serves as a strategic advisor to Meta's
+board.
+
+Broadcom was shrugging off the news Tuesday, rising 4.5% in early trading.
+
+Right now Meta is the belle of the AI ball and that means Nvidia, Broadcom
+and AMD all are likely to have to pay up in order to stay on its good side.
+
+Write to Adam Clark at adam.clark@barrons.com
+
+This content was created by Barron's, which is operated by Dow Jones & Co.
+Barron's is published independently from Dow Jones Newswires and The Wall
+Street Journal. I forward it for information purposes only 🙏
+
+---
+
+
 ## 2026-10-27 | IF YOU ARE WATCHING METU LIKE I AM, LET IT COME TO US > $20.50 👇
 _john@cptdashboard.com - captured 2026-10-28_
 
