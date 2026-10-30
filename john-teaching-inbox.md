@@ -6,6 +6,68 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-29 | IN FOCUS > GOOGLE > LAST EARNINGS APPLE FELL -9% , 33pts ⤵️ 👀 😡 🙏
+_john@corepositiontrading.com - captured 2026-10-30_
+
+IN FOCUS > GOOGLE > LAST EARNINGS APPLE FELL -9% , 33pts ⤵️  👀  😡 🙏
+Some have asked what to think of Google after earnings ...   😡
+
+I would harken back to Apple's last earnings when the stock fell -9% just
+like Google has fallen -10% so far and it took a good week before the
+buyers came back and boy did they ... running AAPL from a low of $300 to
+over $345 recently
+
+Google's earnings seem to be worse and Im not suggesting Google will run to
+all time highs in the 3 months ... but its just a reminder for me that this
+is what happens in today's stock market. Wall Stock just did not want to
+hear Google has decided to shovel all of its cash flow into the AI build
+out ... and Google seems to have doubled down on the idea.
+
+META and Google are the poster childern for this sorta spending and I think
+Wall Street is sending a message (META has fallen -20% since earnings) ,
+that message is something better change ...
+
+I'm hoping Google gets the memo from today to Nov-20th when my 99 Delta's
+expire ... so I have Nov-20 calls for GGLL that will pretty much dance
+around a couple dollars in value ... so its important for me to understand
+what has happened ... GGLL has fallen to my strike price and now as with
+someone who owns the shares, Im going to be down -$20pts on those ... I
+have to Nov-20th so I will buy back the near term ITM CC's and just sit and
+wait and let TIME work its way ... in hopes after about 3 days the selling
+will have exhausted and Google catches a bid and moves sideways to higher
+over the next 20 days and comes Nov-20th I can ROLL my GGLL 99 Delta's and
+continue the trade because as of now, that is the plan ... we will see. 🙏
+
+---
+
+## 2026-10-29 | PURE 💯 TECH SELL OFF > THIS IS THE CURRENT CHART OF THE S&P 500 👇
+_john@cptdashboard.com - captured 2026-10-30_
+
+PURE 💯 TECH SELL OFF > THIS IS THE CURRENT CHART OF THE S&P 500 👇
+
+The sky is not falling, but our technology shares certainly are!
+
+Wall Street is shooting first (selling) and will *buy, buy, buy* later!
+
+Take a look at the S&P 500. Remember, many of the stocks within the S&P 500
+are trading near their 52-week lows. This is why we're seeing so much
+volatility in the Nasdaq compared to the S&P 500, which was down a mere
+0.30% today.
+
+Why am I sending this email?  👉 Because this too shall pass! 💯
+
+Once Wall Street sells technology stocks down to the bone, just like last
+time, and the time before that, and the time before that, they'll come back
+bottom fishing, looking for bargains.
+
+I'm not panicking. Does it suck? *Absolutely!*
+I just hate the 1 step forward, 3 steps back crap 😡😡😡
+
+*We've been here, done this! Stay the course 👍 🙏 mentally  👈*
+
+---
+
+
 ## 2026-10-28 | NOTICE A TREND 🤔 Nvidia and AMD Take $4B Chunk of Meta's Equity
 _john@cptdashboard.com - captured 2026-10-29_
 
