@@ -6,6 +6,73 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-10-31 | DPST HAS BEEN A WILD RIDE SO FAR ... 👉 Staying the course 💯
+_john@cptdashboard.com - captured 2026-11-01_
+
+DPST HAS BEEN A WILD RIDE SO FAR ...
+
+*👉 Staying the course  💯*
+In this stock market, where volatility seems to rule the day and it's often
+difficult to see the forest through the trees, patience and discipline are
+everything.
+
+When we first entered our DPST position, the ETF had fallen to what I
+believed was a wonderful support level near the middle of its Keltner
+Channel. Then came the news of the Fed raising interest rates, and DPST
+continued to fall lower, lower, and lower.
+
+Our $137 cost basis seemed miles away when DPST was trading around $105.
+Every other day, it felt like the ETF was finding another reason to move
+lower!
+
+But eventually, once the interest rate news had been priced into the
+regional banking sector, DPST began to find its footing. And just as we've
+seen so many times before, it slowly started climbing higher.
+
+Now, with the technology sell-off wreaking havoc across the market,
+financial stocks appear to be something of a safe haven. They haven't
+experienced nearly the same level of selling pressure as the technology
+sector.
+
+My expectation is that DPST will continue its march higher, ultimately
+allowing me to exit our position at my $137 cost basis.
+
+👉 And here's where selling covered calls makes all the difference!
+
+Along the way, I've continued collecting premiums while waiting for DPST to
+recover. If this final covered call results in our position being closed at
+our cost basis, I will have generated over $28,475 in covered call premiums!
+
+*Think about that for a moment. 🤔*
+
+The buy-and-hold investor would have simply broken even on the share price.
+Meanwhile, we would have collected more than $28,475 in premiums while
+waiting for the very same recovery.
+
+That's the power of selling time, collecting premiums, and having a plan
+even when the market isn't cooperating.
+
+*We sell time.*
+*We collect premiums.*
+
+*And we manage our positions until we can find our exit.👉 Staying the
+course  💯*
+
+---
+
+## 2026-10-31 | MEMBERS VIDEO | TRADE UPDATE - $288,000 DPST TRADE - STAYING THE COURSE
+_john@cptdashboard.com - captured 2026-11-01_
+
+MEMBERS VIDEO
+- TRADE UPDATE - $288,000 DPST TRADE - STAYING THE COURSE
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/rbiV85fT6Jo>
+
+---
+
+
 ## 2026-10-29 | IN FOCUS > GOOGLE > LAST EARNINGS APPLE FELL -9% , 33pts ⤵️ 👀 😡 🙏
 _john@corepositiontrading.com - captured 2026-10-30_
 
