@@ -6,6 +6,24 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-02 | YOUTUBE VIDEO | 🔥 My 99-Delta Cash Secure Put Alternative Trade vs His Cash-Secured Put 2.6% vs. 1.7% - Which wins?🤔
+_john@corepositiontrading.com - captured 2026-11-03_
+
+I'm releasing this YouTube channel video tomorrow, but I felt it can add
+value to anyone who trades the cash secured put and wants to learn the 99
+Delta Cash Secured Put alternative trade
+
+YOUTUBE VIDEO
+- 🔥 My 99-Delta Cash Secure Put Alternative Trade vs His Cash-Secured Put
+2.6% vs. 1.7% - Which wins?🤔
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/Ua1i6mfJPEM>
+
+---
+
+
 ## 2026-10-31 | DPST HAS BEEN A WILD RIDE SO FAR ... 👉 Staying the course 💯
 _john@cptdashboard.com - captured 2026-11-01_
 
