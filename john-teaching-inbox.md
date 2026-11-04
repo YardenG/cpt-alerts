@@ -6,6 +6,28 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-03 | AMD BEATS THE STREET 🔥 AND NOW THERE IS ONLY ONE 1️⃣
+_john@corepositiontrading.com - captured 2026-11-04_
+
+AMD BEATS THE STREET 🔥 AND NOW THERE IS ONLY ONE 1️⃣
+AMD beats in a big way and Wall Street LOVES AI again ... its up +35 in
+after market and if it holds into tomorrow open will be a good day for all
+...
+
+The 1️⃣ is Nvidia and they are the only real hurrdle left and if AMD is any
+indication , with NVDA trading near its 200 day moving average , NOW is the
+time for entry IF you were thinking about taking advantage of this AI purge
+... its either NVDA or SOXL ... Im not touching AMD or any other lower
+level trade ... but if the Nasdaq is in correction and this news turns the
+AI trade ... then now is the time
+
+*I have a $32.5 strike , NVDL trade for Nov-6 , 6,500 shares (65 contracts)*
+
+I *MIGHT* enter with another but will hold off for now
+
+---
+
+
 ## 2026-11-02 | YOUTUBE VIDEO | 🔥 My 99-Delta Cash Secure Put Alternative Trade vs His Cash-Secured Put 2.6% vs. 1.7% - Which wins?🤔
 _john@corepositiontrading.com - captured 2026-11-03_
 
