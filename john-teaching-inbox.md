@@ -6,6 +6,24 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-04 | LABU (Biotechs) IS AN INCREDIBLE TRADE🔥 IF YOU CAN STOMACH IT
+_john@corepositiontrading.com - captured 2026-11-05_
+
+LABU (Biotechs) IS AN INCREDIBLE TRADE 🔥 IF YOU CAN STOMACH IT
+I have traded LABU for years ... and its been a rock solid trade. I have
+little fear using it to sell premium and have and will more frequently as
+the AI bubble/burst cycle seems to keep Wall Street in flux. But there are
+the biotechs; most of the companies inside LABU (XBI ETF: Moderna, Biogen,
+Amgen, AbbVie to name a few) are beating earnings and putting money right
+back into their businesses. The biotechs, like big pharma are off the radar
+these days and I'm just finding it a trade where I do not have to guess if
+AI cap-ex spending is going to wreck a Mag-7. So, think about using LABU.
+It moves in +/- 30pt swings and with it trading today at $250 I did the
+$251 ITM CC and made very very good premium for the timeframe.
+
+---
+
+
 ## 2026-11-03 | AMD BEATS THE STREET 🔥 AND NOW THERE IS ONLY ONE 1️⃣
 _john@corepositiontrading.com - captured 2026-11-04_
 
