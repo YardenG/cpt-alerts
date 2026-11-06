@@ -6,6 +6,46 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-05 | RISK=OFF > FOR NOW 👇
+_john@cptdashboard.com - captured 2026-11-06_
+
+RISK=OFF > FOR NOW 👇
+I'm like you , watching as the market does what it does ... this time its
+the fear of the AI buildout slowing due to the recent election wins by
+politicians that do not favor or support data centers ... the sell off its
+nasty but lets understand and step back ... the Nasdaq was down 8% 2 days
+ago and it started it correction moving higher ... today its down -13% ...
+so the talk of a correction will bring buyers ... Wall Street dows not let
+money sit ... ALL the AI / Tech related stocks are hit the hardest ... yet
+notice,
+on this day where the Nasdaq is DOWN -1,360 and the Dow is down -1,600
+
+MSFT is down -3% , AAPL -1.5 GOOG -1% ... the financials were up on the day
+... so this is a PAPER loss day ... I will sit back and just watch but just
+remember how the world was ending back on 'Tariff Crash' day in 2025 ...
+
+👉 IF you're asking me > this too will pass
+
+I will be keeping ALL of my positions OPEN and will ROLL anything and
+everything for next week.
+
+Stay Strong, Stay the Course if you can 🙏
+
+---
+
+## 2026-11-05 | MEMBERS VIDEO | 📉 AI WASHOUT DAY - NASDAQ -5%
+_john@cptdashboard.com - captured 2026-11-06_
+
+MEMBERS VIDEO
+-   📉 AI WASHOUT DAY - NASDAQ -5%
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/Op1ab2Y3kTM>
+
+---
+
+
 ## 2026-11-04 | LABU (Biotechs) IS AN INCREDIBLE TRADE🔥 IF YOU CAN STOMACH IT
 _john@corepositiontrading.com - captured 2026-11-05_
 
