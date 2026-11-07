@@ -6,6 +6,39 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-06 | CLEARING TRADES, ROLLING TRADES AND SEEING WHERE TRADES ARE NEXT
+_john@corepositiontrading.com - captured 2026-11-07_
+
+CLEARING TRADES, ROLLING TRADES AND SEEING WHERE TRADES ARE NEXT 🤔
+Like many of you , this Friday is exciting in ways I never wanted it to be
+, know that I am closing trades, rolling 99 delta's and placing new trades
+, time is squeezing me as I need to close/open/roll ... I will consolidate
+most trades in (1) email for anyone interested in how they turned out ...
+outside of the SOXL trade which I have closed , Im sitting right now ... I
+*might* roll the 99 delta's I might not as my appitate for the AI trade has
+gone considerably sour ... Im debating , take the loss , roll in hopes it
+comes back ... ugh! Painful. Everything else is OPEN and rolling.
+
+I'm also putting together a video for members that I will post today or
+tomorrow
+
+🙏 I want to say something ... I lived through many of the 'crash' and
+'washout' trades over the years and although depressing at times, SCARY at
+times ... it never fails that I will think and say to myself ... "John, you
+are a trader and traders trade ... and if my account has money I can make
+money ... shake it off and go find your next good trade"
+
+I know it sounds cheesy but when the 'paper losses' stack up its hard to
+keep a clear mind ... I know whould ALL my trades go back to my cost , its
+all coming back ... so until then , 'trade because that is what I know how
+to do.
+
+*This too will pass and as you can see the darkest moments were yesterday
+so far*
+
+---
+
+
 ## 2026-11-05 | RISK=OFF > FOR NOW 👇
 _john@cptdashboard.com - captured 2026-11-06_
 
