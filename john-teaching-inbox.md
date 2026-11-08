@@ -6,6 +6,19 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-07 | MEMBERS VIDEO | MY 5 ⭐ STAR TRADE PICKS - DPST - LABU
+_john@cptdashboard.com - captured 2026-11-08_
+
+MEMBERS VIDEO
+- MY 5 ⭐ STAR TRADE PICKS - DPST - LABU
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/qXo7WDD-uZ4>
+
+---
+
+
 ## 2026-11-06 | CLEARING TRADES, ROLLING TRADES AND SEEING WHERE TRADES ARE NEXT
 _john@corepositiontrading.com - captured 2026-11-07_
 
