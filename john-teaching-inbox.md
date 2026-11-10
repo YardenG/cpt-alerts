@@ -6,6 +6,31 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-09 | MEMBERS VIDEO | 📉 HOW DID TNA PREFORM DURING NASDAQ -%5 DAY 📉
+_john@cptdashboard.com - captured 2026-11-10_
+
+MEMBERS VIDEO
+- 📉  HOW DID TNA PREFORM DURING NASDAQ -%5 DAY 📉
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/KVFpjRtxTss>
+
+---
+
+## 2026-11-09 | MEMBERS VIDEO | MAG-7 UPDATE NOV 9TH - AAPL AMZN LLY GOOG MSFT META NVDA
+_john@corepositiontrading.com - captured 2026-11-10_
+
+MEMBERS VIDEO
+- MAG-7 UPDATE NOV 9TH - AAPL AMZN LLY GOOG MSFT META NVDA
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/DiQvG4R_aoM>
+
+---
+
+
 ## 2026-11-07 | MEMBERS VIDEO | MY 5 ⭐ STAR TRADE PICKS - DPST - LABU
 _john@cptdashboard.com - captured 2026-11-08_
 
