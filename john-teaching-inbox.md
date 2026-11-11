@@ -6,6 +6,99 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-10 | THE BLENDED TRADE AND ITS TRACKER (Shares + Long Calls) 👈
+_john@cptdashboard.com - captured 2026-11-11_
+
+THE BLENDED TRADE AND ITS TRACKER  (Shares + Long Calls) 👈 👍
+The Blended Trade was something I used last year with wonderful success.
+
+If you remember, I had purchased shares of DPST (actually acquired them via
+cash-secured puts), and DPST fell and fell.
+
+I wanted to double down on the position but thought, "Why buy shares when I
+can purchase 99-delta long calls to simulate stock ownership?"
+
+So, I took the money I was going to use to purchase shares and bought
+99-delta long calls instead. This meant I could purchase MORE and reduce my
+exit share price even further.
+
+It works! I went on to do that with every underwater position where I owned
+shares (actual shares).
+
+Consider using the Blended Trade if you want to double down on a position
+or add to a position to reduce your exit price.
+
+* 🤔 👉 Ask questions!*
+
+Below is the link to the tracker I created. Be sure to watch the "How to
+Use" video, as it explains both how to use the tracker and the actual
+basics of the trade.
+
+CPT Blended Trade Tracker (Shares + LEAPS)
+<https://docs.google.com/spreadsheets/d/1zIN0udhU8KvVsQlYDs-j3x-Q7zVDu9F5zMbhvQhS-Wc/edit?usp=sharing>
+
+*The How to Use video*
+https://www.youtube.com/watch?v=GF8DUQJcQJg
+
+---
+
+## 2026-11-10 | DPST CASH SECURED PUT TRADE IDEA > USING THE $112 STRIKE 🤔
+_john@cptdashboard.com - captured 2026-11-11_
+
+DPST CASH SECURED PUT TRADE IDEA > USING THE $112 STRIKE 🤔
+ Yes, I researching a Cash Secured Puts as many would like to see it.
+ I would use the 99 delta long call then do the same ITM strike
+Looking at DPSTs near term support the $120 (250 moving average) so the
+$112 strike offers a 2.81% Cash on Cash % premium with -8.57% of downside
+protection to start the trade. This trade would expire in 10 days and if
+assigned the shares we would start a Covered Call campaign using the $112
+strike as our CC strike price. The same time frame, ATM strike would render
+about $6.55 at the mid price, this means DPST has fallen -8.57% and trades
+UNDER its 250 moving average ... where its more favorable for it to move
+higher in normal markets.
+
+I have skin in the game with (30) 99 Delta Long Calls , $144 cost basis
+
+---
+
+## 2026-11-10 | MEMBERS VIDEO | ELI LILLY (ELIL) 38 DAY TRADE BREAKDOWN 🤔 👇
+_john@cptdashboard.com - captured 2026-11-11_
+
+MEMBERS VIDEO
+- ELI LILLY (ELIL) 38 DAY TRADE BREAKDOWN - $2,840 🤔 👇
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/e0SRSHiTFLQ>
+
+---
+
+## 2026-11-10 | FRIDAY (NOV-13th) I WILL BE TRAVELING ALL DAY ✈️
+_john@corepositiontrading.com - captured 2026-11-11_
+
+FRIDAY (NOV-13th) > I WILL BE TRAVELING ALL DAY ✈️
+This Friday I will be traveling by plane... I will be closing my Nov-13th
+trades EARLY , on Thrusday as to *NOT *need to be in the airport closing 99
+delta long calls ... so I will be closing trades sooner and for LESS money
+(ugh!😡)
+
+I will ROLL all of them to Nov-20th if not clean and green.
+
+Every trade will be rolled including 99 delta long calls that are currently
+sitting on the bench waiting for the stock to rally a bit.
+
+Email me questions as always, just know I wont get to them until later
+Friday.
+
+*Stay the Course! This too will pass* 🙏😁
+
+➡️ John's Current Trade Desk
+<https://docs.google.com/spreadsheets/d/e/2PACX-1vRTLA9TCO6bzPX78h3DnAS3qOUUFQzLEIce1ACFKkB63nMbwVj_ccIbjPo1y2kU2MvbbODBbAlOUl8o/pubhtml>
+👈
+
+---
+
+
 ## 2026-11-09 | MEMBERS VIDEO | 📉 HOW DID TNA PREFORM DURING NASDAQ -%5 DAY 📉
 _john@cptdashboard.com - captured 2026-11-10_
 
