@@ -6,6 +6,114 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-17 | BACK FROM MY TRAVELS , WILL BE GETTING TO EVERYONES EMAILS TODAY 👍
+_john@cptdashboard.com - captured 2026-11-18_
+
+BACK FROM MY TRAVELS , WILL BE GETTING TO EVERYONES EMAILS TODAY 👍
+Finally back at my desk and will be going through my emails soon. I'm going
+to close some trades as well and see if there is anything I want to do.
+With NVDA's earnings today, it's just incredibly hard to get a feel for
+where this market will go. It's an incredibly painful market. Looking at
+the stock market over the past two years, it's very predictable.
+
+I just hate we got caught up in this AI washout which brought us down from
+so many success's this past year.
+
+*📈 'What goes Up, will go Down' 📉*
+
+I think reflecting on this moment I've identified what I need to change in
+my trading ... sizing.  I think I went too big on about 4 trades that I
+should be about 1/2 on ... and will start there.
+
+Regardless of sizing and strike selection, this market brought most all
+trades of mine under the strikes I would have selected.
+
+I will keep my position OPEN and just know that index's and sector's do and
+will come back. Ugh! 😡
+
+---
+
+## 2026-11-17 | MEMBERS VIDEO | 99 DELTA TRADERS | WHAT 'ROLL' LONG CALL TO BUY
+_john@corepositiontrading.com - captured 2026-11-18_
+
+MEMBERS VIDEO
+- 99 DELTA TRADERS | WHAT 'ROLL' LONG CALL TO BUY
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/2vCIS2Xlw_c>
+
+---
+
+## 2026-11-17 | NVIDIA IS 'CHEAP' AT THESE LEVELS 🤔
+_john@cptdashboard.com - captured 2026-11-18_
+
+NVIDIA IS 'CHEAP' AT THESE LEVELS 🤔
+Nvidia is now trading at levels that go back to May 2025 when they earned
+$0.76 a share and had about $44 billion in revenue... Fast forward to today
+where they will probably earn $2.56 cents a share with over $100 billion in
+revenue...
+
+*THE ONLY THING WALL STREET* is listening for during this earnings is
+*CLARITY* ... Nvidia management, *REMOVE* the uncertainty of the whole
+scandal, who will replace Jensen and update on the Federal investigation
+and Wall Street buy buy BUYs NVDA ... IF management does NOT do this ... it
+will continue to rain on the markets ... so lets ALL hope Nvidia's
+management understands this and clears the uncertianity ... remember,
+Nvidia's management had their hands tied; they could NOT make announcements
+during the earnings blackout time frame leading into earnings ... so this
+is the chance of ALL chances.
+
+Staying the course, this too will ALL pass ... it also does.
+
+and no, I will not play any rally (if it happens) with NVDA stock ... I
+would be using TQQQ or TNA , index's come back and that lets me sleep at
+night ... the NVDA fall out will be bumpy ... so let that happen to someone
+else 💯
+
+---
+
+## 2026-11-17 | MEMBERS VIDEO | 99 DELTA TRADERS: BOUGHT NEW , STUCK IN OLD TRADE IDEA 🤔
+_john@ucptdashboard.com - captured 2026-11-18_
+
+MEMBERS VIDEO
+- 99 DELTA TRADERS: BOUGHT NEW , STUCK IN OLD TRADE IDEA 🤔
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/qVA9iRMReZs>
+
+---
+
+## 2026-11-17 | ANTHROPIC'S IPO > WHAT WILL YOU DO JOHN? 🤔
+_john@ucptdashboard.com - captured 2026-11-18_
+
+ANTHROPIC'S IPO > WHAT WILL YOU DO JOHN? 🤔
+
+(Spoiler alert: single stock risk and any cash I will use to shore up my
+current drawdown trades to help exit sooner) 👈 💯
+
+I've been getting some emails asking my option and also what I plan to do
+... let me say , Anthropic is a pure AI trade and I think like many of you
+, this is something I will not be buying or trading ... heck, if you want
+AI exposure just trade SpaceX or SOXL ... you get all the juice your heart
+can handle with all the vol IV as well ... Anthropic IS NOT coming to
+market cheap either ... no bargins here as they have already oversold the
+IPO and it would not surprise me if it moved similar to SpaceX ... Up then
+Down ... I take is this , you want AI exposure why not just start using
+NVDA now? They had incredible earnings and with all the drama (which you
+know will pass) has tons of upside once Wall Street comes back to it , and
+they will.
+
+👉 Finally ,* IF IF IF *you think this Nasdaq sell-off is near the bottom
+and things will move higher, Anthropic will ride the wave and will probably
+OUT preform ... just know that could be a false flag and profits will be
+taken the moment management can sell shares (post-IPO freeze) IF you're
+asking me
+
+---
+
+
 ## 2026-11-10 | THE BLENDED TRADE AND ITS TRACKER (Shares + Long Calls) 👈
 _john@cptdashboard.com - captured 2026-11-11_
 
