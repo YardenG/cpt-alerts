@@ -6,6 +6,76 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-18 | MEMBERS VIDEO | THE EMOTIONS OF TRADING - A STORY AND IDEA 🥺
+_john@ucptdashboard.com - captured 2026-11-19_
+
+MEMBERS VIDEO
+- THE EMOTIONS OF TRADING - A STORY AND IDEA 🥺
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/6-3Ddr-nK4s>
+
+---
+
+## 2026-11-18 | ☠️ THE SCARY NEWS HAS PAST , NOW LETS GET TO -10% ON THE S&P500 💯 👇
+_john@cptdashboard.com - captured 2026-11-19_
+
+☠️ THE SCARY NEWS HAS PAST , NOW LETS GET TO -10% ON THE S&P500 💯 👇
+With earnings now behind us for the major players in the AI trade, we can
+finally begin moving forward. NVIDIA's much-feared earnings announcement
+turned out to be not nearly as scary as Wall Street had anticipated.
+
+*Is there still uncertainty in the market? Of course there is. *
+
+We still have potential headwinds, including federal investigations,
+questions surrounding corporate leadership, and the possibility of another
+interest rate decision in December.
+
+*But here's what I want everyone to focus on.*
+
+The S&P 500 has been working through what appears to be another correction
+of approximately -10%. Since January 2025, we've seen this pattern play out
+three times, with previous pullbacks eventually giving way to renewed
+rallies and fresh market highs.
+
+This is nothing new. Market corrections are a normal part of investing,
+even during strong bull markets.
+
+*I believe we've weathered the roughest part of this storm.*
+
+Now, more than ever, we need to keep our heads in the game, remain
+disciplined, and pay attention to what the charts are telling us.
+
+You're likely going to hear more and more Wall Street talking heads
+declaring that we've reached the bottom. But rather than listening to the
+noise, I want you to look at something very important.
+
+*Pay close attention to the S&P 500's 250-day moving average.*
+
+Looking back at the market's behavior since January 2025, and setting aside
+the extraordinary volatility surrounding the tariff announcements, the
+250-day moving average has repeatedly served as a significant area of
+support.
+
+Each time the market approached this level, buyers eventually stepped in
+and helped establish a foundation for the next rally.
+
+🤔 *Does that guarantee we've reached the bottom this time?* Absolutely
+not. But history gives us a reason to remain cautiously optimistic.
+
+This is why we follow our indicators, look for favorable entry points, and
+manage our trades rather than allowing market emotions to dictate our
+decisions.
+
+*👉 💯 Stay the course.* Keep your head in the game. Trust your trading
+discipline.
+
+This too shall pass IF you're asking me 👍
+
+---
+
+
 ## 2026-11-17 | BACK FROM MY TRAVELS , WILL BE GETTING TO EVERYONES EMAILS TODAY 👍
 _john@cptdashboard.com - captured 2026-11-18_
 
