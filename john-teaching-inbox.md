@@ -6,6 +6,52 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-19 | 👉 MY NVDL TRADE > WILL CLOSE LONG CALL AND CHANGE TO NVDX 👈
+_john@corepositiontrading.com - captured 2026-11-20_
+
+👉 MY NVDL TRADE > WILL CLOSE LONG CALL AND CHANGE TO NVDX 👈
+I still believe in this trade, so we're going to close our NVDL long call
+position and transition over to NVDX.
+
+*Why the switch? *NVDX is trading at approximately half the price of NVDL,
+allowing us to significantly reduce our overall cash investment while
+maintaining similar exposure to NVIDIA's price movements.
+
+We'll still be controlling 65 contracts, and because NVDL and NVDX both
+seek to deliver 2X the daily performance of NVIDIA, their price movements
+generally mirror one another.
+
+This adjustment is primarily about reducing our overall cash outlay while
+maintaining our position in a trade I continue to believe in.
+
+I've selected the December 11th expiration, giving us a few additional
+weeks for the market to find its footing, stabilize, and potentially begin
+moving higher.
+
+I'm not abandoning the trade or changing my outlook. I'm simply adjusting
+how much capital we're committing while giving the position additional time
+to work in our favor.
+
+*Same overall strategy, less capital committed, and more time for the
+market to recover.*
+
+*THIS IS THE NEW NVDX LONG CALL Dec-11 🙏👇*
+
+---
+
+## 2026-11-19 | MEMBERS VIDEO | EXPLAINING MY GGLL ROLL 👉 NOV TO DEC
+_john@corepositiontrading.com - captured 2026-11-20_
+
+MEMBERS VIDEO
+- EXPLAINING MY GGLL ROLL 👉 NOV TO DEC
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/j-OTZEkl1_4>
+
+---
+
+
 ## 2026-11-18 | MEMBERS VIDEO | THE EMOTIONS OF TRADING - A STORY AND IDEA 🥺
 _john@ucptdashboard.com - captured 2026-11-19_
 
