@@ -6,6 +6,70 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-20 | HOW AM I DEALING WITH THIS SELL-OFF? LIKE EVERYONE ELSE, NOT GOOD
+_john@ucptdashboard.com - captured 2026-11-21_
+
+HOW AM I DEALING WITH THIS SELL-OFF? LIKE EVERYONE ELSE, NOT GOOD
+I guess what I do not understand, this entire AI trade is dragging down
+pretty much everything , no one seems safe ... yet everything we know about
+investing , company earnings profits and growth seem to not matter in this
+environment.
+
+Companies are reporting incredible growth and profits and there stocks are
+ragdolled ... I mean, I get Nvidia's problems but to trim $1.5 Trillion in
+market cap? and how about the inverse defensive trades like the Financials
+and Bio Techs/Big Pharma ... just makes you come to the desk everyday and
+shake your head and wonder ... is the entire stock market a pure momentum
+trade literally being pulled and pushed with no rym or reason at the will
+of volitily?
+
+You could say this stock market is a bubble yet based on the S&P 500
+earnings its fairly priced if not cheap right now based on tradional
+matric's ... its hard watching ... so all I can think about is , when these
+winds change (and they will) all high tides rise all boats ... once out of
+this storm , I will be reflecting on most everything that Im questioning
+now ...
+
+Will I stop covered calls? No way. This is literally a cash printing
+machine ... but what can I do to better myself in times like this?
+
+Because although '*this too will pass*' ... next year it will come again
+and again and again ...
+
+Im staying the course but just know its not easy, it never has been during
+these times and *if you have question whether it be stock related or
+otherwise , let me know , also , if you have video ideas that would be
+good *
+
+---
+
+## 2026-11-20 | 🤔 LAST 3 MARKET CORRECTIONS - S&P 500 FELL -10% 👇
+_john@corepositiontrading.com - captured 2026-11-21_
+
+🤔 LAST 3 MARKET CORRECTIONS - S&P 500 FELL -10% 👇
+Feb-19th - Mar-13th = -10.2% (22 days)
+
+Jan-28th - March 30th = -9.4% (61 days)
+
+NOW > Oct-8th - Nov-20th = -8.8% (43 days)
+
+The bellweather is the S&P 500 ... it has most of the stocks that are being
+washed out in the AI trade today ... the difference is that its loaded with
+500 of the best companies in the world based on earnings. profits and
+growth ... where the Nasdaq is down -16% , the S&P 500 has held up in this
+otherwise FIRE STORM of a market ... so moving forward , it makes sense to
+use UPRO and id buying dividend paying funds, SPYI and SPYT ... XDTE was
+something I bought but Fidelity charges such a fee I can really buy it
+anymore ... my tax bucket now buys QQQY
+
+*👉 NOT* saying Im steering away from Tech and the Nasdaq , just need a
+little more diversificaion in the lineup
+
+🙏
+
+---
+
+
 ## 2026-11-19 | 👉 MY NVDL TRADE > WILL CLOSE LONG CALL AND CHANGE TO NVDX 👈
 _john@corepositiontrading.com - captured 2026-11-20_
 
