@@ -6,6 +6,35 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-21 | FINDING HEDGES THAT WORK (COST) WHILE STILL MAKING INCOME 🤔
+_john@cptdashboard.com - captured 2026-11-22_
+
+FINDING HEDGES THAT WORK (COST) WHILE STILL MAKING INCOME 🤔
+I'm in the lab (my desk) running numbers, trying to figure out hedges that
+work with our style of trading ... the idea of 'downside protection' in our
+ITM covered calls only protect us so far and as many have felt and are
+feeling, that protection wasn't enough. So I'm running numbers for trades ,
+3 month trades where I incorporate buying a PUT option ... this means I
+will sacrafice income but if I believe our stock market in the foreseeable
+future will have these incredible swings and free falls and v-shaped
+rallies, the days of the sideways to higher trade will be shorter and times
+like this will become more frequent ... so starting Monday I will be doing
+a 'Hedged ITM Covered Call' , its a collared trade which limits downside
+... buying a PUT is the insurance ... were not obligated to anything , its
+just that insurance from the strike price we select (say on a $100 stock,
+$90) down ... I will be learn this to become an expert , I will learn this
+and become a master of it ... I will do a video this weekend , consider it
+a primer for what's to come as we move forward in the membership
+
+👉 Our win rates can increase, our losses will be capped and most
+importantly , our confi dence will not be shaken in markets like knowing we
+bought the insurance needed ... we just have to wrap our heads around the
+idea we do give up some income ... but if we incoprerate a 99 Delta long
+call that PUT offers true protection. 👍 🙏💯
+
+---
+
+
 ## 2026-11-20 | HOW AM I DEALING WITH THIS SELL-OFF? LIKE EVERYONE ELSE, NOT GOOD
 _john@ucptdashboard.com - captured 2026-11-21_
 
