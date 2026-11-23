@@ -6,6 +6,19 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-22 | MEMBERS VIDEO | 👉 ADDING A HEDGE / PROTECTIVE PUT TO THE TRADE - GGLL
+_john@cptdashboard.com - captured 2026-11-23_
+
+MEMBERS VIDEO
+-  👉  ADDING A HEDGE / PROTECTIVE PUT TO THE TRADE - GGLL
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/lBe7V_guJvU>
+
+---
+
+
 ## 2026-11-21 | FINDING HEDGES THAT WORK (COST) WHILE STILL MAKING INCOME 🤔
 _john@cptdashboard.com - captured 2026-11-22_
 
