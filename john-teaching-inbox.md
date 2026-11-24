@@ -6,6 +6,66 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-22 | RISK ON ??? HEAD FAKE COMING ??? 🤔 YES and YES 🤔
+_john@corepositiontrading.com - captured 2026-11-24_
+
+RISK ON ??? HEAD FAKE COMING ??? 🤔 YES and YES 👇
+If you're looking to exit some trades on a GREEN day, tomorrow might
+present a good opportunity.
+
+I genuinely believe this market is at or near a bottom. No genius required
+here! In my opinion, this selloff has been driven by 100,000% fear over
+what may turn out to be nothing. Yet, here we are!
+
+👉 With that said, here's what I'm expecting over the next few trading
+sessions.
+
+Tomorrow, we could *BLAST out of the gates!* But don't be surprised if we
+open GREEN, turn RED, and then swing back to GREEN again. These volatile
+moves are exactly what I expect in this environment.
+
+👉 Tuesday, we could see the market retest Friday's lows. 😡 If we wake up
+Wednesday morning with the market moving higher, that could be another
+encouraging signal that we're at or near a bottom. 👇
+
+*The waters are choppy as hell right now, but this too shall pass.*
+
+I believe the eye of the storm is beginning to move away. However, don't
+confuse a market rebound with the end of volatility. I wouldn't be
+surprised to see another selloff in late January. It's simply the nature of
+the market we're trading in today.
+
+Our job isn't to predict every market move. Our job is to recognize
+opportunities, manage risk, and be prepared when those opportunities
+present themselves.
+
+*Stay the course! 💯🙏*
+
+And remember something I've been preaching for years: Selling option
+premium is one of the few ways we can proactively generate cash flow in the
+stock market.
+
+Dividend funds are great, and they certainly have their place. Directional
+trading can generate profits, but it doesn't provide the same
+structured, *repeatable
+cash-flow opportunities that selling option premium can offer. 👈 💯 *
+
+That's why I continue to emphasize learning these strategies, understanding
+your entry points, managing your downside risk, and knowing when to exit.
+
+*LEARN THIS. MASTER THE PROCESS. MANAGE YOUR RISK.*
+
+Because the ultimate goal isn't simply making money on a trade. It's
+developing the knowledge and discipline to generate income consistently
+while protecting the capital that makes it all possible.
+
+That's the path toward financial freedom.
+
+* 🙏*
+
+---
+
+
 ## 2026-11-22 | MEMBERS VIDEO | 👉 ADDING A HEDGE / PROTECTIVE PUT TO THE TRADE - GGLL
 _john@cptdashboard.com - captured 2026-11-23_
 
