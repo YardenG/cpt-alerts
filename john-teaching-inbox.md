@@ -6,6 +6,91 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-24 | 📈 ELI LILLY HAS PERFORMED VERY WELL DURING ALL OF THIS
+_john@ucptdashboard.com - captured 2026-11-25_
+
+📈  ELI LILLY HAS PERFORMED VERY WELL DURING ALL OF THIS
+Looking for a reasonable trade—never say the word "safe," but rather
+"reasonable." Looking at Eli Lilly offers an incredible look into what good
+, steady company to use for selling premium ... Look at how it performed
+even in the chaos of the Nasdaq sell-off. The point of this email is to
+find the winners and not focus on the gloom and doom of the AI trade.
+Always keep an eye on coming interest rate hikes, although most of Wall
+Street believes the December rate hike is 100% certain and has already
+factored that into the current market.
+
+Support lines still work , I would suggest always using some downside
+protection , this trade below offer very little ...
+
+*Here is my current Eli Lilly trade using ELIL > Click here
+<https://cptdashboardtradeblog0725.blogspot.com/search?q=ELIL403.4>*
+
+---
+
+## 2026-11-24 | 1.2% TO 1.5% FOR WEEKLY TRADES > TQQQ CASH SECURED PUT TRADE IDEA
+_john@corepositiontrading.com - captured 2026-11-25_
+
+1.2% TO 1.5% FOR WEEKLY TRADES > TQQQ CASH SECURED PUT TRADE IDEA
+This market is incredibly volatile. Times like this I truely do sit back
+and reflect on what I did, where I can approve to become a better 'cash
+flow' investor ... one trade idea I was thinking about using using TQQQ and
+do a Cash Secured Put at its absolute bottom BOTTOM , were talking Nasdaq
+falling to -20% from its high down to its bottom (Friday) ... IF we used
+that strike for a CSP on TQQQ that would equal TQQQ @ $38 and you would
+make $2.30 in premium for the *Dec-18th expiration* ... yes, its Nasdaq
+risk but you are entering the trade at -20% from its top ... that would
+render $2.30 for *about 3 weeks* which is 6% cash on cash for the money
+invested ... that 3 weeks , $2.30 or about $0.80 a week which is 2.1% for
+money invested ... this might be a 'set it and forget it' trade ... and if
+assigned which means TQQQ would have to fall to $38 or the Nasdaq falling
+basically again , DOWN -20% in this sell off (which a double tap bottom
+could happen) your money invested begins at $38 ... just a thought as I
+work through come 'cash on cash percentage' trades in the near term.
+
+Also, you can dial this back even further for a 1% a week effect which
+
+Alternatively, you can extend the timeframe and let the money sit in the
+position until January... I've done that in the past.
+
+---
+
+## 2026-11-24 | MEMBERS VIDEO | 🤔 CSP - TQQQ 6% TRADE IDEA , 3 WEEKS
+_john@corepositiontrading.com - captured 2026-11-25_
+
+MEMBERS VIDEO
+- 🤔  CSP - TQQQ 6% TRADE IDEA , 3 WEEKS
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/on2gXW02YWM>
+
+---
+
+## 2026-11-24 | MEMBERS VIDEO | 🤔 CSP - UPRO 3% TRADE IDEA , 2 WEEKS
+_john@corepositiontrading.com - captured 2026-11-25_
+
+MEMBERS VIDEO
+- 🤔  CSP - UPRO 3% TRADE IDEA , 2 WEEKS
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/1LchPrpmFH8>
+
+---
+
+## 2026-11-24 | MEMBERS VIDEO | 🤔 CSP - UDOW 6% or 3% TRADE IDEA , 3 WEEKS
+_john@ucptdashboard.com - captured 2026-11-25_
+
+MEMBERS VIDEO
+- 🤔  CSP - UDOW 6% or 3% TRADE IDEA , 3 WEEKS
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/zPNuL002jpw>
+
+---
+
+
 ## 2026-11-22 | RISK ON ??? HEAD FAKE COMING ??? 🤔 YES and YES 🤔
 _john@corepositiontrading.com - captured 2026-11-24_
 
