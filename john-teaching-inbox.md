@@ -6,6 +6,19 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-26 | MEMBERS VIDEO | MY AMAZON (AMZU) PMCC INCOME TRADE IDEA , 3 WEEKS 😁 John on screen
+_john@corepositiontrading.com - captured 2026-11-27_
+
+MEMBERS VIDEO 😁 John on screen
+- MY AMAZON (AMZU) PMCC INCOME TRADE IDEA , 3 WEEKS
+> VIDEO HAS BEEN UPLOADED IN THE PHONE APP 👇
+PHONE App Link (or Desktop) Click Link
+<https://bright-amusement-4588.glideapp.io/>
+YouTube Link 👈 <https://youtu.be/guH4gkuFgQw>
+
+---
+
+
 ## 2026-11-24 | 📈 ELI LILLY HAS PERFORMED VERY WELL DURING ALL OF THIS
 _john@ucptdashboard.com - captured 2026-11-25_
 
