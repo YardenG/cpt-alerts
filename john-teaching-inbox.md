@@ -6,6 +6,69 @@ desk. Most recently captured first (within a run, newest email first).
 
 <!-- entries below, newest first -->
 
+## 2026-11-27 | TRYING TO NOT TRADE BASED ON FOMO 😳 > MY PLAN 👇
+_john@cptdashboard.com - captured 2026-11-28_
+
+TRYING TO NOT TRADE BASED ON FOMO 😳 > MY PLAN 👇
+*Staying the course is my **plan* , as hard as it is to watch , this is
+what I do and will come to this desk everyday and sell premium , when I
+have a premium profit will continue to buy dividend paying funds to
+continue my dividend income in retirement, like I did today buying SPYI. (I
+bought SPYI because it tracks the S&P 500 and that exposure is not that
+scary in this market for me anyway.
+
+My plan is not to go big in this time of FOMO , over reaching and then
+finding myself in losing trades ... now is the time to make sure our setups
+are rock solid .
+
+The markets have so many things to work out ... and the VIX is still +7
+points from being somewhat normal. So, I'm picking my spots using the very
+same plan , downside protection for weekly trades and ATM or a strike of 2
+OTM the money ... people will say buy buy buy this bottom ... I can see a
+SERIOUS dead cat bounce happening ... it happened in March 2025 and would
+have happened this past time had the reason's been different and the AI
+Bubble run not started , Wall Street does what it does ... and lets not
+forget the possible 0.50 basis point rate hike in January that will have
+any rally stalled ... least that is my thinking.
+
+I will try to make my 1.2 to 1.5% a week , maybe a little more but will
+make sure I'm not trading TOO big.
+
+👉 I want MORE protection in this game and I will figure this out  👈
+
+The AI speculation will not stop ... its not ... AMD and MU will move in
+HUGE clips and so will anything AI ... wall street will try to milk every
+rally and drain every sell off ...
+
+Taking this time to see what *DIDN'T* fall as much in tech / mag-7
+
+👉 Note the DOW held up very good -10% (all things considered)  , note the
+S&P 500 fell -12% (heavier tech) and the Nasdaq got rag dolled -20% ... the
+Russell , going to give it a pass being down from -21% top to bottom but
+its tru washout happens AFTER the interest rate announcement , the AI
+washout happens much later , the Russell basically sold off -15% ... so my
+point to all of this ... this is what I do so this is what I WILL BE doing
+... I will use the DOW and S&P 500 as when corrections happen, they seem to
+hold where as that Nasdaq gets crushed every single time ... DAM! ... UDOW
+and UPRO ... and you will see trades with a real protective put ...
+creating a 'danger zone' of loss but it would be a capped loss ... video on
+that today or tomorrow.
+
+Lets get that bounce please 🙏🙏🙏
+
+*More videos coming about good trade setups to consider and more about the
+protective put and how to calculate it.*
+
+Finally , take a look at DPST , the regional banks ... look at FAS , the
+Financials ... the held some support lines I can work with. 👇
+
+Note that the Biotechs (LABU) rallied 2 days before buyers returned ,
+LABU @ $174 rallied back to $241 ... not saying to get long any of these
+but just notice where money moved during the times of sell off
+
+---
+
+
 ## 2026-11-26 | MEMBERS VIDEO | MY AMAZON (AMZU) PMCC INCOME TRADE IDEA , 3 WEEKS 😁 John on screen
 _john@corepositiontrading.com - captured 2026-11-27_
 
